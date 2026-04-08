@@ -1,0 +1,174 @@
+validation,result,column,pk,detail,source_value,target_value
+record_count_check,FAIL,,,"Source: 57359 rows, Target: 7758 rows",57359,7758
+column_count_check,PASS,,,"Source: 48 columns, Target: 49 columns, Common: 48 | Target-only: ['Identifier']",48,49
+metadata_type_check,PASS,ARR Size Dynamic,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account ID,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account Ranking List,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Bill State,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"BoP (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Bundle Product Code,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Category (Adjusted),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Cohort ARR Size,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Covered Finance Product Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Distributor Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,End Customer,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"EoP (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"EoP, Unadjusted  ",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Extn for Late Renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Finance Product Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Geo ,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Index#,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Industry,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Industry [Custom],,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Max. Fortune Rank,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Month of Revenue Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Order Number,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Peak ARR,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous ARR,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous Extn for Late Renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous Refresh Overlap Adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Family,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Group,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Penetration (Landed),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Quantity,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,RCN Emp Count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Refresh Overlap Adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Region,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Reseller Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,SKU,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Sales Designation_New,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Sales Rep,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Service End Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Service Start Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Shipping Country,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Territory Id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Territory Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Variance,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"Variance (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Year of Cohort Date FY,,"Compatible types: Source 'object', Target 'object'",object,object
+duplicate_check,SKIP,,,No primary key defined - duplicate check skipped,,
+null_check,FAIL,ARR Size Dynamic,,"Source: 0 nulls, Target: 174 nulls",0,174
+null_check,FAIL,Account Ranking List,,"Source: 46734 nulls, Target: 6339 nulls",46734,6339
+null_check,FAIL,Bill State,,"Source: 34401 nulls, Target: 4717 nulls",34401,4717
+null_check,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,Bundle Product Code,,"Source: 6903 nulls, Target: 809 nulls",6903,809
+null_check,FAIL,Cohort ARR Size,,"Source: 0 nulls, Target: 303 nulls",0,303
+null_check,FAIL,Distributor Name,,"Source: 6156 nulls, Target: 832 nulls",6156,832
+null_check,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,"EoP, Unadjusted  ",,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,Extn for Late Renewals,,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,Max. Fortune Rank,,"Source: 54073 nulls, Target: 7335 nulls",54073,7335
+null_check,FAIL,Peak ARR,,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,Previous ARR,,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,Previous Extn for Late Renewals,,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,Previous Refresh Overlap Adj,,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,Quantity,,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,Refresh Overlap Adj,,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,Reseller Name,,"Source: 70 nulls, Target: 14 nulls",70,14
+null_check,FAIL,Variance,,"Source: 36 nulls, Target: 0 nulls",36,0
+null_check,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",,"Source: 36 nulls, Target: 0 nulls",36,0
+empty_string_check,PASS,,,No empty strings found,,
+data_validation,FAIL,Account ID,index=0,Values do not match,'0014600001JL7PBAA1','0014600001JL6riAAD'
+data_validation,FAIL,Account Name,index=0,Values do not match,'SUNGARD AVAILABILITY SERVICES','A DUIE PYLE'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,"'4,870'",'0.0'
+data_validation,FAIL,Bundle Product Code,index=0,Values do not match,'TE-2215-SWB-NS1GD',nan
+data_validation,FAIL,Covered Finance Product Category,index=0,Values do not match,'Appliance Software','Hardware'
+data_validation,FAIL,Distributor Name,index=0,Values do not match,'INGRAM MICRO INC','TD SYNNEX Corporation'
+data_validation,FAIL,End Customer,index=0,Values do not match,"'11:11 SYSTEMS, INC.'",'A DUIE PYLE INCORPORATED'
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,'0','7545.999900000001'
+data_validation,FAIL,"EoP, Unadjusted  ",index=0,Values do not match,'$0.00K','7545.999900000001'
+data_validation,FAIL,Extn for Late Renewals,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Industry,index=0,Values do not match,'Information Technology & Related Consulting','Shipping & Transportation'
+data_validation,FAIL,Industry [Custom],index=0,Values do not match,'Information Technology & Related Consulting','Shipping & Transportation'
+data_validation,FAIL,Month of Revenue Date,index=0,Values do not match,'October 2024','January 2026'
+data_validation,FAIL,Order Number,index=0,Values do not match,'DIST-141100','REN-192075'
+data_validation,FAIL,Peak ARR,index=0,Values do not match,'$59.4K','85338.1797'
+data_validation,FAIL,Previous ARR,index=0,Values do not match,'$4.87K','0.0'
+data_validation,FAIL,Previous Extn for Late Renewals,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Product Name,index=0,Values do not match,'Infoblox Premium Maintenance-Enterprise','Infoblox Hardware Maintenance-Enterprise'
+data_validation,FAIL,Product Penetration (Landed),index=0,Values do not match,'4 - Product Customer','2 - Product Customer'
+data_validation,FAIL,Quantity,index=0,Values do not match,'2','4'
+data_validation,FAIL,RCN Emp Count,index=0,Values do not match,'1100','3300'
+data_validation,FAIL,Refresh Overlap Adj,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Reseller Name,index=0,Values do not match,'CONTINENTAL RESOURCES INC',"'AccessIT Group, Inc.'"
+data_validation,FAIL,SKU,index=0,Values do not match,'IB-MNT-PRM','IB-MNT-HW'
+data_validation,FAIL,Service End Date,index=0,Values do not match,'9/22/2024','12/29/2026'
+data_validation,FAIL,Service Start Date,index=0,Values do not match,'9/23/2021','12/30/2025'
+data_validation,FAIL,Variance,index=0,Values do not match,'($4.87K)','7545.999900000001'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,'($4.87K)','7545.999900000001'
+data_validation,FAIL,Year of Cohort Date FY,index=0,Values do not match,'FY 2008','FY 2009'
+data_validation,FAIL,Account ID,index=1,Values do not match,'0014600001JL7PBAA1','0014600001JL6riAAD'
+data_validation,FAIL,Account Name,index=1,Values do not match,'SUNGARD AVAILABILITY SERVICES','A DUIE PYLE'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,"'1,432'",'0.0'
+data_validation,FAIL,Bundle Product Code,index=1,Values do not match,'TE-2215-SWB-NS1GD',nan
+data_validation,FAIL,Covered Finance Product Category,index=1,Values do not match,'Hardware','(blank)'
+data_validation,FAIL,Distributor Name,index=1,Values do not match,'INGRAM MICRO INC','TD SYNNEX Corporation'
+data_validation,FAIL,End Customer,index=1,Values do not match,"'11:11 SYSTEMS, INC.'",'A DUIE PYLE INCORPORATED'
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,'0','25718.0'
+data_validation,FAIL,"EoP, Unadjusted  ",index=1,Values do not match,'$0.00K','25718.0'
+data_validation,FAIL,Extn for Late Renewals,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Finance Product Category,index=1,Values do not match,'Maintenance','Subscription Feed'
+data_validation,FAIL,Industry,index=1,Values do not match,'Information Technology & Related Consulting','Shipping & Transportation'
+data_validation,FAIL,Industry [Custom],index=1,Values do not match,'Information Technology & Related Consulting','Shipping & Transportation'
+data_validation,FAIL,Month of Revenue Date,index=1,Values do not match,'October 2024','January 2026'
+data_validation,FAIL,Order Number,index=1,Values do not match,'DIST-141100','REN-192075'
+data_validation,FAIL,Peak ARR,index=1,Values do not match,'$59.4K','85338.1797'
+data_validation,FAIL,Previous ARR,index=1,Values do not match,'$1.43K','0.0'
+data_validation,FAIL,Previous Extn for Late Renewals,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Product Family,index=1,Values do not match,"'DDI (NS1, NS1GD)'",'BloxOne Threat Defense'
+data_validation,FAIL,Product Group,index=1,Values do not match,'Core DDI (DDI)','Security'
+data_validation,FAIL,Product Name,index=1,Values do not match,'Infoblox Premium Maintenance-Enterprise',"'BloxOne Threat Defense Business, On-Premises'"
+data_validation,FAIL,Product Penetration (Landed),index=1,Values do not match,'4 - Product Customer','2 - Product Customer'
+data_validation,FAIL,Quantity,index=1,Values do not match,'1','2200'
+data_validation,FAIL,RCN Emp Count,index=1,Values do not match,'1100','3300'
+data_validation,FAIL,Refresh Overlap Adj,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Reseller Name,index=1,Values do not match,'CONTINENTAL RESOURCES INC',"'AccessIT Group, Inc.'"
+data_validation,FAIL,SKU,index=1,Values do not match,'IB-MNT-PRM','IB-SUB-THREAT-BIZ-PREM'
+data_validation,FAIL,Service End Date,index=1,Values do not match,'9/22/2024','12/29/2026'
+data_validation,FAIL,Service Start Date,index=1,Values do not match,'9/23/2021','12/30/2025'
+data_validation,FAIL,Variance,index=1,Values do not match,'($1.43K)','25718.0'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,'($1.43K)','25718.0'
+data_validation,FAIL,Year of Cohort Date FY,index=1,Values do not match,'FY 2008','FY 2009'
+data_validation,FAIL,Account ID,index=2,Values do not match,'0014600001JL7PBAA1','0014600001JL6riAAD'
+data_validation,FAIL,Account Name,index=2,Values do not match,'SUNGARD AVAILABILITY SERVICES','A DUIE PYLE'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=2,Values do not match,"'4,870'",'0.0'
+data_validation,FAIL,Bundle Product Code,index=2,Values do not match,'TE-2215-SWB-NS1GD','TE-926-SWBSUB-DDIGD'
+data_validation,FAIL,Covered Finance Product Category,index=2,Values do not match,'Appliance Software','(blank)'
+data_validation,FAIL,Distributor Name,index=2,Values do not match,'INGRAM MICRO INC','TD SYNNEX Corporation'
+data_validation,FAIL,End Customer,index=2,Values do not match,"'11:11 SYSTEMS, INC.'",'A DUIE PYLE INCORPORATED'
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=2,Values do not match,'0','13329.480000000001'
+data_validation,FAIL,"EoP, Unadjusted  ",index=2,Values do not match,'$0.00K','13329.480000000001'
+data_validation,FAIL,Extn for Late Renewals,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Finance Product Category,index=2,Values do not match,'Maintenance','Term Software'
+data_validation,FAIL,Industry,index=2,Values do not match,'Information Technology & Related Consulting','Shipping & Transportation'
+data_validation,FAIL,Industry [Custom],index=2,Values do not match,'Information Technology & Related Consulting','Shipping & Transportation'
+data_validation,FAIL,Month of Revenue Date,index=2,Values do not match,'October 2024','January 2026'
+data_validation,FAIL,Order Number,index=2,Values do not match,'DIST-141141','REN-192075'
+data_validation,FAIL,Peak ARR,index=2,Values do not match,'$59.4K','85338.1797'
+data_validation,FAIL,Previous ARR,index=2,Values do not match,'$4.87K','0.0'
+data_validation,FAIL,Previous Extn for Late Renewals,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Product Name,index=2,Values do not match,'Infoblox Premium Maintenance-Enterprise',"'Trinzic Software Module Subscription, DDI'"
+data_validation,FAIL,Product Penetration (Landed),index=2,Values do not match,'4 - Product Customer','2 - Product Customer'
+data_validation,FAIL,RCN Emp Count,index=2,Values do not match,'1100','3300'
+data_validation,FAIL,Refresh Overlap Adj,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Reseller Name,index=2,Values do not match,'CONTINENTAL RESOURCES INC',"'AccessIT Group, Inc.'"
+data_validation,FAIL,SKU,index=2,Values do not match,'IB-MNT-PRM','IB-SWTL-NS1'
+data_validation,FAIL,Service End Date,index=2,Values do not match,'9/25/2024','12/29/2026'
+data_validation,FAIL,Service Start Date,index=2,Values do not match,'9/26/2021','12/30/2025'
+data_validation,FAIL,Variance,index=2,Values do not match,'($4.87K)','13329.480000000001'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=2,Values do not match,'($4.87K)','13329.480000000001'
+data_validation,FAIL,Year of Cohort Date FY,index=2,Values do not match,'FY 2008','FY 2009'
+data_validation,FAIL,Account ID,index=3,Values do not match,'0014600001JL7PBAA1','0014600001JL6riAAD'
+data_validation,FAIL,Account Name,index=3,Values do not match,'SUNGARD AVAILABILITY SERVICES','A DUIE PYLE'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=3,Values do not match,"'1,432'",'0.0'
+data_validation,FAIL,Bundle Product Code,index=3,Values do not match,'TE-2215-SWB-NS1GD','TE-1516-SWBSUB-DDIGD'
+data_validation,FAIL,Covered Finance Product Category,index=3,Values do not match,'Hardware','(blank)'
+data_validation,FAIL,Distributor Name,index=3,Values do not match,'INGRAM MICRO INC','TD SYNNEX Corporation'
+data_validation,FAIL,End Customer,index=3,Values do not match,"'11:11 SYSTEMS, INC.'",'A DUIE PYLE INCORPORATED'
+data_validation,INFO,,,... and 293844 more mismatches (showing first 100),,

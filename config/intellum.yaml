@@ -1,0 +1,109 @@
+validations:
+  - name: "intellum_assessment_response_questions 1"
+    source:
+      type: file
+      path: ./raw_data/intellum/intellum_assessment_response_questions.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: intellum_assessment_response_questions
+    primary_keys: id
+    output_dir: ./results/intellum
+  
+  - name: "intellum_assessment_response_questions 2"
+    source:
+      type: file
+      path: ./raw_data/intellum/intellum_assessment_response_questions1.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: intellum_assessment_response_questions
+    primary_keys: id
+    output_dir: ./results/intellum
+
+  - name: "intellum_enrollment_curriculum_activities"
+    source:
+      type: file
+      path: ./raw_data/intellum/intellum_enrollment_curriculum_activities.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: intellum_enrollment_curriculum_activities
+    primary_keys: id
+    output_dir: ./results/intellum
+
+  - name: "intellum_enrollments1"
+    source:
+      type: file
+      path: ./raw_data/intellum/intellum_enrollments.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: intellum_enrollments
+    primary_keys: id
+    output_dir: ./results/intellum
+
+  - name: "intellum_enrollments2"
+    source:
+      type: file
+      path: ./raw_data/intellum/intellum_enrollments1.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: intellum_enrollments
+    primary_keys: id
+    output_dir: ./results/intellum
+
+  - name: "intellum_enrollment_video_statuses"
+    source:
+      type: file
+      path: ./raw_data/intellum/intellum_enrollment_video_statuses.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: intellum_enrollment_video_statuses
+    primary_keys: id
+    output_dir: ./results/intellum
+
+  - name: "intellum_enrollment_deletions1"
+    source:
+      type: file
+      path: ./raw_data/intellum/intellum_enrollment_deletions.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: intellum_enrollment_deletions
+    primary_keys: id
+    output_dir: ./results/intellum
+
+  - name: "intellum_enrollment_deletions2"
+    source:
+      type: file
+      path: ./raw_data/intellum/intellum_enrollment_deletions1.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: intellum_enrollment_deletions
+    primary_keys: id
+    output_dir: ./results/intellum
+
+  - name: "intellum_version_links"
+    source:
+      type: file
+      path: ./raw_data/intellum/intellum_version_links.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: intellum_version_links
+    primary_keys: id
+    output_dir: ./results/intellum
+    

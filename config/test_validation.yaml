@@ -1,0 +1,23 @@
+# Test configuration for local file validation
+validations:
+  - name: "Enterprise_B1DDI_Classic"
+    target:
+      type: file
+      path: ./raw_data/arr-s3-files/Enterprise_B1DDI_Classic.csv
+    source:
+      type: file
+      path: ./raw_data/arr-dashboard-files/Enterprise_B1DDI_Classic.csv
+      sep: "\t"
+    primary_keys: Account ID, Order Number, SKU
+    output_dir: ./results
+
+  - name: "Enterprise_SaaS"
+    target:
+      type: file
+      path: ./raw_data/arr-s3-files/Enterprise_SaaS.csv
+    source:
+      type: file
+      path: ./raw_data/arr-dashboard-files/Enterprise_SaaS.csv
+      sep: "\t"
+    primary_keys: Account ID, Order Number, SKU
+    output_dir: ./results

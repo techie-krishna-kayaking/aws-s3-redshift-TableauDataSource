@@ -1,0 +1,162 @@
+validation,result,column,pk,detail,source_value,target_value
+record_count_check,FAIL,,,"Source: 5795 rows, Target: 5708 rows",5795,5708
+column_count_check,PASS,,,"Source: 48 columns, Target: 49 columns, Common: 48 | Target-only: ['Identifier']",48,49
+metadata_type_check,PASS,ARR Size Dynamic,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account ID,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account Ranking List,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Bill State,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"BoP (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Bundle Product Code,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Category (Adjusted),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Cohort ARR Size,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Covered Finance Product Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Distributor Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,End Customer,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"EoP (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"EoP, Unadjusted  ",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Extn for Late Renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Finance Product Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Geo ,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Index#,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Industry,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Industry [Custom],,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Max. Fortune Rank,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Month of Revenue Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Order Number,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Peak ARR,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous ARR,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous Extn for Late Renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous Refresh Overlap Adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Family,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Group,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Penetration (Landed),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Quantity,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,RCN Emp Count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Refresh Overlap Adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Region,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Reseller Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,SKU,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Sales Designation_New,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Sales Rep,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Service End Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Service Start Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Shipping Country,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Territory Id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Territory Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Variance,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"Variance (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Year of Cohort Date FY,,"Compatible types: Source 'object', Target 'object'",object,object
+duplicate_check,SKIP,,,No primary key defined - duplicate check skipped,,
+null_check,FAIL,ARR Size Dynamic,,"Source: 0 nulls, Target: 382 nulls",0,382
+null_check,FAIL,Account Ranking List,,"Source: 2504 nulls, Target: 2462 nulls",2504,2462
+null_check,FAIL,Bill State,,"Source: 2896 nulls, Target: 2865 nulls",2896,2865
+null_check,PASS,Bundle Product Code,,"Source: 604 nulls, Target: 604 nulls",604,604
+null_check,FAIL,Cohort ARR Size,,"Source: 0 nulls, Target: 4869 nulls",0,4869
+null_check,FAIL,Distributor Name,,"Source: 1422 nulls, Target: 1395 nulls",1422,1395
+null_check,FAIL,Max. Fortune Rank,,"Source: 4219 nulls, Target: 4155 nulls",4219,4155
+null_check,FAIL,Reseller Name,,"Source: 217 nulls, Target: 202 nulls",217,202
+empty_string_check,PASS,,,No empty strings found,,
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,"'2,802'",'2801.7'
+data_validation,FAIL,Cohort ARR Size,index=0,Values do not match,'NA',nan
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,"'2,802'",'2801.7'
+data_validation,FAIL,"EoP, Unadjusted  ",index=0,Values do not match,'$2.80K','2801.7'
+data_validation,FAIL,Extn for Late Renewals,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Peak ARR,index=0,Values do not match,'$3.3K','3306.006666666667'
+data_validation,FAIL,Previous ARR,index=0,Values do not match,'$2.80K','2801.7'
+data_validation,FAIL,Previous Extn for Late Renewals,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Refresh Overlap Adj,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Variance,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,"'2,802'",'2801.7'
+data_validation,FAIL,Cohort ARR Size,index=1,Values do not match,'NA',nan
+data_validation,FAIL,"EoP, Unadjusted  ",index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Extn for Late Renewals,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Peak ARR,index=1,Values do not match,'$3.3K','3306.006666666667'
+data_validation,FAIL,Previous ARR,index=1,Values do not match,'$2.80K','2801.7'
+data_validation,FAIL,Previous Extn for Late Renewals,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Refresh Overlap Adj,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Variance,index=1,Values do not match,'($2.80K)','-2801.7'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,'($2.80K)','-2801.7'
+data_validation,FAIL,Cohort ARR Size,index=2,Values do not match,'NA',nan
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=2,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,"EoP, Unadjusted  ",index=2,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Extn for Late Renewals,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Peak ARR,index=2,Values do not match,'$3.3K','3306.006666666667'
+data_validation,FAIL,Previous ARR,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Extn for Late Renewals,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Refresh Overlap Adj,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Variance,index=2,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=2,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=3,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,Cohort ARR Size,index=3,Values do not match,'NA',nan
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=3,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,"EoP, Unadjusted  ",index=3,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Extn for Late Renewals,index=3,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Peak ARR,index=3,Values do not match,'$3.3K','3306.006666666667'
+data_validation,FAIL,Previous ARR,index=3,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Previous Extn for Late Renewals,index=3,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=3,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Refresh Overlap Adj,index=3,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Variance,index=3,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=3,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=4,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,Cohort ARR Size,index=4,Values do not match,'NA',nan
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=4,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,"EoP, Unadjusted  ",index=4,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Extn for Late Renewals,index=4,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Peak ARR,index=4,Values do not match,'$3.3K','3306.006666666667'
+data_validation,FAIL,Previous ARR,index=4,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Previous Extn for Late Renewals,index=4,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=4,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Refresh Overlap Adj,index=4,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Variance,index=4,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=4,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=5,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,Cohort ARR Size,index=5,Values do not match,'NA',nan
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=5,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,"EoP, Unadjusted  ",index=5,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Extn for Late Renewals,index=5,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Peak ARR,index=5,Values do not match,'$3.3K','3306.006666666667'
+data_validation,FAIL,Previous ARR,index=5,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Previous Extn for Late Renewals,index=5,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=5,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Refresh Overlap Adj,index=5,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Variance,index=5,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=5,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=6,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,Cohort ARR Size,index=6,Values do not match,'NA',nan
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=6,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,"EoP, Unadjusted  ",index=6,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Extn for Late Renewals,index=6,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Peak ARR,index=6,Values do not match,'$3.3K','3306.006666666667'
+data_validation,FAIL,Previous ARR,index=6,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Previous Extn for Late Renewals,index=6,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=6,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Refresh Overlap Adj,index=6,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Variance,index=6,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=6,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=7,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,Cohort ARR Size,index=7,Values do not match,'NA',nan
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=7,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,"EoP, Unadjusted  ",index=7,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Extn for Late Renewals,index=7,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Peak ARR,index=7,Values do not match,'$3.3K','3306.006666666667'
+data_validation,FAIL,Previous ARR,index=7,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Previous Extn for Late Renewals,index=7,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=7,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Refresh Overlap Adj,index=7,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Variance,index=7,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=7,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=8,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,Cohort ARR Size,index=8,Values do not match,'NA',nan
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=8,Values do not match,"'3,306'",'3306.006666666667'
+data_validation,FAIL,"EoP, Unadjusted  ",index=8,Values do not match,'$3.31K','3306.006666666667'
+data_validation,FAIL,Extn for Late Renewals,index=8,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Peak ARR,index=8,Values do not match,'$3.3K','3306.006666666667'
+data_validation,INFO,,,... and 191427 more mismatches (showing first 100),,

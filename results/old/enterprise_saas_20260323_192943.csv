@@ -1,0 +1,166 @@
+validation,result,column,pk,detail,source_value,target_value
+record_count_check,PASS,,,"Source: 30994 rows, Target: 30994 rows",30994,30994
+column_count_check,PASS,,,"Source: 48 columns, Target: 50 columns, Common: 48 | Target-only: ['FiscalWindow', 'Identifier']",48,50
+metadata_type_check,PASS,ARR Size Dynamic,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account ID,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account Ranking List,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Bill State,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"BoP (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Bundle Product Code,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Category (Adjusted),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Cohort ARR Size,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Covered Finance Product Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Distributor Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,End Customer,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"EoP (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"EoP, Unadjusted  ",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Extn for Late Renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Finance Product Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Geo ,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Index#,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Industry,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Industry [Custom],,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Max. Fortune Rank,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Month of Revenue Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Order Number,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Peak ARR,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous ARR,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous Extn for Late Renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous Refresh Overlap Adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Family,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Group,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Penetration (Landed),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Quantity,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,RCN Emp Count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Refresh Overlap Adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Region,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Reseller Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,SKU,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Sales Designation_New,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Sales Rep,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Service End Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Service Start Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Shipping Country,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Territory Id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Territory Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Variance,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"Variance (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Year of Cohort Date FY,,"Compatible types: Source 'object', Target 'object'",object,object
+duplicate_check,SKIP,,,No primary key defined - duplicate check skipped,,
+null_check,FAIL,ARR Size Dynamic,,"Source: 0 nulls, Target: 1140 nulls",0,1140
+null_check,PASS,Account Ranking List,,"Source: 17273 nulls, Target: 17273 nulls",17273,17273
+null_check,PASS,Bill State,,"Source: 17518 nulls, Target: 17518 nulls",17518,17518
+null_check,PASS,Bundle Product Code,,"Source: 5335 nulls, Target: 5335 nulls",5335,5335
+null_check,FAIL,Cohort ARR Size,,"Source: 0 nulls, Target: 21055 nulls",0,21055
+null_check,PASS,Distributor Name,,"Source: 4394 nulls, Target: 4394 nulls",4394,4394
+null_check,PASS,Max. Fortune Rank,,"Source: 24833 nulls, Target: 24833 nulls",24833,24833
+null_check,PASS,Region,,"Source: 28 nulls, Target: 28 nulls",28,28
+null_check,PASS,Reseller Name,,"Source: 668 nulls, Target: 668 nulls",668,668
+null_check,PASS,Territory Id,,"Source: 58 nulls, Target: 58 nulls",58,58
+null_check,PASS,Territory Name,,"Source: 58 nulls, Target: 58 nulls",58,58
+null_check,PASS,Year of Cohort Date FY,,"Source: 27 nulls, Target: 27 nulls",27,27
+empty_string_check,PASS,,,No empty strings found,,
+data_validation,FAIL,Account ID,index=0,Values do not match,'0011M00002T3RmPQAV','0014600001RN8uSAAT'
+data_validation,FAIL,Account Name,index=0,Values do not match,'1LINK (PRIVATE) LIMITED','ABU DHABI ACCOUNTABILITY AUTHORITY ADAA'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,"'9,910'",'14613.0'
+data_validation,FAIL,Category,index=0,Values do not match,'Customer Upsell','No Change'
+data_validation,FAIL,Category (Adjusted),index=0,Values do not match,'Customer Upsell','No Change'
+data_validation,FAIL,Cohort ARR Size,index=0,Values do not match,'$10K or less','$10K - $25K'
+data_validation,FAIL,Distributor Name,index=0,Values do not match,'STARLINK DMCC',"'NETWORK DISTRIBUTORS FZ LLC, dba Exclusive Networks UAE'"
+data_validation,FAIL,End Customer,index=0,Values do not match,'1 LINK (PRIVATE) LIMITED',"'ABU DHABI ACCOUNTABILITY AUTHORITY, UAE'"
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,'0','14613.0'
+data_validation,FAIL,"EoP, Unadjusted  ",index=0,Values do not match,'$0.00K','14613.0'
+data_validation,FAIL,Extn for Late Renewals,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Industry,index=0,Values do not match,'Banking','Financial Services'
+data_validation,FAIL,Industry [Custom],index=0,Values do not match,'Financial Services','Government'
+data_validation,FAIL,Month of Revenue Date,index=0,Values do not match,'April 2025','October 2018'
+data_validation,FAIL,Order Number,index=0,Values do not match,'REN-168728','11119307'
+data_validation,FAIL,Peak ARR,index=0,Values do not match,'$13.3K','14613.0'
+data_validation,FAIL,Previous ARR,index=0,Values do not match,'$9.91K','14613.0'
+data_validation,FAIL,Previous Extn for Late Renewals,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Product Family,index=0,Values do not match,'BloxOne Threat Defense','ActiveTrust Cloud'
+data_validation,FAIL,Product Name,index=0,Values do not match,'BloxOne Threat Defense Advanced','Infoblox ActiveTrust Cloud Plus annual subscription for up to 500 protected users'
+data_validation,FAIL,Quantity,index=0,Values do not match,'500','1.0'
+data_validation,FAIL,RCN Emp Count,index=0,Values do not match,'200','139'
+data_validation,FAIL,Refresh Overlap Adj,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Reseller Name,index=0,Values do not match,'SECURE NETWORKS PVT. LTD',nan
+data_validation,FAIL,SKU,index=0,Values do not match,'IB-SUB-THREAT-ADV','IB-SUB-ATC-PL-500'
+data_validation,FAIL,Sales Rep,index=0,Values do not match,'Raheel Marshall','Hesham Elsherif'
+data_validation,FAIL,Service End Date,index=0,Values do not match,'31/01/2025','7/30/2019'
+data_validation,FAIL,Service Start Date,index=0,Values do not match,'01/02/2024','7/31/2018'
+data_validation,FAIL,Shipping Country,index=0,Values do not match,'Pakistan','United Arab Emirates'
+data_validation,FAIL,Territory Id,index=0,Values do not match,'0MIR70000000oj5OAA','0MI8Y000000g6scWAA'
+data_validation,FAIL,Territory Name,index=0,Values do not match,'QATAR / KUWAIT 1','UAE 3'
+data_validation,FAIL,Variance,index=0,Values do not match,'($9.91K)','0.0'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,'($9.91K)','0.0'
+data_validation,FAIL,Year of Cohort Date FY,index=0,Values do not match,'FY 2021','FY 2018'
+data_validation,FAIL,Account ID,index=1,Values do not match,'0011M00002T3RmPQAV','0014600001RN8uSAAT'
+data_validation,FAIL,Account Name,index=1,Values do not match,'1LINK (PRIVATE) LIMITED','ABU DHABI ACCOUNTABILITY AUTHORITY ADAA'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,'0','14613.0'
+data_validation,FAIL,Category,index=1,Values do not match,'Customer Upsell','No Change'
+data_validation,FAIL,Category (Adjusted),index=1,Values do not match,'Customer Upsell','No Change'
+data_validation,FAIL,Cohort ARR Size,index=1,Values do not match,'$10K or less','$10K - $25K'
+data_validation,FAIL,Distributor Name,index=1,Values do not match,'STARLINK DMCC',"'NETWORK DISTRIBUTORS FZ LLC, dba Exclusive Networks UAE'"
+data_validation,FAIL,End Customer,index=1,Values do not match,'1 LINK (PRIVATE) LIMITED',"'ABU DHABI ACCOUNTABILITY AUTHORITY, UAE'"
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,"'11,890'",'14613.0'
+data_validation,FAIL,"EoP, Unadjusted  ",index=1,Values do not match,'$11.89K','14613.0'
+data_validation,FAIL,Extn for Late Renewals,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Industry,index=1,Values do not match,'Banking','Financial Services'
+data_validation,FAIL,Industry [Custom],index=1,Values do not match,'Financial Services','Government'
+data_validation,FAIL,Month of Revenue Date,index=1,Values do not match,'April 2025','January 2019'
+data_validation,FAIL,Order Number,index=1,Values do not match,'REN-181740','11119307'
+data_validation,FAIL,Peak ARR,index=1,Values do not match,'$13.3K','14613.0'
+data_validation,FAIL,Previous ARR,index=1,Values do not match,'$0.00K','14613.0'
+data_validation,FAIL,Previous Extn for Late Renewals,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Product Family,index=1,Values do not match,'BloxOne Threat Defense','ActiveTrust Cloud'
+data_validation,FAIL,Product Name,index=1,Values do not match,'BloxOne Threat Defense Advanced','Infoblox ActiveTrust Cloud Plus annual subscription for up to 500 protected users'
+data_validation,FAIL,Quantity,index=1,Values do not match,'500','1.0'
+data_validation,FAIL,RCN Emp Count,index=1,Values do not match,'200','139'
+data_validation,FAIL,Refresh Overlap Adj,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Reseller Name,index=1,Values do not match,'SECURE NETWORKS PVT. LTD',nan
+data_validation,FAIL,SKU,index=1,Values do not match,'IB-SUB-THREAT-ADV','IB-SUB-ATC-PL-500'
+data_validation,FAIL,Sales Rep,index=1,Values do not match,'Raheel Marshall','Hesham Elsherif'
+data_validation,FAIL,Service End Date,index=1,Values do not match,'31/01/2026','7/30/2019'
+data_validation,FAIL,Service Start Date,index=1,Values do not match,'01/02/2025','7/31/2018'
+data_validation,FAIL,Shipping Country,index=1,Values do not match,'Pakistan','United Arab Emirates'
+data_validation,FAIL,Territory Id,index=1,Values do not match,'0MIR70000000oj5OAA','0MI8Y000000g6scWAA'
+data_validation,FAIL,Territory Name,index=1,Values do not match,'QATAR / KUWAIT 1','UAE 3'
+data_validation,FAIL,Variance,index=1,Values do not match,'$11.89K','0.0'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,'$11.89K','0.0'
+data_validation,FAIL,Year of Cohort Date FY,index=1,Values do not match,'FY 2021','FY 2018'
+data_validation,FAIL,Account ID,index=2,Values do not match,'0011M00002T3RmPQAV','0014600001RN8uSAAT'
+data_validation,FAIL,Account Name,index=2,Values do not match,'1LINK (PRIVATE) LIMITED','ABU DHABI ACCOUNTABILITY AUTHORITY ADAA'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=2,Values do not match,"'11,890'",'14613.0'
+data_validation,FAIL,Cohort ARR Size,index=2,Values do not match,'$10K or less','$10K - $25K'
+data_validation,FAIL,Distributor Name,index=2,Values do not match,'STARLINK DMCC',"'NETWORK DISTRIBUTORS FZ LLC, dba Exclusive Networks UAE'"
+data_validation,FAIL,End Customer,index=2,Values do not match,'1 LINK (PRIVATE) LIMITED',"'ABU DHABI ACCOUNTABILITY AUTHORITY, UAE'"
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=2,Values do not match,"'11,890'",'14613.0'
+data_validation,FAIL,"EoP, Unadjusted  ",index=2,Values do not match,'$11.89K','14613.0'
+data_validation,FAIL,Extn for Late Renewals,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Industry,index=2,Values do not match,'Banking','Financial Services'
+data_validation,FAIL,Industry [Custom],index=2,Values do not match,'Financial Services','Government'
+data_validation,FAIL,Month of Revenue Date,index=2,Values do not match,'July 2025','April 2019'
+data_validation,FAIL,Order Number,index=2,Values do not match,'REN-181740','11119307'
+data_validation,FAIL,Peak ARR,index=2,Values do not match,'$13.3K','14613.0'
+data_validation,FAIL,Previous ARR,index=2,Values do not match,'$11.89K','14613.0'
+data_validation,FAIL,Previous Extn for Late Renewals,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Product Family,index=2,Values do not match,'BloxOne Threat Defense','ActiveTrust Cloud'
+data_validation,FAIL,Product Name,index=2,Values do not match,'BloxOne Threat Defense Advanced','Infoblox ActiveTrust Cloud Plus annual subscription for up to 500 protected users'
+data_validation,FAIL,Quantity,index=2,Values do not match,'500','1.0'
+data_validation,FAIL,RCN Emp Count,index=2,Values do not match,'200','139'
+data_validation,FAIL,Refresh Overlap Adj,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Reseller Name,index=2,Values do not match,'SECURE NETWORKS PVT. LTD',nan
+data_validation,FAIL,SKU,index=2,Values do not match,'IB-SUB-THREAT-ADV','IB-SUB-ATC-PL-500'
+data_validation,FAIL,Sales Rep,index=2,Values do not match,'Raheel Marshall','Hesham Elsherif'
+data_validation,FAIL,Service End Date,index=2,Values do not match,'31/01/2026','7/30/2019'
+data_validation,FAIL,Service Start Date,index=2,Values do not match,'01/02/2025','7/31/2018'
+data_validation,FAIL,Shipping Country,index=2,Values do not match,'Pakistan','United Arab Emirates'
+data_validation,FAIL,Territory Id,index=2,Values do not match,'0MIR70000000oj5OAA','0MI8Y000000g6scWAA'
+data_validation,FAIL,Territory Name,index=2,Values do not match,'QATAR / KUWAIT 1','UAE 3'
+data_validation,INFO,,,... and 1201058 more mismatches (showing first 100),,

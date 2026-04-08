@@ -1,0 +1,163 @@
+validation,result,column,pk,detail,source_value,target_value
+record_count_check,FAIL,,,"Source: 6246 rows, Target: 6234 rows",6246,6234
+column_count_check,PASS,,,"Source: 48 columns, Target: 50 columns, Common: 48 | Target-only: ['FiscalWindow', 'Identifier']",48,50
+metadata_type_check,PASS,ARR Size Dynamic,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account ID,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Account Ranking List,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Bill State,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"BoP (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Bundle Product Code,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Category (Adjusted),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Cohort ARR Size,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Covered Finance Product Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Distributor Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,End Customer,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"EoP (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"EoP, Unadjusted  ",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Extn for Late Renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Finance Product Category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Geo ,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Index#,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Industry,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Industry [Custom],,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Max. Fortune Rank,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Month of Revenue Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Order Number,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Peak ARR,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous ARR,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous Extn for Late Renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Previous Refresh Overlap Adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Family,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Group,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Product Penetration (Landed),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Quantity,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,RCN Emp Count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Refresh Overlap Adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Region,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Reseller Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,SKU,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Sales Designation_New,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Sales Rep,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Service End Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Service Start Date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Shipping Country,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Territory Id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Territory Name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Variance,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"Variance (Adjusted, w/ Late Renewals Extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,Year of Cohort Date FY,,"Compatible types: Source 'object', Target 'object'",object,object
+duplicate_check,SKIP,,,No primary key defined - duplicate check skipped,,
+null_check,FAIL,ARR Size Dynamic,,"Source: 0 nulls, Target: 331 nulls",0,331
+null_check,FAIL,Account Ranking List,,"Source: 2499 nulls, Target: 2493 nulls",2499,2493
+null_check,FAIL,Bill State,,"Source: 2652 nulls, Target: 2649 nulls",2652,2649
+null_check,PASS,Bundle Product Code,,"Source: 238 nulls, Target: 238 nulls",238,238
+null_check,FAIL,Cohort ARR Size,,"Source: 0 nulls, Target: 4598 nulls",0,4598
+null_check,PASS,Distributor Name,,"Source: 965 nulls, Target: 965 nulls",965,965
+null_check,FAIL,Max. Fortune Rank,,"Source: 4272 nulls, Target: 4263 nulls",4272,4263
+null_check,PASS,Reseller Name,,"Source: 59 nulls, Target: 59 nulls",59,59
+null_check,PASS,Year of Cohort Date FY,,"Source: 11 nulls, Target: 11 nulls",11,11
+empty_string_check,PASS,,,No empty strings found,,
+data_validation,FAIL,ARR Size Dynamic,index=0,Values do not match,'$100K - $1M','$10K - $25K'
+data_validation,FAIL,Account ID,index=0,Values do not match,'0014600001JL7pYAAT','0014600001JLGSsAAP'
+data_validation,FAIL,Account Name,index=0,Values do not match,'AO SMITH CORPORATION','AL RAJHI BANK'
+data_validation,FAIL,Account Ranking List,index=0,Values do not match,'Fortune 1000;S&P 500;MarketCap 10k','Forbes 2000;MarketCap 10k'
+data_validation,FAIL,Bill State,index=0,Values do not match,'Wisconsin',nan
+data_validation,FAIL,Bundle Product Code,index=0,Values do not match,'IB-SUB-B1DDI-BIZ-GR-G','WR-B1-DDI'
+data_validation,FAIL,Category,index=0,Values do not match,'New Customer (Reclaimed)','New Customer'
+data_validation,FAIL,Category (Adjusted),index=0,Values do not match,'New Customer (Reclaimed)','New Customer'
+data_validation,FAIL,Cohort ARR Size,index=0,Values do not match,'NA',nan
+data_validation,FAIL,Distributor Name,index=0,Values do not match,'INGRAM MICRO INC',"'NETWORK DISTRIBUTORS FZ LLC, dba Exclusive Networks UAE'"
+data_validation,FAIL,End Customer,index=0,Values do not match,'A O SMITH CORPORATION','AL RAJHI BANKING & INVESTMENT CORPORATION'
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,"'105,000'",'12908.842845973417'
+data_validation,FAIL,"EoP, Unadjusted  ",index=0,Values do not match,'$105.00K','12908.842845973417'
+data_validation,FAIL,Extn for Late Renewals,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Geo ,index=0,Values do not match,'AMS','EMEA'
+data_validation,FAIL,Industry,index=0,Values do not match,'Electronics','Banking'
+data_validation,FAIL,Industry [Custom],index=0,Values do not match,'Manufacturing','Banking'
+data_validation,FAIL,Max. Fortune Rank,index=0,Values do not match,'768',nan
+data_validation,FAIL,Month of Revenue Date,index=0,Values do not match,'Jul-23','July 2020'
+data_validation,FAIL,Order Number,index=0,Values do not match,'DIST-162680','DIST-125039'
+data_validation,FAIL,Peak ARR,index=0,Values do not match,'$105.0K','12908.842845973417'
+data_validation,FAIL,Previous ARR,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Extn for Late Renewals,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Product Name,index=0,Values do not match,'Infoblox BloxOne DDI Business Software Annual Subscription for up to guardrail limits in tier G (45,'Infoblox BloxOne DDI Advanced Software Annual Subscription per virtual machine or Infoblox 105 Hard
+data_validation,FAIL,Quantity,index=0,Values do not match,'1','10'
+data_validation,FAIL,RCN Emp Count,index=0,Values do not match,'13700','23437'
+data_validation,FAIL,Refresh Overlap Adj,index=0,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Region,index=0,Values do not match,'AMS NEW LOGO EAST','METAF'
+data_validation,FAIL,Reseller Name,index=0,Values do not match,"'AccessIT Group, Inc.'","'Help Information Technology Consultancy L.L.C.,'"
+data_validation,FAIL,SKU,index=0,Values do not match,'IB-SUB-B1DDI-BIZ-GR-G','IB-SUB-B1-DDI-ADV'
+data_validation,FAIL,Sales Rep,index=0,Values do not match,'Julie Mitchell','Mansoor AlShalahi'
+data_validation,FAIL,Service End Date,index=0,Values do not match,'28/07/2024','2/6/2024'
+data_validation,FAIL,Service Start Date,index=0,Values do not match,'29/07/2023','8/7/2020'
+data_validation,FAIL,Shipping Country,index=0,Values do not match,'United States','Saudi Arabia'
+data_validation,FAIL,Territory Id,index=0,Values do not match,'0MIR70000000oiTOAQ','0MIR70000000VztOAE'
+data_validation,FAIL,Territory Name,index=0,Values do not match,'AMS NEW LOGO EAST 06','SAUDI 2'
+data_validation,FAIL,Variance,index=0,Values do not match,'$105.00K','12908.842845973417'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=0,Values do not match,'$105.00K','12908.842845973417'
+data_validation,FAIL,Year of Cohort Date FY,index=0,Values do not match,'FY 2009','FY 2020'
+data_validation,FAIL,ARR Size Dynamic,index=1,Values do not match,'$100K - $1M','$10K or less'
+data_validation,FAIL,Account ID,index=1,Values do not match,'0014600001JL7pYAAT','0014600001JL8mBAAT'
+data_validation,FAIL,Account Name,index=1,Values do not match,'AO SMITH CORPORATION',"""SERVEI DE TELECOMUNICACIONS D'ANDORRA"""
+data_validation,FAIL,Account Ranking List,index=1,Values do not match,'Fortune 1000;S&P 500;MarketCap 10k',nan
+data_validation,FAIL,Bill State,index=1,Values do not match,'Wisconsin',nan
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,"'105,000'",'0.0'
+data_validation,FAIL,Bundle Product Code,index=1,Values do not match,'IB-SUB-B1DDI-BIZ-GR-G','WR-B1-DDI'
+data_validation,FAIL,Category,index=1,Values do not match,'No Change','New Customer (Reclaimed)'
+data_validation,FAIL,Category (Adjusted),index=1,Values do not match,'No Change','New Customer (Reclaimed)'
+data_validation,FAIL,Cohort ARR Size,index=1,Values do not match,'NA',nan
+data_validation,FAIL,Distributor Name,index=1,Values do not match,'INGRAM MICRO INC','EXCLUSIVE NETWORKS SPAIN'
+data_validation,FAIL,End Customer,index=1,Values do not match,'A O SMITH CORPORATION','ANDORRA TELECOM SAU'
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,"'105,000'",'4308.0'
+data_validation,FAIL,"EoP, Unadjusted  ",index=1,Values do not match,'$105.00K','4308.0'
+data_validation,FAIL,Extn for Late Renewals,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Geo ,index=1,Values do not match,'AMS','EMEA'
+data_validation,FAIL,Industry,index=1,Values do not match,'Electronics','Telecomm Service Providers'
+data_validation,FAIL,Industry [Custom],index=1,Values do not match,'Manufacturing','Telecomm Service Providers'
+data_validation,FAIL,Max. Fortune Rank,index=1,Values do not match,'768',nan
+data_validation,FAIL,Month of Revenue Date,index=1,Values do not match,'Oct-23','July 2020'
+data_validation,FAIL,Order Number,index=1,Values do not match,'DIST-162680','DIST-124062'
+data_validation,FAIL,Peak ARR,index=1,Values do not match,'$105.0K','4308.0'
+data_validation,FAIL,Previous ARR,index=1,Values do not match,'$105.00K','0.0'
+data_validation,FAIL,Previous Extn for Late Renewals,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Previous Refresh Overlap Adj,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Product Name,index=1,Values do not match,'Infoblox BloxOne DDI Business Software Annual Subscription for up to guardrail limits in tier G (45,'Infoblox BloxOne DDI Advanced Software Annual Subscription per virtual machine or Infoblox 105 Hard
+data_validation,FAIL,Quantity,index=1,Values do not match,'1','2'
+data_validation,FAIL,RCN Emp Count,index=1,Values do not match,'13700','500'
+data_validation,FAIL,Refresh Overlap Adj,index=1,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Region,index=1,Values do not match,'AMS NEW LOGO EAST','EMEA SP SI'
+data_validation,FAIL,Reseller Name,index=1,Values do not match,"'AccessIT Group, Inc.'",'SATEC - Spain'
+data_validation,FAIL,SKU,index=1,Values do not match,'IB-SUB-B1DDI-BIZ-GR-G','IB-SUB-B1-DDI-ADV'
+data_validation,FAIL,Sales Rep,index=1,Values do not match,'Julie Mitchell','Paulo Favero'
+data_validation,FAIL,Service End Date,index=1,Values do not match,'28/07/2024','7/21/2023'
+data_validation,FAIL,Service Start Date,index=1,Values do not match,'29/07/2023','7/22/2020'
+data_validation,FAIL,Shipping Country,index=1,Values do not match,'United States','Andorra'
+data_validation,FAIL,Territory Id,index=1,Values do not match,'0MIR70000000oiTOAQ','0MI8Y000000g6sDWAQ'
+data_validation,FAIL,Territory Name,index=1,Values do not match,'AMS NEW LOGO EAST 06','EMEA SP EUROPE 1'
+data_validation,FAIL,Variance,index=1,Values do not match,'$0.00K','4308.0'
+data_validation,FAIL,"Variance (Adjusted, w/ Late Renewals Extn)",index=1,Values do not match,'$0.00K','4308.0'
+data_validation,FAIL,Year of Cohort Date FY,index=1,Values do not match,'FY 2009','FY 2008'
+data_validation,FAIL,ARR Size Dynamic,index=2,Values do not match,'$100K - $1M','$10K or less'
+data_validation,FAIL,Account ID,index=2,Values do not match,'0014600001JL7pYAAT','0014600001JLJTkAAP'
+data_validation,FAIL,Account Name,index=2,Values do not match,'AO SMITH CORPORATION','ANN & ROBERT H LURIE CHILDRENS HOSPITAL OF CHICAGO'
+data_validation,FAIL,Account Ranking List,index=2,Values do not match,'Fortune 1000;S&P 500;MarketCap 10k',nan
+data_validation,FAIL,Bill State,index=2,Values do not match,'Wisconsin','Illinois'
+data_validation,FAIL,"BoP (Adjusted, w/ Late Renewals Extn)",index=2,Values do not match,"'105,000'",'0.0'
+data_validation,FAIL,Bundle Product Code,index=2,Values do not match,'IB-SUB-B1DDI-BIZ-GR-G','IB-SUB-B1-DDI-ESNTL'
+data_validation,FAIL,Category,index=2,Values do not match,'No Change','New Customer'
+data_validation,FAIL,Category (Adjusted),index=2,Values do not match,'No Change','New Customer'
+data_validation,FAIL,Cohort ARR Size,index=2,Values do not match,'NA',nan
+data_validation,FAIL,End Customer,index=2,Values do not match,'A O SMITH CORPORATION',"""ANN & ROBERT H LURIE CHILDREN'S HOSPITAL OF CHICAGO"""
+data_validation,FAIL,"EoP (Adjusted, w/ Late Renewals Extn)",index=2,Values do not match,"'105,000'",'938.1266666666668'
+data_validation,FAIL,"EoP, Unadjusted  ",index=2,Values do not match,'$105.00K','938.1266666666668'
+data_validation,FAIL,Extn for Late Renewals,index=2,Values do not match,'$0.00K','0.0'
+data_validation,FAIL,Industry,index=2,Values do not match,'Electronics','Healthcare'
+data_validation,FAIL,Industry [Custom],index=2,Values do not match,'Manufacturing','Healthcare'
+data_validation,FAIL,Max. Fortune Rank,index=2,Values do not match,'768',nan
+data_validation,FAIL,Month of Revenue Date,index=2,Values do not match,'Jan-24','July 2020'
+data_validation,FAIL,Order Number,index=2,Values do not match,'DIST-162680','DIST-125051'
+data_validation,INFO,,,... and 241892 more mismatches (showing first 100),,

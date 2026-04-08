@@ -1,0 +1,92 @@
+# Universal Data Validation Framework
+# Example configuration file demonstrating all 5 comparison scenarios
+
+validations:
+  # Scenario 1: File vs Redshift Table
+  - name: "CSV to Redshift Validation"
+    source:
+      type: file
+      path: ./data/source_data.csv  # Relative to project root
+      format: csv  # Optional: auto-detected from extension
+    target:
+      type: table
+      schema: edw_asis
+      table: my_table_name
+      # Redshift credentials loaded from .env file
+    primary_keys: id,user_id  # Comma-separated primary keys
+    output_dir: ./results
+  
+  # Scenario 2: Redshift Table vs Table
+  - name: "Table to Table Comparison"
+    source:
+      type: table
+      schema: edw_asis
+      table: source_table
+    target:
+      type: table
+      schema: edw_tobe
+      table: target_table
+    primary_keys: customer_id
+    output_dir: ./results
+  
+  # Scenario 3: File vs File
+  - name: "CSV to Parquet Validation"
+    source:
+      type: file
+      path: ./data/source.csv
+    target:
+      type: file
+      path: ./data/target.parquet
+    primary_keys: id
+    output_dir: ./results
+  
+  # Scenario 4: DataSource (TWBX) vs DataSource
+  - name: "TWBX Comparison"
+    source:
+      type: datasource
+      path: ./datasources/pre_rca_opp_historical.twbx
+    target:
+      type: datasource
+      path: ./datasources/post_rca_opp_historical.twbx
+    # No primary keys for datasource comparison
+    output_dir: ./results
+  
+  # Scenario 5: DataSource vs Redshift Table
+  - name: "TWBX to Table Validation"
+    source:
+      type: datasource
+      path: ./datasources/my_datasource.twbx
+      datasource_name: "Main Data"  # Optional: specific datasource to extract
+    target:
+      type: table
+      schema: edw_asis
+      table: tableau_data
+    primary_keys: record_id
+    output_dir: ./results
+  
+  # Additional Examples
+  
+  # JSON to Excel
+  - name: "JSON to Excel Comparison"
+    source:
+      type: file
+      path: ./data/api_response.json
+      json_orient: records  # Optional: JSON orientation
+    target:
+      type: file
+      path: ./data/excel_export.xlsx
+      sheet_name: 0  # Optional: Excel sheet to read
+    primary_keys: transaction_id
+    output_dir: ./results
+  
+  # Parquet to Table (no primary key - row-by-row comparison)
+  - name: "Parquet to Table (No PK)"
+    source:
+      type: file
+      path: ./data/batch_data.parquet
+    target:
+      type: table
+      schema: staging
+      table: batch_import
+    # No primary_keys - will compare row-by-row
+    output_dir: ./results

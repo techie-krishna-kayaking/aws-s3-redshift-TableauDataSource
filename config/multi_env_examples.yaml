@@ -1,0 +1,94 @@
+# Multi-Environment Validation Examples
+# Demonstrates using different Redshift environments
+
+validations:
+  # Example 1: Using DEV environment
+  - name: "DEV - CSV to Table Validation"
+    source:
+      type: file
+      path: ./data/dev_data.csv
+    target:
+      type: table
+      environment: DEV  # Uses DEV_JDBC_URL, DEV_USER, DEV_PASSWORD from .env
+      schema: edw_asis
+      table: dev_table
+    primary_keys: id
+    output_dir: ./results
+  
+  # Example 2: Using DEV_REVOPS environment (different user on same instance)
+  - name: "DEV RevOps - Table Comparison"
+    source:
+      type: table
+      environment: DEV  # kkrishna user
+      schema: edw_asis
+      table: source_table
+    target:
+      type: table
+      environment: DEV_REVOPS  # revops_test_qa user
+      schema: edw_asis
+      table: target_table
+    primary_keys: customer_id
+    output_dir: ./results
+  
+  # Example 3: Compare DEV vs PREPROD
+  - name: "DEV to PREPROD Migration Check"
+    source:
+      type: table
+      environment: DEV
+      schema: staging
+      table: customers
+    target:
+      type: table
+      environment: PREPROD
+      schema: staging
+      table: customers
+    primary_keys: customer_id
+    output_dir: ./results
+  
+  # Example 4: Validate PREPROD before PROD deployment
+  - name: "PREPROD to PROD Validation"
+    source:
+      type: table
+      environment: PREPROD
+      schema: production
+      table: final_data
+    target:
+      type: table
+      environment: PROD
+      schema: production
+      table: final_data
+    primary_keys: record_id
+    output_dir: ./results
+  
+  # Example 5: File to specific environment
+  - name: "CSV to PROD Table"
+    source:
+      type: file
+      path: ./data/production_upload.csv
+    target:
+      type: table
+      environment: PROD
+      schema: production
+      table: import_table
+    primary_keys: transaction_id
+    output_dir: ./results
+  
+  # Example 6: Mix environment and direct config (advanced)
+  - name: "Mixed Configuration Example"
+    source:
+      type: table
+      environment: DEV  # Use environment config
+      schema: edw_asis
+      table: source_data
+    target:
+      type: table
+      # Direct config (legacy mode)
+      host: custom-cluster.redshift.amazonaws.com
+      database: custom-db
+      user: custom_user
+      password: custom_pass
+      port: 5439
+      schema: public
+      table: target_data
+    primary_keys: id
+    output_dir: ./results

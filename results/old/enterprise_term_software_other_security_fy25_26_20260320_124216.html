@@ -1,0 +1,4083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Term Software Other Security_fy25_26 - Validation Report</title>
+    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .card-title {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .card-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .card.pass .card-value {
+            color: #28a745;
+        }
+        
+        .card.fail .card-value {
+            color: #dc3545;
+        }
+        
+        .card.info .card-value {
+            color: #17a2b8;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 3px;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        table.dataTable {
+            width: 100% !important;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table.dataTable thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+        
+        table.dataTable tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table.dataTable tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .badge.pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .badge.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .badge.skip {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .badge.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .metadata-item {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .metadata-label {
+            font-weight: 600;
+            color: #666;
+            min-width: 120px;
+        }
+        
+        .metadata-value {
+            color: #333;
+            word-break: break-all;
+        }
+        
+        .collapsible {
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 8px;
+            margin: 10px 0;
+            transition: background 0.3s ease;
+        }
+        
+        .collapsible:hover {
+            background: #764ba2;
+        }
+        
+        .collapsible::after {
+            content: '\25BC';
+            float: right;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .collapsible.active::after {
+            transform: rotate(-180deg);
+        }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .collapsible-content.active {
+            max-height: 2000px;
+            padding: 20px;
+            border: 2px solid #667eea;
+            border-top: none;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .timestamp {
+            font-size: 0.9em;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Enterprise Term Software Other Security_fy25_26</h1>
+            <div class="subtitle">Data Validation Report</div>
+            <div class="timestamp">Generated: 2026-03-20 12:42:16</div>
+        </div>
+        
+        <div class="summary-cards">
+            <div class="card fail">
+                <div class="card-title">Overall Status</div>
+                <div class="card-value">❌ FAIL</div>
+            </div>
+            <div class="card pass">
+                <div class="card-title">Passed Checks</div>
+                <div class="card-value">51</div>
+            </div>
+            <div class="card fail">
+                <div class="card-title">Failed Checks</div>
+                <div class="card-value">108</div>
+            </div>
+            <div class="card info">
+                <div class="card-title">Total Checks</div>
+                <div class="card-value">161</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- Metadata Section -->
+            <div class="section">
+                <h2 class="section-title">Validation Configuration</h2>
+                <div class="metadata">
+                    <div class="metadata-grid">
+                        
+            <div class="metadata-item">
+                <div class="metadata-label">Source Type:</div>
+                <div class="metadata-value">file</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Source Path:</div>
+                <div class="metadata-value">/Users/kkrishna/Library/CloudStorage/OneDrive-InfobloxInc/PycharmProjects/infoblox-DE/1UniversalFramework/universal-validator/raw_data/arr-dashboard-files/Enterprise Term Software Other Security_fy25_26.csv</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Source Rows:</div>
+                <div class="metadata-value">5795</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Source Columns:</div>
+                <div class="metadata-value">48</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Type:</div>
+                <div class="metadata-value">file</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Path:</div>
+                <div class="metadata-value">/Users/kkrishna/Library/CloudStorage/OneDrive-InfobloxInc/PycharmProjects/infoblox-DE/1UniversalFramework/universal-validator/raw_data/arr-s3-files/Enterprise Term Software Other Security_fy25_26.csv</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Rows:</div>
+                <div class="metadata-value">5708</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Columns:</div>
+                <div class="metadata-value">49</div>
+            </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visualizations Section -->
+            <div class="section">
+                <h2 class="section-title">Validation Overview</h2>
+                <div class="chart-grid">
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="validationTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column-Level Analysis -->
+            <div class="section">
+                <h2 class="section-title">Column-Level Analysis</h2>
+                <div class="chart-container" style="height: 500px;">
+                    <canvas id="columnChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Detailed Results -->
+            <div class="section">
+                <h2 class="section-title">Detailed Results</h2>
+                
+                <!-- Failed Checks -->
+                <button class="collapsible active">❌ Failed Checks (108)</button>
+                <div class="collapsible-content active">
+                    <table id="failedTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Validation Type</th>
+                                <th>Column</th>
+                                <th>Primary Key</th>
+                                <th>Detail</th>
+                                <th>Source Value</th>
+                                <th>Target Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                    <tr>
+                        
+                        <td>Record Count Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Source: 5795 rows, Target: 5708 rows</td>
+                        <td>'5795'</td>
+                        <td>'5708'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>ARR Size Dynamic</td>
+                        <td>-</td>
+                        <td>Source: 0 nulls, Target: 382 nulls</td>
+                        <td>'0'</td>
+                        <td>'382'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>Account Ranking List</td>
+                        <td>-</td>
+                        <td>Source: 2504 nulls, Target: 2462 nulls</td>
+                        <td>'2504'</td>
+                        <td>'2462'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>Bill State</td>
+                        <td>-</td>
+                        <td>Source: 2896 nulls, Target: 2865 nulls</td>
+                        <td>'2896'</td>
+                        <td>'2865'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>Cohort ARR Size</td>
+                        <td>-</td>
+                        <td>Source: 0 nulls, Target: 4869 nulls</td>
+                        <td>'0'</td>
+                        <td>'4869'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>Distributor Name</td>
+                        <td>-</td>
+                        <td>Source: 1422 nulls, Target: 1395 nulls</td>
+                        <td>'1422'</td>
+                        <td>'1395'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>Max. Fortune Rank</td>
+                        <td>-</td>
+                        <td>Source: 4219 nulls, Target: 4155 nulls</td>
+                        <td>'4219'</td>
+                        <td>'4155'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>Reseller Name</td>
+                        <td>-</td>
+                        <td>Source: 217 nulls, Target: 202 nulls</td>
+                        <td>'217'</td>
+                        <td>'202'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'2,802'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'2,802'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$2.80K'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$2.80K'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'2,802'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$2.80K'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'($2.80K)'"</td>
+                        <td>"'-2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'($2.80K)'"</td>
+                        <td>"'-2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Passed Checks -->
+                <button class="collapsible">✅ Passed Checks (51)</button>
+                <div class="collapsible-content">
+                    <table id="passedTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Validation Type</th>
+                                <th>Column</th>
+                                <th>Detail</th>
+                                <th>Source Value</th>
+                                <th>Target Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                    <tr>
+                        
+                        <td>Column Count Check</td>
+                        <td>-</td>
+                        <td>Source: 48 columns, Target: 49 columns, Common: 48 | Target-only: ['Identifier']</td>
+                        <td>'48'</td>
+                        <td>'49'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>ARR Size Dynamic</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Account ID</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Account Name</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Account Ranking List</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Bill State</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Bundle Product Code</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Category</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Category (Adjusted)</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Cohort ARR Size</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Covered Finance Product Category</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Distributor Name</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>End Customer</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Finance Product Category</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Geo </td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Index#</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Industry</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Industry [Custom]</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Max. Fortune Rank</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Month of Revenue Date</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Order Number</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Peak ARR</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Previous ARR</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Product Family</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Product Group</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Product Name</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Product Penetration (Landed)</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Quantity</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>RCN Emp Count</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Region</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Reseller Name</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>SKU</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Sales Designation_New</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Sales Rep</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Service End Date</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Service Start Date</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Shipping Country</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Territory Id</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Territory Name</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Variance</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>Year of Cohort Date FY</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>Bundle Product Code</td>
+                        <td>Source: 604 nulls, Target: 604 nulls</td>
+                        <td>'604'</td>
+                        <td>'604'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Empty String Check</td>
+                        <td>-</td>
+                        <td>No empty strings found</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- All Results -->
+                <button class="collapsible">📋 All Results (161)</button>
+                <div class="collapsible-content">
+                    <table id="allTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Validation Type</th>
+                                <th>Column</th>
+                                <th>Primary Key</th>
+                                <th>Detail</th>
+                                <th>Source Value</th>
+                                <th>Target Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Record Count Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Source: 5795 rows, Target: 5708 rows</td>
+                        <td>'5795'</td>
+                        <td>'5708'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Column Count Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Source: 48 columns, Target: 49 columns, Common: 48 | Target-only: ['Identifier']</td>
+                        <td>'48'</td>
+                        <td>'49'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>ARR Size Dynamic</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Account ID</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Account Name</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Account Ranking List</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Bill State</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Bundle Product Code</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Category</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Category (Adjusted)</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Cohort ARR Size</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Covered Finance Product Category</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Distributor Name</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>End Customer</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Finance Product Category</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Geo </td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Index#</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Industry</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Industry [Custom]</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Max. Fortune Rank</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Month of Revenue Date</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Order Number</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Peak ARR</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Previous ARR</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Product Family</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Product Group</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Product Name</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Product Penetration (Landed)</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Quantity</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>RCN Emp Count</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Region</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Reseller Name</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>SKU</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Sales Designation_New</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Sales Rep</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Service End Date</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Service Start Date</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Shipping Country</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Territory Id</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Territory Name</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Variance</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>Year of Cohort Date FY</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge skip">SKIP</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>No primary key defined - duplicate check skipped</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Null Check</td>
+                        <td>ARR Size Dynamic</td>
+                        <td>-</td>
+                        <td>Source: 0 nulls, Target: 382 nulls</td>
+                        <td>'0'</td>
+                        <td>'382'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Null Check</td>
+                        <td>Account Ranking List</td>
+                        <td>-</td>
+                        <td>Source: 2504 nulls, Target: 2462 nulls</td>
+                        <td>'2504'</td>
+                        <td>'2462'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Null Check</td>
+                        <td>Bill State</td>
+                        <td>-</td>
+                        <td>Source: 2896 nulls, Target: 2865 nulls</td>
+                        <td>'2896'</td>
+                        <td>'2865'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>Bundle Product Code</td>
+                        <td>-</td>
+                        <td>Source: 604 nulls, Target: 604 nulls</td>
+                        <td>'604'</td>
+                        <td>'604'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Null Check</td>
+                        <td>Cohort ARR Size</td>
+                        <td>-</td>
+                        <td>Source: 0 nulls, Target: 4869 nulls</td>
+                        <td>'0'</td>
+                        <td>'4869'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Null Check</td>
+                        <td>Distributor Name</td>
+                        <td>-</td>
+                        <td>Source: 1422 nulls, Target: 1395 nulls</td>
+                        <td>'1422'</td>
+                        <td>'1395'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Null Check</td>
+                        <td>Max. Fortune Rank</td>
+                        <td>-</td>
+                        <td>Source: 4219 nulls, Target: 4155 nulls</td>
+                        <td>'4219'</td>
+                        <td>'4155'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Null Check</td>
+                        <td>Reseller Name</td>
+                        <td>-</td>
+                        <td>Source: 217 nulls, Target: 202 nulls</td>
+                        <td>'217'</td>
+                        <td>'202'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Empty String Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>No empty strings found</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'2,802'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'2,802'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$2.80K'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$2.80K'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=0</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'2,802'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$2.80K'"</td>
+                        <td>"'2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'($2.80K)'"</td>
+                        <td>"'-2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=1</td>
+                        <td>Values do not match</td>
+                        <td>"'($2.80K)'"</td>
+                        <td>"'-2801.7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=2</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=3</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=4</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=5</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=6</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous ARR</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Extn for Late Renewals</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Previous Refresh Overlap Adj</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Refresh Overlap Adj</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Variance (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=7</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>BoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Cohort ARR Size</td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'NA'"</td>
+                        <td>'nan'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP (Adjusted, w/ Late Renewals Extn)</td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'3,306'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>EoP, Unadjusted  </td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.31K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Extn for Late Renewals</td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'$0.00K'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>Peak ARR</td>
+                        <td>index=8</td>
+                        <td>Values do not match</td>
+                        <td>"'$3.3K'"</td>
+                        <td>"'3306.006666666667'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge info">INFO</span></td>
+                        <td>Data Validation</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>... and 191427 more mismatches (showing first 100)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Universal Data Validation Framework v1.0</p>
+            <p class="timestamp">Report generated on 2026-03-20 12:42:16</p>
+        </div>
+    </div>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <script>
+        // Collapsible sections
+        const collapsibles = document.querySelectorAll('.collapsible');
+        collapsibles.forEach(coll => {
+            coll.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                content.classList.toggle('active');
+            });
+        });
+        
+        // Initialize DataTables
+        $(document).ready(function() {
+            $('#failedTable').DataTable({
+                pageLength: 25,
+                order: [[0, 'asc']],
+                language: {
+                    search: "Search failures:"
+                }
+            });
+            
+            $('#passedTable').DataTable({
+                pageLength: 25,
+                order: [[0, 'asc']],
+                language: {
+                    search: "Search passed:"
+                }
+            });
+            
+            $('#allTable').DataTable({
+                pageLength: 50,
+                order: [[0, 'asc']],
+                language: {
+                    search: "Search all:"
+                }
+            });
+        });
+        
+        // Chart.js visualizations
+        const chartData = {"pass_count": 51, "fail_count": 108, "skip_count": 1, "validation_types": ["record_count_check", "column_count_check", "metadata_type_check", "duplicate_check", "null_check", "empty_string_check", "data_validation"], "validation_fails": [1, 0, 0, 0, 7, 0, 100], "validation_passes": [0, 1, 48, 0, 1, 1, 0], "column_names": ["Cohort ARR Size", "EoP, Unadjusted  ", "Extn for Late Renewals", "Peak ARR", "Variance (Adjusted, w/ Late Renewals Extn)", "Previous Refresh Overlap Adj", "Variance", "BoP (Adjusted, w/ Late Renewals Extn)", "EoP (Adjusted, w/ Late Renewals Extn)", "Refresh Overlap Adj", "Previous ARR", "Previous Extn for Late Renewals", "Reseller Name", "ARR Size Dynamic", "Account Ranking List", "Distributor Name", "Bill State", "Max. Fortune Rank"], "column_failures": [10, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1]};
+        
+        // Status Pie Chart
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Passed', 'Failed', 'Skipped'],
+                datasets: [{
+                    data: [chartData.pass_count, chartData.fail_count, chartData.skip_count],
+                    backgroundColor: ['#28a745', '#dc3545', '#ffc107'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Validation Status Distribution',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+        
+        // Validation Type Bar Chart
+        new Chart(document.getElementById('validationTypeChart'), {
+            type: 'bar',
+            data: {
+                labels: chartData.validation_types,
+                datasets: [{
+                    label: 'Failed',
+                    data: chartData.validation_fails,
+                    backgroundColor: '#dc3545'
+                }, {
+                    label: 'Passed',
+                    data: chartData.validation_passes,
+                    backgroundColor: '#28a745'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Validation Type Breakdown',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, beginAtZero: true }
+                }
+            }
+        });
+        
+        // Column-Level Failures Chart
+        if (chartData.column_failures.length > 0) {
+            new Chart(document.getElementById('columnChart'), {
+                type: 'bar',
+                data: {
+                    labels: chartData.column_names,
+                    datasets: [{
+                        label: 'Failures per Column',
+                        data: chartData.column_failures,
+                        backgroundColor: '#dc3545'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Column-Level Failure Analysis (Top Culprits)',
+                            font: { size: 16, weight: 'bold' }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: { beginAtZero: true, title: { display: true, text: 'Number of Failures' } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
