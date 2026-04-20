@@ -10,7 +10,7 @@ import json
 import logging
 import csv
 
-from utils.html_template import get_html_template
+from utils.html_template import get_html_template, get_consolidated_html_template
 from utils.helpers import safe_repr
 
 logger = logging.getLogger(__name__)
@@ -306,4 +306,195 @@ class Reporter:
         return {
             'csv': self.generate_csv(csv_path),
             'html': self.generate_html(html_path)
+        }
+
+
+class ConsolidatedReporter:
+    """
+    Generates a single consolidated Excel workbook and a single tabbed HTML report
+    from multiple validation results.
+    """
+
+    def __init__(self, all_results: List[Dict[str, Any]]):
+        """
+        Args:
+            all_results: List of result dicts returned by Validator.run()
+        """
+        self.all_results = all_results
+
+    def generate_excel(self, output_path: Path) -> Path:
+        """Generate a single Excel file with one sheet per validation."""
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
+            # Summary sheet
+            summary_rows = []
+            for r in self.all_results:
+                summary_rows.append({
+                    'Validation': r['name'],
+                    'Status': r['status'],
+                    'Passed': r['pass_count'],
+                    'Failed': r['fail_count'],
+                    'Total': r['total_count'],
+                })
+            pd.DataFrame(summary_rows).to_excel(writer, sheet_name='Summary', index=False)
+
+            for r in self.all_results:
+                sheet_name = r['name'][:31]  # Excel sheet name limit
+                df = pd.DataFrame(r['results'])
+                df.to_excel(writer, sheet_name=sheet_name, index=False)
+
+        logger.info(f"Consolidated Excel saved: {output_path}")
+        return output_path
+
+    def generate_html(self, output_path: Path) -> Path:
+        """Generate a single HTML file with tabs for each validation."""
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Build tab headers and tab content
+        tab_headers = []
+        tab_contents = []
+
+        for idx, r in enumerate(self.all_results):
+            name = r['name']
+            status_icon = '✅' if r['status'] == 'PASS' else '❌'
+            active = 'active' if idx == 0 else ''
+            tab_headers.append(
+                f'<button class="tab-btn {active}" data-tab="tab-{idx}">{status_icon} {name}</button>'
+            )
+
+            reporter = Reporter(
+                validation_name=name,
+                results=r['results'],
+                source_metadata=r.get('source_metadata', {}),
+                target_metadata=r.get('target_metadata', {}),
+            )
+            stats = reporter._calculate_statistics()
+            chart_data = reporter._generate_chart_data()
+            metadata_html = reporter._generate_metadata_html()
+            failed_rows = reporter._generate_table_rows(
+                reporter.results_df[reporter.results_df['result'] == 'FAIL'])
+            passed_rows = reporter._generate_table_rows(
+                reporter.results_df[reporter.results_df['result'] == 'PASS'], include_pk=False)
+            all_rows = reporter._generate_table_rows(reporter.results_df, include_status=True)
+
+            display = 'block' if idx == 0 else 'none'
+            tab_contents.append(f'''
+            <div class="tab-content" id="tab-{idx}" style="display:{display}">
+                <div class="summary-cards">
+                    <div class="card {stats['overall_status_class']}">
+                        <div class="card-title">Overall Status</div>
+                        <div class="card-value">{stats['overall_status']}</div>
+                    </div>
+                    <div class="card pass">
+                        <div class="card-title">Passed Checks</div>
+                        <div class="card-value">{stats['pass_count']}</div>
+                    </div>
+                    <div class="card fail">
+                        <div class="card-title">Failed Checks</div>
+                        <div class="card-value">{stats['fail_count']}</div>
+                    </div>
+                    <div class="card info">
+                        <div class="card-title">Total Checks</div>
+                        <div class="card-value">{stats['total_count']}</div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="section">
+                        <h2 class="section-title">Validation Configuration</h2>
+                        <div class="metadata"><div class="metadata-grid">{metadata_html}</div></div>
+                    </div>
+                    <div class="section">
+                        <h2 class="section-title">Validation Overview</h2>
+                        <div class="chart-grid">
+                            <div class="chart-container"><canvas id="statusChart-{idx}"></canvas></div>
+                            <div class="chart-container"><canvas id="validationTypeChart-{idx}"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <h2 class="section-title">Column-Level Analysis</h2>
+                        <div class="chart-container" style="height:500px;"><canvas id="columnChart-{idx}"></canvas></div>
+                    </div>
+                    <div class="section">
+                        <h2 class="section-title">Detailed Results</h2>
+                        <button class="collapsible active">❌ Failed Checks ({stats['fail_count']})</button>
+                        <div class="collapsible-content active">
+                            <table id="failedTable-{idx}" class="display">
+                                <thead><tr><th>Validation Type</th><th>Column</th><th>Primary Key</th><th>Detail</th><th>Source Value</th><th>Target Value</th></tr></thead>
+                                <tbody>{failed_rows}</tbody>
+                            </table>
+                        </div>
+                        <button class="collapsible">✅ Passed Checks ({stats['pass_count']})</button>
+                        <div class="collapsible-content">
+                            <table id="passedTable-{idx}" class="display">
+                                <thead><tr><th>Validation Type</th><th>Column</th><th>Detail</th><th>Source Value</th><th>Target Value</th></tr></thead>
+                                <tbody>{passed_rows}</tbody>
+                            </table>
+                        </div>
+                        <button class="collapsible">📋 All Results ({stats['total_count']})</button>
+                        <div class="collapsible-content">
+                            <table id="allTable-{idx}" class="display">
+                                <thead><tr><th>Status</th><th>Validation Type</th><th>Column</th><th>Primary Key</th><th>Detail</th><th>Source Value</th><th>Target Value</th></tr></thead>
+                                <tbody>{all_rows}</tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+            (function() {{
+                const cd = {json.dumps(chart_data)};
+                function initCharts_{idx}() {{
+                    new Chart(document.getElementById('statusChart-{idx}'), {{
+                        type:'doughnut', data:{{ labels:['Passed','Failed','Skipped'], datasets:[{{ data:[cd.pass_count,cd.fail_count,cd.skip_count], backgroundColor:['#28a745','#dc3545','#ffc107'], borderWidth:2, borderColor:'#fff' }}] }},
+                        options:{{ responsive:true, maintainAspectRatio:false, plugins:{{ title:{{ display:true, text:'Validation Status Distribution', font:{{size:16,weight:'bold'}} }}, legend:{{position:'bottom'}} }} }}
+                    }});
+                    new Chart(document.getElementById('validationTypeChart-{idx}'), {{
+                        type:'bar', data:{{ labels:cd.validation_types, datasets:[{{ label:'Failed', data:cd.validation_fails, backgroundColor:'#dc3545' }},{{ label:'Passed', data:cd.validation_passes, backgroundColor:'#28a745' }}] }},
+                        options:{{ responsive:true, maintainAspectRatio:false, plugins:{{ title:{{ display:true, text:'Validation Type Breakdown', font:{{size:16,weight:'bold'}} }}, legend:{{position:'bottom'}} }}, scales:{{ x:{{stacked:true}}, y:{{stacked:true,beginAtZero:true}} }} }}
+                    }});
+                    if (cd.column_failures.length > 0) {{
+                        new Chart(document.getElementById('columnChart-{idx}'), {{
+                            type:'bar', data:{{ labels:cd.column_names, datasets:[{{ label:'Failures per Column', data:cd.column_failures, backgroundColor:'#dc3545' }}] }},
+                            options:{{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{{ title:{{ display:true, text:'Column-Level Failure Analysis', font:{{size:16,weight:'bold'}} }}, legend:{{display:false}} }}, scales:{{ x:{{beginAtZero:true}} }} }}
+                        }});
+                    }}
+                    $('#failedTable-{idx}').DataTable({{ pageLength:25, order:[[0,'asc']], language:{{search:"Search failures:"}} }});
+                    $('#passedTable-{idx}').DataTable({{ pageLength:25, order:[[0,'asc']], language:{{search:"Search passed:"}} }});
+                    $('#allTable-{idx}').DataTable({{ pageLength:50, order:[[0,'asc']], language:{{search:"Search all:"}} }});
+                }}
+                window._tabInits = window._tabInits || {{}};
+                window._tabInits['tab-{idx}'] = initCharts_{idx};
+                {'initCharts_' + str(idx) + '();' if idx == 0 else ''}
+            }})();
+            </script>
+            ''')
+
+        # Build overall summary
+        total_v = len(self.all_results)
+        passed_v = sum(1 for r in self.all_results if r['status'] == 'PASS')
+        failed_v = total_v - passed_v
+
+        template = get_consolidated_html_template()
+        html = template.replace('{{TIMESTAMP}}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        html = html.replace('{{TOTAL_VALIDATIONS}}', str(total_v))
+        html = html.replace('{{PASSED_VALIDATIONS}}', str(passed_v))
+        html = html.replace('{{FAILED_VALIDATIONS}}', str(failed_v))
+        html = html.replace('{{TAB_HEADERS}}', '\n'.join(tab_headers))
+        html = html.replace('{{TAB_CONTENTS}}', '\n'.join(tab_contents))
+
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+        logger.info(f"Consolidated HTML saved: {output_path}")
+        return output_path
+
+    def generate_reports(self, output_dir: Path, base_name: str = 'consolidated') -> Dict[str, Path]:
+        """Generate consolidated Excel + tabbed HTML."""
+        output_dir.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        excel_path = output_dir / f"{base_name}_{timestamp}.xlsx"
+        html_path = output_dir / f"{base_name}_{timestamp}.html"
+
+        return {
+            'excel': self.generate_excel(excel_path),
+            'html': self.generate_html(html_path),
         }

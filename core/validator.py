@@ -2,6 +2,7 @@
 Main validator orchestrator.
 Coordinates the validation workflow: loading data, running comparisons, generating reports.
 """
+import shutil
 import yaml
 from pathlib import Path
 from typing import Dict, Any, List
@@ -9,7 +10,7 @@ import logging
 
 from adapters import FileAdapter, TableAdapter, DataSourceAdapter, BaseAdapter
 from core.comparator import Comparator
-from core.reporter import Reporter
+from core.reporter import Reporter, ConsolidatedReporter
 from utils.helpers import parse_primary_keys, resolve_path
 
 logger = logging.getLogger(__name__)
@@ -175,7 +176,9 @@ class Validator:
             'fail_count': fail_count,
             'total_count': len(results),
             'results': results,
-            'reports': report_paths
+            'reports': report_paths,
+            'source_metadata': source_metadata,
+            'target_metadata': target_metadata
         }
 
 
@@ -245,5 +248,24 @@ def run_validations(config_path: Path, validation_name: str = None) -> List[Dict
     logger.info("="*80)
     logger.info(f"Total: {passed_validations}/{total_validations} validations passed")
     logger.info("="*80 + "\n")
+    
+    # Generate consolidated reports if multiple validations
+    if len(results) > 1:
+        # Use the output_dir from the first validation
+        output_dir = Path(validations[0].get('output_dir', './results'))
+        consolidated = ConsolidatedReporter(results)
+        consolidated_paths = consolidated.generate_reports(output_dir)
+        logger.info(f"Consolidated Excel: {consolidated_paths['excel']}")
+        logger.info(f"Consolidated HTML:  {consolidated_paths['html']}")
+
+        # Move individual CSV/HTML files to archive subfolder
+        archive_dir = output_dir / 'archive'
+        archive_dir.mkdir(parents=True, exist_ok=True)
+        for r in results:
+            for report_path in r.get('reports', {}).values():
+                report_path = Path(report_path)
+                if report_path.exists():
+                    shutil.move(str(report_path), str(archive_dir / report_path.name))
+        logger.info(f"Individual reports moved to: {archive_dir}")
     
     return results

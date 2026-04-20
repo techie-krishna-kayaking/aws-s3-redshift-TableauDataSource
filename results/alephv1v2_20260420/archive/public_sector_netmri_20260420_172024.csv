@@ -1,0 +1,97 @@
+validation,result,column,pk,detail,source_value,target_value
+record_count_check,PASS,,,"Source: 172 rows, Target: 172 rows",172,172
+column_count_check,PASS,,,"Source: 49 columns, Target: 49 columns, Common: 49",49,49
+metadata_type_check,PASS,account id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,account name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,account ranking list,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,arr size dynamic,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,bill state,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"bop (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,bundle product code,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,category (adjusted),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,cohort arr size,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,covered finance product category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,distributor name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,end customer,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"eop (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"eop, unadjusted  ",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,extn for late renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,finance product category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,geo ,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,identifier,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,index#,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,industry,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,industry [custom],,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,max. fortune rank,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,month of revenue date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,order number,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,peak arr,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous arr,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous extn for late renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous refresh overlap adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product family,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product group,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product penetration (landed),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,quantity,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,rcn emp count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,refresh overlap adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,region,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,reseller name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sales designation_new,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sales rep,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,service end date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,service start date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,shipping country,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sku,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,territory id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,territory name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,variance,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"variance (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,year of cohort date fy,,"Compatible types: Source 'object', Target 'object'",object,object
+duplicate_check,FAIL,,"account id='0014600001JL9n5AAD', order number='FEDR-185671', sku='IB-MNT-PRM', service start date='5/23/2025'",Source has 2 duplicate rows (showing first 5 of 56),2,
+duplicate_check,FAIL,,"account id='0014600001JLOSvAAP', order number='FEDR-185704', sku='IB-MNT-PRM', service start date='5/25/2025'",Source has 2 duplicate rows (showing first 5 of 56),2,
+duplicate_check,FAIL,,"account id='0014600001JLMVxAAP', order number='FEDR-178302', sku='IB-MNT-PRM', service start date='10/17/2024'",Source has 2 duplicate rows (showing first 5 of 56),2,
+duplicate_check,FAIL,,"account id='0014600001JLMVxAAP', order number='FEDR-184547', sku='IB-MNT-PRM', service start date='4/27/2025'",Source has 2 duplicate rows (showing first 5 of 56),2,
+duplicate_check,FAIL,,"account id='0014600001JLMVxAAP', order number='FEDR-191086', sku='IB-MNT-PRM', service start date='10/17/2025'",Source has 2 duplicate rows (showing first 5 of 56),2,
+duplicate_check,FAIL,,"account id='0014600001JL9n5AAD', order number='FEDR-185671', sku='IB-MNT-PRM', service start date='5/23/2025'",Target has 2 duplicate rows (showing first 5 of 56),,2
+duplicate_check,FAIL,,"account id='0014600001JLOSvAAP', order number='FEDR-185704', sku='IB-MNT-PRM', service start date='5/25/2025'",Target has 2 duplicate rows (showing first 5 of 56),,2
+duplicate_check,FAIL,,"account id='0014600001JLMVxAAP', order number='FEDR-178302', sku='IB-MNT-PRM', service start date='10/17/2024'",Target has 2 duplicate rows (showing first 5 of 56),,2
+duplicate_check,FAIL,,"account id='0014600001JLMVxAAP', order number='FEDR-184547', sku='IB-MNT-PRM', service start date='4/27/2025'",Target has 2 duplicate rows (showing first 5 of 56),,2
+duplicate_check,FAIL,,"account id='0014600001JLMVxAAP', order number='FEDR-191086', sku='IB-MNT-PRM', service start date='10/17/2025'",Target has 2 duplicate rows (showing first 5 of 56),,2
+null_check,PASS,account ranking list,,"Source: 172 nulls, Target: 172 nulls",172,172
+null_check,PASS,arr size dynamic,,"Source: 9 nulls, Target: 9 nulls",9,9
+null_check,PASS,bill state,,"Source: 9 nulls, Target: 9 nulls",9,9
+null_check,PASS,bundle product code,,"Source: 132 nulls, Target: 132 nulls",132,132
+null_check,PASS,cohort arr size,,"Source: 102 nulls, Target: 102 nulls",102,102
+null_check,PASS,distributor name,,"Source: 11 nulls, Target: 11 nulls",11,11
+null_check,PASS,max. fortune rank,,"Source: 172 nulls, Target: 172 nulls",172,172
+empty_string_check,PASS,,,No empty strings found,,
+primary_key_match,PASS,,,"Common: 143, Source-only: 0, Target-only: 0",143,143
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)",,"7 mismatches in column bop (adjusted, w/ late renewals extn)",,
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)","account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'",Value mismatch (example 1 of 7),'7919.26343457944','7919.263434579439'
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)","account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'",Value mismatch (example 2 of 7),'25045.837579673134','25045.83757967313'
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)","account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'",Value mismatch (example 3 of 7),'25029.696078431374','25029.69607843137'
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)",,"7 mismatches in column eop (adjusted, w/ late renewals extn)",,
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)","account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'",Value mismatch (example 1 of 7),'7919.26343457944','7919.263434579439'
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)","account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'",Value mismatch (example 2 of 7),'25045.837579673134','25045.83757967313'
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)","account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'",Value mismatch (example 3 of 7),'25029.696078431374','25029.69607843137'
+data_validation,FAIL,"eop, unadjusted  ",,"7 mismatches in column eop, unadjusted  ",,
+data_validation,FAIL,"eop, unadjusted  ","account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'",Value mismatch (example 1 of 7),'7919.26343457944','7919.263434579439'
+data_validation,FAIL,"eop, unadjusted  ","account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'",Value mismatch (example 2 of 7),'25045.837579673134','25045.83757967313'
+data_validation,FAIL,"eop, unadjusted  ","account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'",Value mismatch (example 3 of 7),'25029.696078431374','25029.69607843137'
+data_validation,FAIL,index#,,143 mismatches in column index#,,
+data_validation,FAIL,index#,"account id='0014600001JLOtIAAX', order number='FEDR-171228', sku='IB-MNT-PRM', service start date='3/30/2024'",Value mismatch (example 1 of 143),'9','1'
+data_validation,FAIL,index#,"account id='0014600001JLOtIAAX', order number='FEDR-171228', sku='NT-SUB-MRI-ADVISOR', service start date='3/30/2024'",Value mismatch (example 2 of 143),'16','4'
+data_validation,FAIL,index#,"account id='0014600001JLOtIAAX', order number='FEDR-171228', sku='NT-MRI-SWTL', service start date='3/30/2024'",Value mismatch (example 3 of 143),'23','7'
+data_validation,FAIL,peak arr,,33 mismatches in column peak arr,,
+data_validation,FAIL,peak arr,"account id='0014600001JLGBmAAP', order number='FEDR-183069', sku='IB-MNT-PRM', service start date='5/27/2025'",Value mismatch (example 1 of 33),'14177.760000000002','14177.759999999998'
+data_validation,FAIL,peak arr,"account id='0014600001JLGBmAAP', order number='FEDR-183069', sku='NT-SUB-MRI-ADVISOR', service start date='5/27/2025'",Value mismatch (example 2 of 33),'14177.760000000002','14177.759999999998'
+data_validation,FAIL,peak arr,"account id='0014600001JLGBmAAP', order number='FEDR-183069', sku='NT-MRI-SWTL', service start date='5/27/2025'",Value mismatch (example 3 of 33),'14177.760000000002','14177.759999999998'
+data_validation,FAIL,previous arr,,7 mismatches in column previous arr,,
+data_validation,FAIL,previous arr,"account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'",Value mismatch (example 1 of 7),'7919.26343457944','7919.263434579439'
+data_validation,FAIL,previous arr,"account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'",Value mismatch (example 2 of 7),'25045.837579673134','25045.83757967313'
+data_validation,FAIL,previous arr,"account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'",Value mismatch (example 3 of 7),'25029.696078431374','25029.69607843137'
+data_validation,FAIL,rcn emp count,,1 mismatches in column rcn emp count,,
+data_validation,FAIL,rcn emp count,"account id='0014600001JLHlRAAX', order number='REN-186052', sku='IB-MNT-PRM', service start date='6/5/2025'",Value mismatch (example 1 of 1),'200','2000'

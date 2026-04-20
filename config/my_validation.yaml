@@ -1,0 +1,104 @@
+# Test configuration for local file validation
+# Comparing v1_dev Q1 only (source) vs V2_preprod (target)
+# v1_dev files filtered to 'October 2025' via filter_v1_q1.py
+validations:
+  - name: "Commercial_No_Rep_Management_Tokens"
+    target:
+      type: file
+      path: ./raw_data/aleph_apr/V2_preprod/Commercial_Rep_Management_Tokens_FY26Q1.csv
+    source:
+      type: file
+      path: "./raw_data/aleph_apr/v1_dev_q1/Commercial (No Rep) Management Tokens_fy25_26.csv"
+    primary_keys: Account ID, Order Number, SKU, Service Start Date
+    output_dir: ./results/alephv1v2_20260420
+
+  - name: "Commercial_No_Rep_SaaS"
+    target:
+      type: file
+      path: ./raw_data/aleph_apr/V2_preprod/Commercial_No_Rep_SaaS_FY26Q1.csv
+    source:
+      type: file
+      path: "./raw_data/aleph_apr/v1_dev_q1/Commercial (No Rep) SaaS_fy25_26.csv"
+    primary_keys: Account ID, Order Number, SKU, Service Start Date
+    output_dir: ./results/alephv1v2_20260420
+
+  - name: "Consolidated_ADP"
+    target:
+      type: file
+      path: ./raw_data/aleph_apr/V2_preprod/Consolidated_ADP_FY26Q1.csv
+    source:
+      type: file
+      path: "./raw_data/aleph_apr/v1_dev_q1/Consolidated ADP_fy25_26.csv"
+    primary_keys: Account ID, Order Number, SKU, Service Start Date
+    output_dir: ./results/alephv1v2_20260420
+
+  - name: "Consolidated_Reporting_Tokens"
+    target:
+      type: file
+      path: ./raw_data/aleph_apr/V2_preprod/Consolidated_Reporting_Tokens_FY26Q1.csv
+    source:
+      type: file
+      path: "./raw_data/aleph_apr/v1_dev_q1/Consolidated Reporting Tokens_fy25_26.csv"
+    primary_keys: Account ID, Order Number, SKU, Service Start Date
+    output_dir: ./results/alephv1v2_20260420  
+
+  - name: "Consolidated_SaaS_B1DDI_Classic"
+    target:
+      type: file
+      path: ./raw_data/aleph_apr/V2_preprod/Consolidated_SaaS_B1DDI_Classic_FY26Q1.csv
+    source:
+      type: file
+      path: "./raw_data/aleph_apr/v1_dev_q1/Consolidated SaaS B1DDI Classic_fy25_26.csv"
+    primary_keys: Account ID, Order Number, SKU, Service Start Date
+    output_dir: ./results/alephv1v2_20260420
+
+  - name: "Consolidated_Subscription_Feed_ADP"
+    target:
+      type: file
+      path: ./raw_data/aleph_apr/V2_preprod/Consolidated_Subscription_Feed_ADP_FY26Q1.csv
+    source:
+      type: file
+      path: "./raw_data/aleph_apr/v1_dev_q1/Consolidated Subscription Feed ADP_fy25_26.csv"
+    primary_keys: Account ID, Order Number, SKU, Service Start Date
+    output_dir: ./results/alephv1v2_20260420
+
+  - name: "Consolidated_Term_Software_NetMRI"
+    target:
+      type: file
+      path: ./raw_data/aleph_apr/V2_preprod/Consolidated_Term_Software_NetMRI_FY26Q1.csv
+    source:
+      type: file
+      path: "./raw_data/aleph_apr/v1_dev_q1/Consolidated Term Software NetMRI_fy25_26.csv"
+    primary_keys: Account ID, Order Number, SKU, Service Start Date
+    output_dir: ./results/alephv1v2_20260420
+
+  - name: "Public_Sector_NetMRI"
+    target:
+      type: file
+      path: ./raw_data/aleph_apr/V2_preprod/Public_Sector_NetMRI_FY26Q1.csv
+    source:
+      type: file
+      path: "./raw_data/aleph_apr/v1_dev_q1/Public Sector NetMRI_fy25_26.csv"
+    primary_keys: Account ID, Order Number, SKU, Service Start Date
+    output_dir: ./results/alephv1v2_20260420
+
+  - name: "SP_Maintenance_Core_DDI"
+    target:
+      type: file
+      path: ./raw_data/aleph_apr/V2_preprod/SP_Maintenance_Core_DDI_FY26Q1.csv
+    source:
+      type: file
+      path: "./raw_data/aleph_apr/v1_dev_q1/SP Maintenance Core DDI_fy25_26.csv"
+    primary_keys: Account ID, Order Number, SKU, Service Start Date
+    output_dir: ./results/alephv1v2_20260420
+
+  - name: "SP_Total"
+    target:
+      type: file
+      path: ./raw_data/aleph_apr/V2_preprod/SP_Total_FY26Q1.csv
+    source:
+      type: file
+      path: "./raw_data/aleph_apr/v1_dev_q1/SP Total_fy25_26.csv"
+    primary_keys: Account ID, Order Number, SKU, Service Start Date
+    output_dir: ./results/alephv1v2_20260420
+

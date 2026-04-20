@@ -1,0 +1,2972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial_No_Rep_SaaS - Validation Report</title>
+    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .card-title {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .card-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .card.pass .card-value {
+            color: #28a745;
+        }
+        
+        .card.fail .card-value {
+            color: #dc3545;
+        }
+        
+        .card.info .card-value {
+            color: #17a2b8;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 3px;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        table.dataTable {
+            width: 100% !important;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table.dataTable thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+        
+        table.dataTable tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table.dataTable tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .badge.pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .badge.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .badge.skip {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .badge.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .metadata-item {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .metadata-label {
+            font-weight: 600;
+            color: #666;
+            min-width: 120px;
+        }
+        
+        .metadata-value {
+            color: #333;
+            word-break: break-all;
+        }
+        
+        .collapsible {
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 8px;
+            margin: 10px 0;
+            transition: background 0.3s ease;
+        }
+        
+        .collapsible:hover {
+            background: #764ba2;
+        }
+        
+        .collapsible::after {
+            content: '\25BC';
+            float: right;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .collapsible.active::after {
+            transform: rotate(-180deg);
+        }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            background: white;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .collapsible-content.active {
+            max-height: none;
+            padding: 20px;
+            border: 2px solid #667eea;
+            border-top: none;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .timestamp {
+            font-size: 0.9em;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Commercial_No_Rep_SaaS</h1>
+            <div class="subtitle">Data Validation Report</div>
+            <div class="timestamp">Generated: 2026-04-20 17:20:23</div>
+        </div>
+        
+        <div class="summary-cards">
+            <div class="card fail">
+                <div class="card-title">Overall Status</div>
+                <div class="card-value">❌ FAIL</div>
+            </div>
+            <div class="card pass">
+                <div class="card-title">Passed Checks</div>
+                <div class="card-value">61</div>
+            </div>
+            <div class="card fail">
+                <div class="card-title">Failed Checks</div>
+                <div class="card-value">49</div>
+            </div>
+            <div class="card info">
+                <div class="card-title">Total Checks</div>
+                <div class="card-value">110</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- Metadata Section -->
+            <div class="section">
+                <h2 class="section-title">Validation Configuration</h2>
+                <div class="metadata">
+                    <div class="metadata-grid">
+                        
+            <div class="metadata-item">
+                <div class="metadata-label">Source Type:</div>
+                <div class="metadata-value">file</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Source Path:</div>
+                <div class="metadata-value">./raw_data/aleph_apr/v1_dev_q1/Commercial (No Rep) SaaS_fy25_26.csv</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Source Rows:</div>
+                <div class="metadata-value">310</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Source Columns:</div>
+                <div class="metadata-value">49</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Type:</div>
+                <div class="metadata-value">file</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Path:</div>
+                <div class="metadata-value">./raw_data/aleph_apr/V2_preprod/Commercial_No_Rep_SaaS_FY26Q1.csv</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Rows:</div>
+                <div class="metadata-value">310</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Columns:</div>
+                <div class="metadata-value">49</div>
+            </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visualizations Section -->
+            <div class="section">
+                <h2 class="section-title">Validation Overview</h2>
+                <div class="chart-grid">
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="validationTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column-Level Analysis -->
+            <div class="section">
+                <h2 class="section-title">Column-Level Analysis</h2>
+                <div class="chart-container" style="height: 500px;">
+                    <canvas id="columnChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Detailed Results -->
+            <div class="section">
+                <h2 class="section-title">Detailed Results</h2>
+                
+                <!-- Failed Checks -->
+                <button class="collapsible active">❌ Failed Checks (49)</button>
+                <div class="collapsible-content active">
+                    <table id="failedTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Validation Type</th>
+                                <th>Column</th>
+                                <th>Primary Key</th>
+                                <th>Detail</th>
+                                <th>Source Value</th>
+                                <th>Target Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>bill state</td>
+                        <td>-</td>
+                        <td>Source: 78 nulls, Target: 77 nulls</td>
+                        <td>'78'</td>
+                        <td>'77'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>account name</td>
+                        <td>-</td>
+                        <td>2 mismatches in column account name</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>account name</td>
+                        <td>account id='0014600001JLuJCAA1', order number='REN-189287', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='8/28/2025'</td>
+                        <td>Value mismatch (example 1 of 2)</td>
+                        <td>"'PIRAMAL ENTERPRISES LTD'"</td>
+                        <td>"'Piramal Finance Limited'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>account name</td>
+                        <td>account id='0014600001JLuJCAA1', order number='REN-175880', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='8/28/2024'</td>
+                        <td>Value mismatch (example 2 of 2)</td>
+                        <td>"'PIRAMAL ENTERPRISES LTD'"</td>
+                        <td>"'Piramal Finance Limited'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>bill state</td>
+                        <td>-</td>
+                        <td>1 mismatches in column bill state</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>bill state</td>
+                        <td>account id='0011M00002bQGrcQAG', order number='DIST-181631', sku='IB-SUB-THREAT-ADV', service start date='1/27/2025'</td>
+                        <td>Value mismatch (example 1 of 1)</td>
+                        <td>'nan'</td>
+                        <td>"'Tamil Nadu'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>12 mismatches in column bop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>Value mismatch (example 1 of 12)</td>
+                        <td>"'31909.028650646953'"</td>
+                        <td>"'31909.028650646957'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>Value mismatch (example 2 of 12)</td>
+                        <td>"'4381.5250696378835'"</td>
+                        <td>"'4381.525069637884'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>Value mismatch (example 3 of 12)</td>
+                        <td>"'25645.608628659476'"</td>
+                        <td>"'25645.60862865948'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>end customer</td>
+                        <td>-</td>
+                        <td>2 mismatches in column end customer</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>end customer</td>
+                        <td>account id='0018Y00002tf8ETQAY', order number='DIST-180332', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='12/20/2024'</td>
+                        <td>Value mismatch (example 1 of 2)</td>
+                        <td>"'INOX LEASING AND FINANCE LIMITED'"</td>
+                        <td>"'GUJARAT FLUOROCHEMICALS LIMITED'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>end customer</td>
+                        <td>account id='0014600001JL9EAAA1', order number='REN-181202', sku='IB-SUB-THREAT-ADV', service start date='1/18/2025'</td>
+                        <td>Value mismatch (example 2 of 2)</td>
+                        <td>"'OTTO BREMER FOUNDATION'"</td>
+                        <td>"'OLD NATIONAL BANCORP'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>11 mismatches in column eop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>Value mismatch (example 1 of 11)</td>
+                        <td>"'31909.028650646953'"</td>
+                        <td>"'31909.028650646957'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>Value mismatch (example 2 of 11)</td>
+                        <td>"'4381.5250696378835'"</td>
+                        <td>"'4381.525069637884'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>Value mismatch (example 3 of 11)</td>
+                        <td>"'25645.608628659476'"</td>
+                        <td>"'25645.60862865948'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>-</td>
+                        <td>11 mismatches in column eop, unadjusted  </td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>Value mismatch (example 1 of 11)</td>
+                        <td>"'31909.028650646953'"</td>
+                        <td>"'31909.028650646957'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>Value mismatch (example 2 of 11)</td>
+                        <td>"'4381.5250696378835'"</td>
+                        <td>"'4381.525069637884'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>Value mismatch (example 3 of 11)</td>
+                        <td>"'25645.608628659476'"</td>
+                        <td>"'25645.60862865948'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>-</td>
+                        <td>310 mismatches in column index#</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLJJ0AAP', order number='REN-178605', sku='IB-SUB-THREAT-ADV', service start date='12/29/2024'</td>
+                        <td>Value mismatch (example 1 of 310)</td>
+                        <td>"'13'"</td>
+                        <td>"'1'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0018Y0000334IPkQAM', order number='REN-185123', sku='IB-SUB-THREAT-ADV', service start date='3/11/2025'</td>
+                        <td>Value mismatch (example 2 of 310)</td>
+                        <td>"'23'"</td>
+                        <td>"'6'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLIJ9AAP', order number='DIST-153294', sku='IB-SUB-THREAT-ADV', service start date='10/24/2022'</td>
+                        <td>Value mismatch (example 3 of 310)</td>
+                        <td>"'34'"</td>
+                        <td>"'9'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>industry [custom]</td>
+                        <td>-</td>
+                        <td>2 mismatches in column industry [custom]</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>industry [custom]</td>
+                        <td>account id='0018Y00002tf8ETQAY', order number='DIST-180332', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='12/20/2024'</td>
+                        <td>Value mismatch (example 1 of 2)</td>
+                        <td>"'Financial Services'"</td>
+                        <td>"'Manufacturing'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>industry [custom]</td>
+                        <td>account id='0014600001JL9EAAA1', order number='REN-181202', sku='IB-SUB-THREAT-ADV', service start date='1/18/2025'</td>
+                        <td>Value mismatch (example 2 of 2)</td>
+                        <td>"'Financial Services'"</td>
+                        <td>"'Banking'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>-</td>
+                        <td>46 mismatches in column peak arr</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLJJ0AAP', order number='REN-178605', sku='IB-SUB-THREAT-ADV', service start date='12/29/2024'</td>
+                        <td>Value mismatch (example 1 of 46)</td>
+                        <td>"'27341.999999999996'"</td>
+                        <td>"'27342.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLIJ9AAP', order number='DIST-153294', sku='IB-SUB-THREAT-ADV', service start date='10/24/2022'</td>
+                        <td>Value mismatch (example 2 of 46)</td>
+                        <td>"'34680.0'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>Value mismatch (example 3 of 46)</td>
+                        <td>"'31909.028650646953'"</td>
+                        <td>"'31909.028650646957'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>-</td>
+                        <td>12 mismatches in column previous arr</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>Value mismatch (example 1 of 12)</td>
+                        <td>"'31909.028650646953'"</td>
+                        <td>"'31909.028650646957'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>Value mismatch (example 2 of 12)</td>
+                        <td>"'4381.5250696378835'"</td>
+                        <td>"'4381.525069637884'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>Value mismatch (example 3 of 12)</td>
+                        <td>"'25645.608628659476'"</td>
+                        <td>"'25645.60862865948'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>-</td>
+                        <td>9 mismatches in column rcn emp count</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>account id='0011M00002bQGrcQAG', order number='DIST-181631', sku='IB-SUB-THREAT-ADV', service start date='1/27/2025'</td>
+                        <td>Value mismatch (example 1 of 9)</td>
+                        <td>"'83147'"</td>
+                        <td>"'42497'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='4/26/2025'</td>
+                        <td>Value mismatch (example 2 of 9)</td>
+                        <td>"'490'"</td>
+                        <td>"'700'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='4/26/2025'</td>
+                        <td>Value mismatch (example 3 of 9)</td>
+                        <td>"'490'"</td>
+                        <td>"'700'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>sales rep</td>
+                        <td>-</td>
+                        <td>20 mismatches in column sales rep</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>sales rep</td>
+                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>Value mismatch (example 1 of 20)</td>
+                        <td>"'Apichart Choempraphai'"</td>
+                        <td>"'Lee Anstiss'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>sales rep</td>
+                        <td>account id='0018Y00002j9fWJQAY', order number='REN-182358', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='2/18/2025'</td>
+                        <td>Value mismatch (example 2 of 20)</td>
+                        <td>"'Apichart Choempraphai'"</td>
+                        <td>"'Lee Anstiss'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>sales rep</td>
+                        <td>account id='0018Y00002j9fWJQAY', order number='REN-182358', sku='IB-SUB-B1DDI-LOG-MAN-GR-30-A', service start date='2/18/2025'</td>
+                        <td>Value mismatch (example 3 of 20)</td>
+                        <td>"'Apichart Choempraphai'"</td>
+                        <td>"'Lee Anstiss'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>variance</td>
+                        <td>-</td>
+                        <td>1 mismatches in column variance</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>variance</td>
+                        <td>account id='0018Y00002g84I3QAI', order number='REN-177124', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='9/28/2024'</td>
+                        <td>Value mismatch (example 1 of 1)</td>
+                        <td>"'-24524.999999999996'"</td>
+                        <td>"'-24525.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>2 mismatches in column variance (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0011M00002eADvUQAW', order number='DIST-178105', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/18/2024'</td>
+                        <td>Value mismatch (example 1 of 2)</td>
+                        <td>"'-6440.5999999999985'"</td>
+                        <td>"'-6440.599999999999'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0018Y00002g84I3QAI', order number='REN-177124', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='9/28/2024'</td>
+                        <td>Value mismatch (example 2 of 2)</td>
+                        <td>"'-24524.999999999996'"</td>
+                        <td>"'-24525.0'"</td>
+                    </tr>
+                
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Passed Checks -->
+                <button class="collapsible">✅ Passed Checks (61)</button>
+                <div class="collapsible-content">
+                    <table id="passedTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Validation Type</th>
+                                <th>Column</th>
+                                <th>Detail</th>
+                                <th>Source Value</th>
+                                <th>Target Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                    <tr>
+                        
+                        <td>Record Count Check</td>
+                        <td>-</td>
+                        <td>Source: 310 rows, Target: 310 rows</td>
+                        <td>'310'</td>
+                        <td>'310'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Column Count Check</td>
+                        <td>-</td>
+                        <td>Source: 49 columns, Target: 49 columns, Common: 49</td>
+                        <td>'49'</td>
+                        <td>'49'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>account id</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>account name</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>account ranking list</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>arr size dynamic</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>bill state</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>bundle product code</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>category</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>category (adjusted)</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>cohort arr size</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>covered finance product category</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>distributor name</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>end customer</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>eop, unadjusted  </td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>extn for late renewals</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>finance product category</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>geo </td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>identifier</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>index#</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>industry</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>industry [custom]</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>max. fortune rank</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>month of revenue date</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>order number</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>peak arr</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>previous arr</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>previous extn for late renewals</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>previous refresh overlap adj</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>product family</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>product group</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>product name</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>product penetration (landed)</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>quantity</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>rcn emp count</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>refresh overlap adj</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>region</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>reseller name</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>sales designation_new</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>sales rep</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>service end date</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>service start date</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>shipping country</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>sku</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>territory id</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>territory name</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>variance</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>year of cohort date fy</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>No duplicates found in Source</td>
+                        <td>'0'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>No duplicates found in Target</td>
+                        <td>-</td>
+                        <td>'0'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>account ranking list</td>
+                        <td>Source: 216 nulls, Target: 216 nulls</td>
+                        <td>'216'</td>
+                        <td>'216'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>arr size dynamic</td>
+                        <td>Source: 7 nulls, Target: 7 nulls</td>
+                        <td>'7'</td>
+                        <td>'7'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>bundle product code</td>
+                        <td>Source: 31 nulls, Target: 31 nulls</td>
+                        <td>'31'</td>
+                        <td>'31'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>cohort arr size</td>
+                        <td>Source: 140 nulls, Target: 140 nulls</td>
+                        <td>'140'</td>
+                        <td>'140'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>distributor name</td>
+                        <td>Source: 14 nulls, Target: 14 nulls</td>
+                        <td>'14'</td>
+                        <td>'14'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>max. fortune rank</td>
+                        <td>Source: 306 nulls, Target: 306 nulls</td>
+                        <td>'306'</td>
+                        <td>'306'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Empty String Check</td>
+                        <td>-</td>
+                        <td>No empty strings found</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>Common: 310, Source-only: 0, Target-only: 0</td>
+                        <td>'310'</td>
+                        <td>'310'</td>
+                    </tr>
+                
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- All Results -->
+                <button class="collapsible">📋 All Results (110)</button>
+                <div class="collapsible-content">
+                    <table id="allTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Validation Type</th>
+                                <th>Column</th>
+                                <th>Primary Key</th>
+                                <th>Detail</th>
+                                <th>Source Value</th>
+                                <th>Target Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Record Count Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Source: 310 rows, Target: 310 rows</td>
+                        <td>'310'</td>
+                        <td>'310'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Column Count Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Source: 49 columns, Target: 49 columns, Common: 49</td>
+                        <td>'49'</td>
+                        <td>'49'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>account id</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>account name</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>account ranking list</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>arr size dynamic</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>bill state</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>bundle product code</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>category</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>category (adjusted)</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>cohort arr size</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>covered finance product category</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>distributor name</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>end customer</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>eop, unadjusted  </td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>extn for late renewals</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>finance product category</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>geo </td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>identifier</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>index#</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>industry</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>industry [custom]</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>max. fortune rank</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>month of revenue date</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>order number</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>peak arr</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>previous arr</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>previous extn for late renewals</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>previous refresh overlap adj</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>product family</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>product group</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>product name</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>product penetration (landed)</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>quantity</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>rcn emp count</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>refresh overlap adj</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>region</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>reseller name</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>sales designation_new</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>sales rep</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>service end date</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>service start date</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>shipping country</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>sku</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>territory id</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>territory name</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>variance</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>year of cohort date fy</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>No duplicates found in Source</td>
+                        <td>'0'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>No duplicates found in Target</td>
+                        <td>-</td>
+                        <td>'0'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>account ranking list</td>
+                        <td>-</td>
+                        <td>Source: 216 nulls, Target: 216 nulls</td>
+                        <td>'216'</td>
+                        <td>'216'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>arr size dynamic</td>
+                        <td>-</td>
+                        <td>Source: 7 nulls, Target: 7 nulls</td>
+                        <td>'7'</td>
+                        <td>'7'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Null Check</td>
+                        <td>bill state</td>
+                        <td>-</td>
+                        <td>Source: 78 nulls, Target: 77 nulls</td>
+                        <td>'78'</td>
+                        <td>'77'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>bundle product code</td>
+                        <td>-</td>
+                        <td>Source: 31 nulls, Target: 31 nulls</td>
+                        <td>'31'</td>
+                        <td>'31'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>cohort arr size</td>
+                        <td>-</td>
+                        <td>Source: 140 nulls, Target: 140 nulls</td>
+                        <td>'140'</td>
+                        <td>'140'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>distributor name</td>
+                        <td>-</td>
+                        <td>Source: 14 nulls, Target: 14 nulls</td>
+                        <td>'14'</td>
+                        <td>'14'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>max. fortune rank</td>
+                        <td>-</td>
+                        <td>Source: 306 nulls, Target: 306 nulls</td>
+                        <td>'306'</td>
+                        <td>'306'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Empty String Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>No empty strings found</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Common: 310, Source-only: 0, Target-only: 0</td>
+                        <td>'310'</td>
+                        <td>'310'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>account name</td>
+                        <td>-</td>
+                        <td>2 mismatches in column account name</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>account name</td>
+                        <td>account id='0014600001JLuJCAA1', order number='REN-189287', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='8/28/2025'</td>
+                        <td>Value mismatch (example 1 of 2)</td>
+                        <td>"'PIRAMAL ENTERPRISES LTD'"</td>
+                        <td>"'Piramal Finance Limited'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>account name</td>
+                        <td>account id='0014600001JLuJCAA1', order number='REN-175880', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='8/28/2024'</td>
+                        <td>Value mismatch (example 2 of 2)</td>
+                        <td>"'PIRAMAL ENTERPRISES LTD'"</td>
+                        <td>"'Piramal Finance Limited'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>bill state</td>
+                        <td>-</td>
+                        <td>1 mismatches in column bill state</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>bill state</td>
+                        <td>account id='0011M00002bQGrcQAG', order number='DIST-181631', sku='IB-SUB-THREAT-ADV', service start date='1/27/2025'</td>
+                        <td>Value mismatch (example 1 of 1)</td>
+                        <td>'nan'</td>
+                        <td>"'Tamil Nadu'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>12 mismatches in column bop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>Value mismatch (example 1 of 12)</td>
+                        <td>"'31909.028650646953'"</td>
+                        <td>"'31909.028650646957'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>Value mismatch (example 2 of 12)</td>
+                        <td>"'4381.5250696378835'"</td>
+                        <td>"'4381.525069637884'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>Value mismatch (example 3 of 12)</td>
+                        <td>"'25645.608628659476'"</td>
+                        <td>"'25645.60862865948'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>end customer</td>
+                        <td>-</td>
+                        <td>2 mismatches in column end customer</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>end customer</td>
+                        <td>account id='0018Y00002tf8ETQAY', order number='DIST-180332', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='12/20/2024'</td>
+                        <td>Value mismatch (example 1 of 2)</td>
+                        <td>"'INOX LEASING AND FINANCE LIMITED'"</td>
+                        <td>"'GUJARAT FLUOROCHEMICALS LIMITED'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>end customer</td>
+                        <td>account id='0014600001JL9EAAA1', order number='REN-181202', sku='IB-SUB-THREAT-ADV', service start date='1/18/2025'</td>
+                        <td>Value mismatch (example 2 of 2)</td>
+                        <td>"'OTTO BREMER FOUNDATION'"</td>
+                        <td>"'OLD NATIONAL BANCORP'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>11 mismatches in column eop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>Value mismatch (example 1 of 11)</td>
+                        <td>"'31909.028650646953'"</td>
+                        <td>"'31909.028650646957'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>Value mismatch (example 2 of 11)</td>
+                        <td>"'4381.5250696378835'"</td>
+                        <td>"'4381.525069637884'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>Value mismatch (example 3 of 11)</td>
+                        <td>"'25645.608628659476'"</td>
+                        <td>"'25645.60862865948'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>-</td>
+                        <td>11 mismatches in column eop, unadjusted  </td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>Value mismatch (example 1 of 11)</td>
+                        <td>"'31909.028650646953'"</td>
+                        <td>"'31909.028650646957'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>Value mismatch (example 2 of 11)</td>
+                        <td>"'4381.5250696378835'"</td>
+                        <td>"'4381.525069637884'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>Value mismatch (example 3 of 11)</td>
+                        <td>"'25645.608628659476'"</td>
+                        <td>"'25645.60862865948'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>-</td>
+                        <td>310 mismatches in column index#</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLJJ0AAP', order number='REN-178605', sku='IB-SUB-THREAT-ADV', service start date='12/29/2024'</td>
+                        <td>Value mismatch (example 1 of 310)</td>
+                        <td>"'13'"</td>
+                        <td>"'1'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0018Y0000334IPkQAM', order number='REN-185123', sku='IB-SUB-THREAT-ADV', service start date='3/11/2025'</td>
+                        <td>Value mismatch (example 2 of 310)</td>
+                        <td>"'23'"</td>
+                        <td>"'6'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLIJ9AAP', order number='DIST-153294', sku='IB-SUB-THREAT-ADV', service start date='10/24/2022'</td>
+                        <td>Value mismatch (example 3 of 310)</td>
+                        <td>"'34'"</td>
+                        <td>"'9'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>industry [custom]</td>
+                        <td>-</td>
+                        <td>2 mismatches in column industry [custom]</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>industry [custom]</td>
+                        <td>account id='0018Y00002tf8ETQAY', order number='DIST-180332', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='12/20/2024'</td>
+                        <td>Value mismatch (example 1 of 2)</td>
+                        <td>"'Financial Services'"</td>
+                        <td>"'Manufacturing'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>industry [custom]</td>
+                        <td>account id='0014600001JL9EAAA1', order number='REN-181202', sku='IB-SUB-THREAT-ADV', service start date='1/18/2025'</td>
+                        <td>Value mismatch (example 2 of 2)</td>
+                        <td>"'Financial Services'"</td>
+                        <td>"'Banking'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>-</td>
+                        <td>46 mismatches in column peak arr</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLJJ0AAP', order number='REN-178605', sku='IB-SUB-THREAT-ADV', service start date='12/29/2024'</td>
+                        <td>Value mismatch (example 1 of 46)</td>
+                        <td>"'27341.999999999996'"</td>
+                        <td>"'27342.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLIJ9AAP', order number='DIST-153294', sku='IB-SUB-THREAT-ADV', service start date='10/24/2022'</td>
+                        <td>Value mismatch (example 2 of 46)</td>
+                        <td>"'34680.0'"</td>
+                        <td>"'0.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>Value mismatch (example 3 of 46)</td>
+                        <td>"'31909.028650646953'"</td>
+                        <td>"'31909.028650646957'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>-</td>
+                        <td>12 mismatches in column previous arr</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>Value mismatch (example 1 of 12)</td>
+                        <td>"'31909.028650646953'"</td>
+                        <td>"'31909.028650646957'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>Value mismatch (example 2 of 12)</td>
+                        <td>"'4381.5250696378835'"</td>
+                        <td>"'4381.525069637884'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>Value mismatch (example 3 of 12)</td>
+                        <td>"'25645.608628659476'"</td>
+                        <td>"'25645.60862865948'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>-</td>
+                        <td>9 mismatches in column rcn emp count</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>account id='0011M00002bQGrcQAG', order number='DIST-181631', sku='IB-SUB-THREAT-ADV', service start date='1/27/2025'</td>
+                        <td>Value mismatch (example 1 of 9)</td>
+                        <td>"'83147'"</td>
+                        <td>"'42497'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='4/26/2025'</td>
+                        <td>Value mismatch (example 2 of 9)</td>
+                        <td>"'490'"</td>
+                        <td>"'700'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='4/26/2025'</td>
+                        <td>Value mismatch (example 3 of 9)</td>
+                        <td>"'490'"</td>
+                        <td>"'700'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>sales rep</td>
+                        <td>-</td>
+                        <td>20 mismatches in column sales rep</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>sales rep</td>
+                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>Value mismatch (example 1 of 20)</td>
+                        <td>"'Apichart Choempraphai'"</td>
+                        <td>"'Lee Anstiss'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>sales rep</td>
+                        <td>account id='0018Y00002j9fWJQAY', order number='REN-182358', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='2/18/2025'</td>
+                        <td>Value mismatch (example 2 of 20)</td>
+                        <td>"'Apichart Choempraphai'"</td>
+                        <td>"'Lee Anstiss'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>sales rep</td>
+                        <td>account id='0018Y00002j9fWJQAY', order number='REN-182358', sku='IB-SUB-B1DDI-LOG-MAN-GR-30-A', service start date='2/18/2025'</td>
+                        <td>Value mismatch (example 3 of 20)</td>
+                        <td>"'Apichart Choempraphai'"</td>
+                        <td>"'Lee Anstiss'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>variance</td>
+                        <td>-</td>
+                        <td>1 mismatches in column variance</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>variance</td>
+                        <td>account id='0018Y00002g84I3QAI', order number='REN-177124', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='9/28/2024'</td>
+                        <td>Value mismatch (example 1 of 1)</td>
+                        <td>"'-24524.999999999996'"</td>
+                        <td>"'-24525.0'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>2 mismatches in column variance (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0011M00002eADvUQAW', order number='DIST-178105', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/18/2024'</td>
+                        <td>Value mismatch (example 1 of 2)</td>
+                        <td>"'-6440.5999999999985'"</td>
+                        <td>"'-6440.599999999999'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0018Y00002g84I3QAI', order number='REN-177124', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='9/28/2024'</td>
+                        <td>Value mismatch (example 2 of 2)</td>
+                        <td>"'-24524.999999999996'"</td>
+                        <td>"'-24525.0'"</td>
+                    </tr>
+                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Universal Data Validation Framework v1.0</p>
+            <p class="timestamp">Report generated on 2026-04-20 17:20:23</p>
+        </div>
+    </div>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <script>
+        // Collapsible sections
+        const collapsibles = document.querySelectorAll('.collapsible');
+        collapsibles.forEach(coll => {
+            coll.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                content.classList.toggle('active');
+            });
+        });
+        
+        // Initialize DataTables
+        $(document).ready(function() {
+            $('#failedTable').DataTable({
+                pageLength: 25,
+                order: [[0, 'asc']],
+                language: {
+                    search: "Search failures:"
+                }
+            });
+            
+            $('#passedTable').DataTable({
+                pageLength: 25,
+                order: [[0, 'asc']],
+                language: {
+                    search: "Search passed:"
+                }
+            });
+            
+            $('#allTable').DataTable({
+                pageLength: 50,
+                order: [[0, 'asc']],
+                language: {
+                    search: "Search all:"
+                }
+            });
+        });
+        
+        // Chart.js visualizations
+        const chartData = {"pass_count": 61, "fail_count": 49, "skip_count": 0, "validation_types": ["record_count_check", "column_count_check", "metadata_type_check", "duplicate_check", "null_check", "empty_string_check", "primary_key_match", "data_validation"], "validation_fails": [0, 0, 0, 0, 1, 0, 0, 48], "validation_passes": [1, 1, 49, 2, 6, 1, 1, 0], "column_names": ["bop (adjusted, w/ late renewals extn)", "eop (adjusted, w/ late renewals extn)", "eop, unadjusted  ", "index#", "peak arr", "previous arr", "rcn emp count", "sales rep", "account name", "bill state", "end customer", "industry [custom]", "variance (adjusted, w/ late renewals extn)", "variance"], "column_failures": [4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2]};
+        
+        // Status Pie Chart
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Passed', 'Failed', 'Skipped'],
+                datasets: [{
+                    data: [chartData.pass_count, chartData.fail_count, chartData.skip_count],
+                    backgroundColor: ['#28a745', '#dc3545', '#ffc107'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Validation Status Distribution',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+        
+        // Validation Type Bar Chart
+        new Chart(document.getElementById('validationTypeChart'), {
+            type: 'bar',
+            data: {
+                labels: chartData.validation_types,
+                datasets: [{
+                    label: 'Failed',
+                    data: chartData.validation_fails,
+                    backgroundColor: '#dc3545'
+                }, {
+                    label: 'Passed',
+                    data: chartData.validation_passes,
+                    backgroundColor: '#28a745'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Validation Type Breakdown',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, beginAtZero: true }
+                }
+            }
+        });
+        
+        // Column-Level Failures Chart
+        if (chartData.column_failures.length > 0) {
+            new Chart(document.getElementById('columnChart'), {
+                type: 'bar',
+                data: {
+                    labels: chartData.column_names,
+                    datasets: [{
+                        label: 'Failures per Column',
+                        data: chartData.column_failures,
+                        backgroundColor: '#dc3545'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Column-Level Failure Analysis (Top Culprits)',
+                            font: { size: 16, weight: 'bold' }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: { beginAtZero: true, title: { display: true, text: 'Number of Failures' } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

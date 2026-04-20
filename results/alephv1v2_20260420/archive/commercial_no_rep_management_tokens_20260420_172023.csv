@@ -1,0 +1,66 @@
+validation,result,column,pk,detail,source_value,target_value
+record_count_check,FAIL,,,"Source: 29 rows, Target: 0 rows (Note: Smart sub-setting applied - records filtered to matching PKs)",29,0
+column_count_check,PASS,,,"Source: 49 columns, Target: 49 columns, Common: 49",49,49
+metadata_type_check,PASS,account id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,account name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,account ranking list,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,arr size dynamic,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,bill state,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"bop (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,bundle product code,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,category (adjusted),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,cohort arr size,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,covered finance product category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,distributor name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,end customer,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"eop (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"eop, unadjusted  ",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,extn for late renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,finance product category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,geo ,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,identifier,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,index#,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,industry,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,industry [custom],,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,max. fortune rank,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,month of revenue date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,order number,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,peak arr,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous arr,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous extn for late renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous refresh overlap adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product family,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product group,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product penetration (landed),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,quantity,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,rcn emp count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,refresh overlap adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,region,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,reseller name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sales designation_new,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sales rep,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,service end date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,service start date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,shipping country,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sku,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,territory id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,territory name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,variance,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"variance (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,year of cohort date fy,,"Compatible types: Source 'object', Target 'object'",object,object
+duplicate_check,PASS,,,No duplicates found in Source,0,
+duplicate_check,PASS,,,No duplicates found in Target,,0
+null_check,FAIL,account ranking list,,"Source: 24 nulls, Target: 0 nulls",24,0
+null_check,FAIL,bill state,,"Source: 2 nulls, Target: 0 nulls",2,0
+null_check,FAIL,cohort arr size,,"Source: 22 nulls, Target: 0 nulls",22,0
+null_check,FAIL,distributor name,,"Source: 1 nulls, Target: 0 nulls",1,0
+null_check,FAIL,max. fortune rank,,"Source: 28 nulls, Target: 0 nulls",28,0
+empty_string_check,PASS,,,No empty strings found,,
+primary_key_match,FAIL,,,"Common: 0, Source-only: 29, Target-only: 0",29,0
+primary_key_match,FAIL,,"account id='0018Y00002wB9UxQAK', order number='REN-190555', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='10/31/2025'",Primary key exists in Source but not in Target (showing first 5 of 29),EXISTS,MISSING
+primary_key_match,FAIL,,"account id='0014600001JLhdxAAD', order number='DIST-185212', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='4/30/2025'",Primary key exists in Source but not in Target (showing first 5 of 29),EXISTS,MISSING
+primary_key_match,FAIL,,"account id='0014600001JLrHDAA1', order number='REN-183315', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='3/31/2025'",Primary key exists in Source but not in Target (showing first 5 of 29),EXISTS,MISSING
+primary_key_match,FAIL,,"account id='0014600001JLuw0AAD', order number='DIST-190846', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='10/9/2025'",Primary key exists in Source but not in Target (showing first 5 of 29),EXISTS,MISSING
+primary_key_match,FAIL,,"account id='0018Y00002mS0gkQAC', order number='REN-189214', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='8/11/2025'",Primary key exists in Source but not in Target (showing first 5 of 29),EXISTS,MISSING

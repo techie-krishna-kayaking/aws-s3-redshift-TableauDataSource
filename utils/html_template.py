@@ -276,13 +276,12 @@ def get_html_template() -> str:
         .collapsible-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
             background: white;
             border-radius: 0 0 8px 8px;
         }
         
         .collapsible-content.active {
-            max-height: 2000px;
+            max-height: none;
             padding: 20px;
             border: 2px solid #667eea;
             border-top: none;
@@ -578,6 +577,122 @@ def get_html_template() -> str:
                 }
             });
         }
+    </script>
+</body>
+</html>
+"""
+
+
+def get_consolidated_html_template() -> str:
+    """
+    Get a tabbed HTML template for consolidated validation reports.
+    Each validation gets its own tab.
+    """
+    return """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consolidated Validation Report</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); padding:20px; min-height:100vh; }
+        .container { max-width:1400px; margin:0 auto; background:white; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.2); overflow:hidden; }
+        .header { background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:white; padding:30px; text-align:center; }
+        .header h1 { font-size:2.5em; margin-bottom:10px; text-shadow:2px 2px 4px rgba(0,0,0,0.3); }
+        .header .subtitle { font-size:1.1em; opacity:0.9; }
+        .summary-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; padding:30px; background:#f8f9fa; }
+        .card { background:white; padding:25px; border-radius:10px; box-shadow:0 4px 6px rgba(0,0,0,0.1); transition:transform 0.3s ease,box-shadow 0.3s ease; }
+        .card:hover { transform:translateY(-5px); box-shadow:0 8px 15px rgba(0,0,0,0.2); }
+        .card-title { font-size:0.9em; color:#666; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
+        .card-value { font-size:2.5em; font-weight:bold; color:#333; }
+        .card.pass .card-value { color:#28a745; }
+        .card.fail .card-value { color:#dc3545; }
+        .card.info .card-value { color:#17a2b8; }
+        .content { padding:30px; }
+        .section { margin-bottom:40px; }
+        .section-title { font-size:1.8em; color:#333; margin-bottom:20px; padding-bottom:10px; border-bottom:3px solid #667eea; display:flex; align-items:center; gap:10px; }
+        .section-title::before { content:''; width:6px; height:30px; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); border-radius:3px; }
+        .chart-container { position:relative; height:400px; margin:20px 0; background:white; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+        .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:30px; margin:20px 0; }
+        table.dataTable { width:100%!important; border-collapse:collapse; margin:20px 0; background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+        table.dataTable thead th { background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:white; padding:15px; text-align:left; font-weight:600; text-transform:uppercase; font-size:0.85em; letter-spacing:0.5px; }
+        table.dataTable tbody td { padding:12px 15px; border-bottom:1px solid #eee; }
+        table.dataTable tbody tr:hover { background:#f8f9fa; }
+        .badge { display:inline-block; padding:5px 12px; border-radius:20px; font-size:0.85em; font-weight:600; text-transform:uppercase; }
+        .badge.pass { background:#d4edda; color:#155724; }
+        .badge.fail { background:#f8d7da; color:#721c24; }
+        .badge.skip { background:#fff3cd; color:#856404; }
+        .metadata { background:#f8f9fa; padding:20px; border-radius:10px; margin:20px 0; border-left:4px solid #667eea; }
+        .metadata-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:15px; }
+        .metadata-item { display:flex; gap:10px; }
+        .metadata-label { font-weight:600; color:#666; min-width:120px; }
+        .metadata-value { color:#333; word-break:break-all; }
+        .collapsible { background:#667eea; color:white; cursor:pointer; padding:15px; width:100%; border:none; text-align:left; outline:none; font-size:1.1em; font-weight:600; border-radius:8px; margin:10px 0; transition:background 0.3s ease; }
+        .collapsible:hover { background:#764ba2; }
+        .collapsible::after { content:'\\25BC'; float:right; margin-left:5px; transition:transform 0.3s ease; }
+        .collapsible.active::after { transform:rotate(-180deg); }
+        .collapsible-content { max-height:0; overflow:hidden; background:white; border-radius:0 0 8px 8px; }
+        .collapsible-content.active { max-height:none; padding:20px; border:2px solid #667eea; border-top:none; }
+        .footer { background:#f8f9fa; padding:20px; text-align:center; color:#666; border-top:1px solid #dee2e6; }
+        .timestamp { font-size:0.9em; color:#999; }
+
+        /* Tab styles */
+        .tab-bar { display:flex; flex-wrap:wrap; gap:4px; padding:10px 30px 0; background:#f8f9fa; border-bottom:2px solid #667eea; overflow-x:auto; }
+        .tab-btn { padding:10px 20px; border:none; background:#e0e0e0; color:#333; font-size:0.95em; font-weight:600; cursor:pointer; border-radius:8px 8px 0 0; transition:background 0.2s; white-space:nowrap; }
+        .tab-btn:hover { background:#c8c8f0; }
+        .tab-btn.active { background:#667eea; color:white; }
+        .tab-content { display:none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Consolidated Validation Report</h1>
+            <div class="subtitle">{{PASSED_VALIDATIONS}}/{{TOTAL_VALIDATIONS}} validations passed</div>
+            <div class="timestamp">Generated: {{TIMESTAMP}}</div>
+        </div>
+
+        <div class="tab-bar">
+            {{TAB_HEADERS}}
+        </div>
+
+        {{TAB_CONTENTS}}
+
+        <div class="footer">
+            <p>Universal Data Validation Framework v1.0</p>
+            <p class="timestamp">Report generated on {{TIMESTAMP}}</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+                this.classList.add('active');
+                var tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).style.display = 'block';
+                // Lazy-init charts/tables for this tab
+                if (window._tabInits && window._tabInits[tabId]) {
+                    window._tabInits[tabId]();
+                    delete window._tabInits[tabId];
+                }
+            });
+        });
+
+        // Collapsible sections
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('collapsible')) {
+                e.target.classList.toggle('active');
+                e.target.nextElementSibling.classList.toggle('active');
+            }
+        });
     </script>
 </body>
 </html>

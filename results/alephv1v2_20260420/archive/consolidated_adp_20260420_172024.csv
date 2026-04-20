@@ -1,0 +1,145 @@
+validation,result,column,pk,detail,source_value,target_value
+record_count_check,PASS,,,"Source: 1971 rows, Target: 1971 rows",1971,1971
+column_count_check,PASS,,,"Source: 49 columns, Target: 49 columns, Common: 49",49,49
+metadata_type_check,PASS,account id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,account name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,account ranking list,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,arr size dynamic,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,bill state,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"bop (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,bundle product code,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,category (adjusted),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,cohort arr size,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,covered finance product category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,distributor name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,end customer,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"eop (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"eop, unadjusted  ",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,extn for late renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,finance product category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,geo ,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,identifier,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,index#,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,industry,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,industry [custom],,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,max. fortune rank,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,month of revenue date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,order number,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,peak arr,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous arr,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous extn for late renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous refresh overlap adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product family,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product group,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product penetration (landed),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,quantity,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,rcn emp count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,refresh overlap adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,region,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,reseller name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sales designation_new,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sales rep,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,service end date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,service start date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,shipping country,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sku,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,territory id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,territory name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,variance,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"variance (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,year of cohort date fy,,"Compatible types: Source 'object', Target 'object'",object,object
+duplicate_check,FAIL,,"account id='0014600001JL5ftAAD', order number='REN-185508', sku='IB-SWTL-ADNS', service start date='5/30/2025'",Source has 2 duplicate rows (showing first 5 of 398),2,
+duplicate_check,FAIL,,"account id='0014600001LOy6bAAD', order number='REN-185949', sku='IB-SWTL-ADNS', service start date='6/20/2025'",Source has 2 duplicate rows (showing first 5 of 398),2,
+duplicate_check,FAIL,,"account id='0014600001JLF6vAAH', order number='REN-171310', sku='IB-SWTL-ADNS', service start date='6/1/2025'",Source has 2 duplicate rows (showing first 5 of 398),2,
+duplicate_check,FAIL,,"account id='0014600001JLONCAA5', order number='REN-172485', sku='IB-SWTL-ADNS', service start date='5/1/2024'",Source has 2 duplicate rows (showing first 5 of 398),2,
+duplicate_check,FAIL,,"account id='0014600001JLONCAA5', order number='REN-178290', sku='IB-SWTL-ADNS', service start date='9/1/2024'",Source has 2 duplicate rows (showing first 5 of 398),2,
+duplicate_check,FAIL,,"account id='0014600001JL5ftAAD', order number='REN-185508', sku='IB-SWTL-ADNS', service start date='5/30/2025'",Target has 2 duplicate rows (showing first 5 of 398),,2
+duplicate_check,FAIL,,"account id='0014600001LOy6bAAD', order number='REN-185949', sku='IB-SWTL-ADNS', service start date='6/20/2025'",Target has 2 duplicate rows (showing first 5 of 398),,2
+duplicate_check,FAIL,,"account id='0014600001JLF6vAAH', order number='REN-171310', sku='IB-SWTL-ADNS', service start date='6/1/2025'",Target has 2 duplicate rows (showing first 5 of 398),,2
+duplicate_check,FAIL,,"account id='0014600001JLONCAA5', order number='REN-172485', sku='IB-SWTL-ADNS', service start date='5/1/2024'",Target has 2 duplicate rows (showing first 5 of 398),,2
+duplicate_check,FAIL,,"account id='0014600001JLONCAA5', order number='REN-178290', sku='IB-SWTL-ADNS', service start date='9/1/2024'",Target has 2 duplicate rows (showing first 5 of 398),,2
+null_check,PASS,account ranking list,,"Source: 1174 nulls, Target: 1174 nulls",1174,1174
+null_check,PASS,arr size dynamic,,"Source: 47 nulls, Target: 47 nulls",47,47
+null_check,PASS,bill state,,"Source: 992 nulls, Target: 992 nulls",992,992
+null_check,PASS,bundle product code,,"Source: 341 nulls, Target: 341 nulls",341,341
+null_check,PASS,cohort arr size,,"Source: 1552 nulls, Target: 1552 nulls",1552,1552
+null_check,PASS,distributor name,,"Source: 282 nulls, Target: 282 nulls",282,282
+null_check,FAIL,max. fortune rank,,"Source: 1723 nulls, Target: 1722 nulls",1723,1722
+null_check,PASS,reseller name,,"Source: 46 nulls, Target: 46 nulls",46,46
+null_check,FAIL,territory id,,"Source: 1 nulls, Target: 0 nulls",1,0
+null_check,FAIL,territory name,,"Source: 1 nulls, Target: 0 nulls",1,0
+empty_string_check,PASS,,,No empty strings found,,
+primary_key_match,PASS,,,"Common: 1755, Source-only: 0, Target-only: 0",1755,1755
+data_validation,FAIL,account name,,1 mismatches in column account name,,
+data_validation,FAIL,account name,"account id='0014600001JL5kZAAT', order number='REN-180033', sku='IB-SWTL-ADNS', service start date='12/15/2024'",Value mismatch (example 1 of 1),'One Telecommunications Sh.a.','ONE Albania sha'
+data_validation,FAIL,account ranking list,,1 mismatches in column account ranking list,,
+data_validation,FAIL,account ranking list,"account id='0014600001JLHQ4AAP', order number='REN-162198', sku='IB-SWTL-ADNS', service start date='7/23/2023'",Value mismatch (example 1 of 1),'MarketCap 10k','Fortune 1000;MarketCap 10k'
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)",,"66 mismatches in column bop (adjusted, w/ late renewals extn)",,
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)","account id='0014600001JLZ9BAAX', order number='REN-181226', sku='IB-SWTL-ADNS', service start date='7/28/2025'",Value mismatch (example 1 of 66),'18739.009918719217','18739.009918719214'
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)","account id='0014600001JLNmpAAH', order number='DIST-153573', sku='IB-SWTL-ADNS', service start date='10/29/2022'",Value mismatch (example 2 of 66),'4158.5599999999995','4158.56'
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)","account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SWTL-ADNS', service start date='7/18/2025'",Value mismatch (example 3 of 66),'3950.3733333333334','3950.373333333333'
+data_validation,FAIL,covered finance product category,,1 mismatches in column covered finance product category,,
+data_validation,FAIL,covered finance product category,"account id='0011M00002G4JhpQAF', order number='REN-194405', sku='IB-SWTL-ADNS', service start date='9/9/2025'",Value mismatch (example 1 of 1),'(blank)','Term Software'
+data_validation,FAIL,end customer,,1 mismatches in column end customer,,
+data_validation,FAIL,end customer,"account id='0014600001JLV42AAH', order number='DIST-153521', sku='IB-SWTL-ADNS', service start date='10/28/2022'",Value mismatch (example 1 of 1),'PT. SURYADUTA INVESTAMA','PT. GUDANG GARAM TBK'
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)",,"68 mismatches in column eop (adjusted, w/ late renewals extn)",,
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)","account id='0014600001JLZ9BAAX', order number='REN-181226', sku='IB-SWTL-ADNS', service start date='7/28/2025'",Value mismatch (example 1 of 68),'18739.009918719217','18739.009918719214'
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)","account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SWTL-ADNS', service start date='7/18/2025'",Value mismatch (example 2 of 68),'3950.3733333333334','3950.373333333333'
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)","account id='0014600001JLNB0AAP', order number='REN-185174', sku='IB-SWTL-ADNS', service start date='4/6/2025'",Value mismatch (example 3 of 68),'31818.023130555557','31818.02313055556'
+data_validation,FAIL,"eop, unadjusted  ",,"67 mismatches in column eop, unadjusted  ",,
+data_validation,FAIL,"eop, unadjusted  ","account id='0014600001JLZ9BAAX', order number='REN-181226', sku='IB-SWTL-ADNS', service start date='7/28/2025'",Value mismatch (example 1 of 67),'18739.009918719217','18739.009918719214'
+data_validation,FAIL,"eop, unadjusted  ","account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SWTL-ADNS', service start date='7/18/2025'",Value mismatch (example 2 of 67),'3950.3733333333334','3950.373333333333'
+data_validation,FAIL,"eop, unadjusted  ","account id='0014600001JLNB0AAP', order number='REN-185174', sku='IB-SWTL-ADNS', service start date='4/6/2025'",Value mismatch (example 3 of 67),'31818.023130555557','31818.02313055556'
+data_validation,FAIL,extn for late renewals,,3 mismatches in column extn for late renewals,,
+data_validation,FAIL,extn for late renewals,"account id='0018Y00002qHg23QAC', order number='DIST-170706', sku='IB-SWTL-ADNS', service start date='3/20/2024'",Value mismatch (example 1 of 3),'2473.7999999999997','2473.8'
+data_validation,FAIL,extn for late renewals,"account id='0014600001JLL7aAAH', order number='REN-181192', sku='IB-SWTL-ADNS', service start date='10/29/2024'",Value mismatch (example 2 of 3),'3229.7999999999997','3229.8'
+data_validation,FAIL,extn for late renewals,"account id='0014600001RN91iAAD', order number='REN-179291', sku='IB-SWTL-ADNS', service start date='10/23/2024'",Value mismatch (example 3 of 3),'2803.7999999999997','2803.8'
+data_validation,FAIL,index#,,1755 mismatches in column index#,,
+data_validation,FAIL,index#,"account id='0014600001JL5kZAAT', order number='REN-180033', sku='IB-SWTL-ADNS', service start date='12/15/2024'",Value mismatch (example 1 of 1755),'6','1'
+data_validation,FAIL,index#,"account id='0014600001JL6riAAD', order number='REN-179212', sku='IB-SWTL-ADNS', service start date='12/30/2024'",Value mismatch (example 2 of 1755),'18','8'
+data_validation,FAIL,index#,"account id='0014600001JLWnmAAH', order number='REN-187269', sku='IB-SWTL-ADNS', service start date='7/1/2025'",Value mismatch (example 3 of 1755),'25','10'
+data_validation,FAIL,industry [custom],,1 mismatches in column industry [custom],,
+data_validation,FAIL,industry [custom],"account id='0014600001JLV42AAH', order number='DIST-153521', sku='IB-SWTL-ADNS', service start date='10/28/2022'",Value mismatch (example 1 of 1),'Financial Services','Manufacturing'
+data_validation,FAIL,max. fortune rank,,1 mismatches in column max. fortune rank,,
+data_validation,FAIL,max. fortune rank,"account id='0014600001JLHQ4AAP', order number='REN-162198', sku='IB-SWTL-ADNS', service start date='7/23/2023'",Value mismatch (example 1 of 1),nan,'746.0'
+data_validation,FAIL,peak arr,,454 mismatches in column peak arr,,
+data_validation,FAIL,peak arr,"account id='0014600001JL5ftAAD', order number='REN-185508', sku='IB-SWTL-ADNS', service start date='5/30/2025'",Value mismatch (example 1 of 454),'245839.63999999996','245839.64'
+data_validation,FAIL,peak arr,"account id='0014600001JL9g4AAD', order number='REN-178009', sku='IB-SWTL-ADNS', service start date='10/11/2024'",Value mismatch (example 2 of 454),'51002.65246891652','42903.49261280141'
+data_validation,FAIL,peak arr,"account id='0014600001JL9g4AAD', order number='REN-189727', sku='IB-SWTL-ADNS', service start date='10/11/2025'",Value mismatch (example 3 of 454),'51002.65246891652','42903.49261280141'
+data_validation,FAIL,previous arr,,64 mismatches in column previous arr,,
+data_validation,FAIL,previous arr,"account id='0014600001JLZ9BAAX', order number='REN-181226', sku='IB-SWTL-ADNS', service start date='7/28/2025'",Value mismatch (example 1 of 64),'18739.009918719217','18739.009918719214'
+data_validation,FAIL,previous arr,"account id='0014600001JLNmpAAH', order number='DIST-153573', sku='IB-SWTL-ADNS', service start date='10/29/2022'",Value mismatch (example 2 of 64),'4158.5599999999995','4158.56'
+data_validation,FAIL,previous arr,"account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SWTL-ADNS', service start date='7/18/2025'",Value mismatch (example 3 of 64),'3950.3733333333334','3950.373333333333'
+data_validation,FAIL,previous extn for late renewals,,2 mismatches in column previous extn for late renewals,,
+data_validation,FAIL,previous extn for late renewals,"account id='0018Y00002qHg23QAC', order number='DIST-170706', sku='IB-SWTL-ADNS', service start date='3/20/2024'",Value mismatch (example 1 of 2),'2473.7999999999997','2473.8'
+data_validation,FAIL,previous extn for late renewals,"account id='0014600001JLL7aAAH', order number='REN-181192', sku='IB-SWTL-ADNS', service start date='10/29/2024'",Value mismatch (example 2 of 2),'3229.7999999999997','3229.8'
+data_validation,FAIL,rcn emp count,,29 mismatches in column rcn emp count,,
+data_validation,FAIL,rcn emp count,"account id='0014600001JLEfBAAX', order number='REN-173562', sku='IB-SWTL-ADNS', service start date='7/1/2024'",Value mismatch (example 1 of 29),'1059','1156'
+data_validation,FAIL,rcn emp count,"account id='0014600001JLEfBAAX', order number='REN-187544', sku='IB-SWTL-ADNS', service start date='8/1/2025'",Value mismatch (example 2 of 29),'1059','1156'
+data_validation,FAIL,rcn emp count,"account id='001R700000H76V7IAJ', order number='DIST-179927', sku='IB-SWTL-ADNS', service start date='12/11/2024'",Value mismatch (example 3 of 29),'1500','5000'
+data_validation,FAIL,refresh overlap adj,,2 mismatches in column refresh overlap adj,,
+data_validation,FAIL,refresh overlap adj,"account id='0014600001JL7irAAD', order number='DIST-128985', sku='IB-SWTL-ADNS', service start date='11/17/2020'",Value mismatch (example 1 of 2),'-5079.9279799999995','-5079.92798'
+data_validation,FAIL,refresh overlap adj,"account id='0014600001JLMEIAA5', order number='FEDR-188643', sku='IB-SWTL-ADNS', service start date='8/24/2025'",Value mismatch (example 2 of 2),'-38589.61366459627','-38589.61366459628'
+data_validation,FAIL,region,,1 mismatches in column region,,
+data_validation,FAIL,region,"account id='0014600001JLE4eAAH', order number='REN-181132', sku='IB-SWTL-ADNS', service start date='2/4/2025'",Value mismatch (example 1 of 1),'WEUR','NEUR'
+data_validation,FAIL,reseller name,,2 mismatches in column reseller name,,
+data_validation,FAIL,reseller name,"account id='0014600001JLISpAAP', order number='REN-188079', sku='IB-SWTL-ADNS', service start date='7/29/2025'",Value mismatch (example 1 of 2),'Computacenter - USA','Computacenter United States Inc.'
+data_validation,FAIL,reseller name,"account id='0018Y00002qErHmQAK', order number='REN-180376', sku='IB-SWTL-ADNS', service start date='12/31/2024'",Value mismatch (example 2 of 2),'Kirey Security S.r.l .','Kirey S.r.l .'
+data_validation,FAIL,sales rep,,22 mismatches in column sales rep,,
+data_validation,FAIL,sales rep,"account id='0014600001JLFwXAAX', order number='DIST-178104', sku='IB-SWTL-ADNS', service start date='10/18/2024'",Value mismatch (example 1 of 22),'Apichart Choempraphai','Lee Anstiss'
+data_validation,FAIL,sales rep,"account id='0014600001JLG6NAAX', order number='DIST-175259', sku='IB-SWTL-ADNS', service start date='7/24/2024'",Value mismatch (example 2 of 22),'Apichart Choempraphai','Lee Anstiss'
+data_validation,FAIL,sales rep,"account id='0014600001JL9YFAA1', order number='DIST-187378', sku='IB-SWTL-ADNS', service start date='7/4/2025'",Value mismatch (example 3 of 22),'Apichart Choempraphai','Lee Anstiss'
+data_validation,FAIL,territory id,,1 mismatches in column territory id,,
+data_validation,FAIL,territory id,"account id='0014600001JLE4eAAH', order number='REN-181132', sku='IB-SWTL-ADNS', service start date='2/4/2025'",Value mismatch (example 1 of 1),nan,'0MI8Y000000GpLGWA0'
+data_validation,FAIL,territory name,,1 mismatches in column territory name,,
+data_validation,FAIL,territory name,"account id='0014600001JLE4eAAH', order number='REN-181132', sku='IB-SWTL-ADNS', service start date='2/4/2025'",Value mismatch (example 1 of 1),nan,'BENELUX CAM'
+data_validation,FAIL,variance,,15 mismatches in column variance,,
+data_validation,FAIL,variance,"account id='0014600001JLNmpAAH', order number='DIST-153573', sku='IB-SWTL-ADNS', service start date='10/29/2022'",Value mismatch (example 1 of 15),'-4158.5599999999995','-4158.56'
+data_validation,FAIL,variance,"account id='0014600001JL87XAAT', order number='REN-177269', sku='IB-SWTL-ADNS', service start date='9/29/2024'",Value mismatch (example 2 of 15),'-7821.8599','-7821.859899999999'
+data_validation,FAIL,variance,"account id='0014600001JLQPeAAP', order number='DIST-151042', sku='IB-SWTL-ADNS', service start date='7/29/2022'",Value mismatch (example 3 of 15),'-4139.6804351771825','-4139.680435177183'
+data_validation,FAIL,"variance (adjusted, w/ late renewals extn)",,"16 mismatches in column variance (adjusted, w/ late renewals extn)",,
+data_validation,FAIL,"variance (adjusted, w/ late renewals extn)","account id='0014600001JLNmpAAH', order number='DIST-153573', sku='IB-SWTL-ADNS', service start date='10/29/2022'",Value mismatch (example 1 of 16),'-4158.5599999999995','-4158.56'
+data_validation,FAIL,"variance (adjusted, w/ late renewals extn)","account id='0014600001JL87XAAT', order number='REN-177269', sku='IB-SWTL-ADNS', service start date='9/29/2024'",Value mismatch (example 2 of 16),'-7821.8599','-7821.859899999999'
+data_validation,FAIL,"variance (adjusted, w/ late renewals extn)","account id='0014600001JLQPeAAP', order number='DIST-151042', sku='IB-SWTL-ADNS', service start date='7/29/2022'",Value mismatch (example 3 of 16),'-4139.6804351771825','-4139.680435177183'

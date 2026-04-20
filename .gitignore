@@ -24,6 +24,7 @@ dist/
 results/*.csv
 results/*.html
 results/*.json
+results/*.xlsx
 
 # Test data
 tests/data/*

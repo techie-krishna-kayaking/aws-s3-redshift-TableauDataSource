@@ -38,6 +38,7 @@ class FileAdapter(BaseAdapter):
                 - sep: Delimiter for CSV files (default: ',')
         """
         super().__init__(config)
+        self._original_path = config['path']
         self.path = resolve_path(config['path'])
         self.format = config.get('format', self._detect_format())
         self.sheet_name = config.get('sheet_name', 0)
@@ -159,7 +160,7 @@ class FileAdapter(BaseAdapter):
         return {
             'source_type': 'file',
             'file_format': self.format,
-            'source_path': str(self.path),
+            'source_path': self._original_path,
             'row_count': len(self._data),
             'column_count': len(self._data.columns),
             'columns': column_info,

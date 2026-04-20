@@ -1,0 +1,106 @@
+validation,result,column,pk,detail,source_value,target_value
+record_count_check,PASS,,,"Source: 171 rows, Target: 171 rows",171,171
+column_count_check,PASS,,,"Source: 49 columns, Target: 49 columns, Common: 49",49,49
+metadata_type_check,PASS,account id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,account name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,account ranking list,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,arr size dynamic,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,bill state,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"bop (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,bundle product code,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,category (adjusted),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,cohort arr size,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,covered finance product category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,distributor name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,end customer,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"eop (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"eop, unadjusted  ",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,extn for late renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,finance product category,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,geo ,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,identifier,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,index#,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,industry,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,industry [custom],,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,max. fortune rank,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,month of revenue date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,order number,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,peak arr,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous arr,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous extn for late renewals,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,previous refresh overlap adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product family,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product group,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,product penetration (landed),,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,quantity,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,rcn emp count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,refresh overlap adj,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,region,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,reseller name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sales designation_new,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sales rep,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,service end date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,service start date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,shipping country,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,sku,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,territory id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,territory name,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,variance,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,"variance (adjusted, w/ late renewals extn)",,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,year of cohort date fy,,"Compatible types: Source 'object', Target 'object'",object,object
+duplicate_check,PASS,,,No duplicates found in Source,0,
+duplicate_check,PASS,,,No duplicates found in Target,,0
+null_check,PASS,account ranking list,,"Source: 106 nulls, Target: 106 nulls",106,106
+null_check,PASS,arr size dynamic,,"Source: 3 nulls, Target: 3 nulls",3,3
+null_check,PASS,bill state,,"Source: 51 nulls, Target: 51 nulls",51,51
+null_check,PASS,cohort arr size,,"Source: 140 nulls, Target: 140 nulls",140,140
+null_check,PASS,distributor name,,"Source: 20 nulls, Target: 20 nulls",20,20
+null_check,PASS,max. fortune rank,,"Source: 140 nulls, Target: 140 nulls",140,140
+empty_string_check,PASS,,,No empty strings found,,
+primary_key_match,PASS,,,"Common: 171, Source-only: 0, Target-only: 0",171,171
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)",,"3 mismatches in column bop (adjusted, w/ late renewals extn)",,
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)","account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'",Value mismatch (example 1 of 3),'27279.999999999996','27280.0'
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)","account id='0018Y00002w9XJCQA2', order number='DIST-181287', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='1/17/2025'",Value mismatch (example 2 of 3),'3581.8131868131873','3581.8131868131877'
+data_validation,FAIL,"bop (adjusted, w/ late renewals extn)","account id='0014600001JLO1BAAX', order number='REN-188383', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/28/2025'",Value mismatch (example 3 of 3),'404.7999999999999','404.8'
+data_validation,FAIL,end customer,,1 mismatches in column end customer,,
+data_validation,FAIL,end customer,"account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'",Value mismatch (example 1 of 1),'DOWLAIS GROUP PLC','DAUCH CORPORATION'
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)",,"5 mismatches in column eop (adjusted, w/ late renewals extn)",,
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)","account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'",Value mismatch (example 1 of 5),'401439.99999999994','401440.0'
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)","account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'",Value mismatch (example 2 of 5),'27279.999999999996','27280.0'
+data_validation,FAIL,"eop (adjusted, w/ late renewals extn)","account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'",Value mismatch (example 3 of 5),'212.87999999999997','212.88'
+data_validation,FAIL,"eop, unadjusted  ",,"5 mismatches in column eop, unadjusted  ",,
+data_validation,FAIL,"eop, unadjusted  ","account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'",Value mismatch (example 1 of 5),'401439.99999999994','401440.0'
+data_validation,FAIL,"eop, unadjusted  ","account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'",Value mismatch (example 2 of 5),'27279.999999999996','27280.0'
+data_validation,FAIL,"eop, unadjusted  ","account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'",Value mismatch (example 3 of 5),'212.87999999999997','212.88'
+data_validation,FAIL,index#,,170 mismatches in column index#,,
+data_validation,FAIL,index#,"account id='001R700000QnZnIIAV', order number='DIST-184897', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='4/27/2025'",Value mismatch (example 1 of 170),'10','8'
+data_validation,FAIL,index#,"account id='0011M00002G3zpvQAB', order number='DIST-181281', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='1/16/2025'",Value mismatch (example 2 of 170),'22','17'
+data_validation,FAIL,index#,"account id='0018Y00002wB9UxQAK', order number='REN-190555', sku='IB-TOKENS-REPORTING-40', service start date='10/31/2025'",Value mismatch (example 3 of 170),'26','21'
+data_validation,FAIL,industry [custom],,1 mismatches in column industry [custom],,
+data_validation,FAIL,industry [custom],"account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'",Value mismatch (example 1 of 1),'Aerospace & Defense','Manufacturing'
+data_validation,FAIL,peak arr,,7 mismatches in column peak arr,,
+data_validation,FAIL,peak arr,"account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'",Value mismatch (example 1 of 7),'401439.99999999994','401440.0'
+data_validation,FAIL,peak arr,"account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'",Value mismatch (example 2 of 7),'212.87999999999997','212.88'
+data_validation,FAIL,peak arr,"account id='0014600001JLImkAAH', order number='DIST-178187', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='10/22/2024'",Value mismatch (example 3 of 7),'192000.00000000003','0.0'
+data_validation,FAIL,previous arr,,3 mismatches in column previous arr,,
+data_validation,FAIL,previous arr,"account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'",Value mismatch (example 1 of 3),'27279.999999999996','27280.0'
+data_validation,FAIL,previous arr,"account id='0018Y00002w9XJCQA2', order number='DIST-181287', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='1/17/2025'",Value mismatch (example 2 of 3),'3581.8131868131873','3581.8131868131877'
+data_validation,FAIL,previous arr,"account id='0014600001JLO1BAAX', order number='REN-188383', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/28/2025'",Value mismatch (example 3 of 3),'404.7999999999999','404.8'
+data_validation,FAIL,rcn emp count,,5 mismatches in column rcn emp count,,
+data_validation,FAIL,rcn emp count,"account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='4/26/2025'",Value mismatch (example 1 of 5),'490','700'
+data_validation,FAIL,rcn emp count,"account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'",Value mismatch (example 2 of 5),'23327','18000'
+data_validation,FAIL,rcn emp count,"account id='0014600001JL71YAAT', order number='DIST-179190', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='11/20/2024'",Value mismatch (example 3 of 5),'6000','5500'
+data_validation,FAIL,reseller name,,3 mismatches in column reseller name,,
+data_validation,FAIL,reseller name,"account id='0011M00002G4IbKQAV', order number='REN-186088', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/4/2025'",Value mismatch (example 1 of 3),'Computacenter - USA','Computacenter United States Inc.'
+data_validation,FAIL,reseller name,"account id='0018Y00002kykqyQAA', order number='REN-188349', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/31/2025'",Value mismatch (example 2 of 3),'Computacenter - USA','Computacenter United States Inc.'
+data_validation,FAIL,reseller name,"account id='0014600001JLO1BAAX', order number='REN-188383', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/28/2025'",Value mismatch (example 3 of 3),'Computacenter - USA','Computacenter United States Inc.'
+data_validation,FAIL,variance,,2 mismatches in column variance,,
+data_validation,FAIL,variance,"account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'",Value mismatch (example 1 of 2),'401439.99999999994','401440.0'
+data_validation,FAIL,variance,"account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'",Value mismatch (example 2 of 2),'212.87999999999997','212.88'
+data_validation,FAIL,"variance (adjusted, w/ late renewals extn)",,"2 mismatches in column variance (adjusted, w/ late renewals extn)",,
+data_validation,FAIL,"variance (adjusted, w/ late renewals extn)","account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'",Value mismatch (example 1 of 2),'401439.99999999994','401440.0'
+data_validation,FAIL,"variance (adjusted, w/ late renewals extn)","account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'",Value mismatch (example 2 of 2),'212.87999999999997','212.88'
+data_validation,FAIL,year of cohort date fy,,1 mismatches in column year of cohort date fy,,
+data_validation,FAIL,year of cohort date fy,"account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'",Value mismatch (example 1 of 1),'FY 2023','FY 2019'
