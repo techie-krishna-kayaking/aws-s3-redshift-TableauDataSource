@@ -1,41 +1,275 @@
-# Universal Data Validation Framework
+<div align="center">
 
-A powerful, plugin-based data validation framework that supports multiple data sources with interactive HTML reports and drill-down visualizations.
+# 🛡️ Universal Data Validation Framework
 
-## 🎯 Features
+<p align="center">
+  <strong>A powerful, plugin-based data validation engine for comparing data across files, databases, and Tableau datasources — with rich interactive HTML reports.</strong>
+</p>
 
-- **Universal Comparison**: Validate data across 5 different scenarios
-  - File ↔ Redshift Table
-  - Redshift Table ↔ Table  
-  - File ↔ File
-  - DataSource (TWBX) ↔ DataSource
-  - DataSource ↔ Redshift Table
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9+">
+  <img src="https://img.shields.io/badge/pandas-2.0+-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
+  <img src="https://img.shields.io/badge/Amazon_Redshift-8C4FFF?style=for-the-badge&logo=amazonredshift&logoColor=white" alt="Redshift">
+  <img src="https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white" alt="Tableau">
+  <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="Chart.js">
+  <img src="https://img.shields.io/badge/YAML-CB171E?style=for-the-badge&logo=yaml&logoColor=white" alt="YAML">
+</p>
 
-- **Multiple File Formats**: CSV, JSON, Parquet, Excel
-- **Configuration-Driven**: YAML-based configuration for all scenarios
-- **Interactive Reports**: HTML reports with Chart.js visualizations and drill-down tables
-- **Comprehensive Validation**: Record counts, column counts, duplicates, nulls, empty strings, data values
-- **Primary Key Support**: Intelligent comparison with or without primary keys
-- **Failure Analysis**: Identifies culprit columns and specific data anomalies
-- **Timestamped Results**: Each run creates new files with timestamps - never lose history!
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-comparison-scenarios">Scenarios</a> •
+  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-configuration-examples">Config</a> •
+  <a href="#-multi-environment-support">Multi-Env</a>
+</p>
+
+</div>
+
+---
+
+## 📸 What You Get
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║  VALIDATION: CSV to Redshift                                       ║
+║  Source: 10,000 rows × 25 columns                                  ║
+║  Target:  9,999 rows × 25 columns                                  ║
+║                                                                      ║
+║  ✅ 44 passed  ·  ❌ 3 failed  ·  ⏭ 0 skipped                      ║
+║                                                                      ║
+║  📊 CSV Report:  ./results/csv_to_redshift_20260420_184324.csv      ║
+║  📊 HTML Report: ./results/csv_to_redshift_20260420_184324.html     ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
+## ✨ Features
+
+### 🔄 5 Universal Comparison Scenarios
+
+| Source | | Target | Use Case |
+|:---|:---:|:---|:---|
+| 📄 **File** (CSV/JSON/Parquet/Excel) | ↔ | 🗄️ **Redshift Table** | ETL pipeline validation |
+| 🗄️ **Redshift Table** | ↔ | 🗄️ **Redshift Table** | Cross-schema / cross-env comparison |
+| 📄 **File** | ↔ | 📄 **File** | Format migration, data export checks |
+| 📊 **Tableau Datasource** (TWBX) | ↔ | 📊 **Tableau Datasource** | Pre/post-RCA comparison |
+| 📊 **Tableau Datasource** | ↔ | 🗄️ **Redshift Table** | Dashboard data accuracy |
+
+### 🔍 7 Comprehensive Validation Checks
+
+| # | Check | Description |
+|---|:------|:------------|
+| 1 | **Record Count** | Compares total row counts between source and target |
+| 2 | **Column Count** | Identifies matching, missing, and extra columns |
+| 3 | **Metadata Types** | Validates data type compatibility across columns |
+| 4 | **Duplicate Detection** | Finds duplicate primary key values with row counts |
+| 5 | **Null Analysis** | Detects null/NA values per column with counts |
+| 6 | **Empty String Detection** | Identifies empty strings in all columns |
+| 7 | **Data Value Comparison** | PK-based record matching or row-by-row comparison with type coercion |
+
+### 📊 Interactive HTML Reports
+
+- **Summary Dashboard** — Pass/fail/skip count cards with status badges
+- **Pie Chart** — Overall validation status distribution
+- **Bar Charts** — Validation type breakdown (pass/fail per type)
+- **Column Analysis** — Horizontal bar chart of top 20 culprit columns
+- **Drill-Down Tables** — Sortable, searchable, paginated tables with primary key context
+- **Collapsible Sections** — Clean, organized expand/collapse layout
+- **Metadata Panel** — Source/target info with row & column counts
+
+### 📦 Consolidated Reporting
+
+When running multiple validations in one config, the framework automatically generates:
+
+- 📗 **Single Excel workbook** — One sheet per validation + summary sheet
+- 🌐 **Tabbed HTML report** — Single page with tabs for each validation
+- 📁 **Auto-archiving** — Individual reports moved to `archive/` subfolder
+
+### 🧠 Smart Data Handling
+
+- **Auto Sub-setting** — When dataset sizes differ, filters to matching primary keys
+- **Type Coercion** — Converts numeric strings to int/float for accurate comparison
+- **NaN Equivalence** — Treats `NaN` and `None` as equal
+- **Whitespace Normalization** — Strips spaces before comparison
+- **Multi-Encoding Support** — Auto-tries UTF-8, UTF-16, ISO-8859-1, CP1252
+- **Late-Binding View Support** — Handles Redshift views via `SELECT * LIMIT 0` fallback
+- **Result Limiting** — Caps detailed failures at 100 rows to avoid report bloat
+
+### 🌍 Multi-Environment Support
+
+Seamlessly compare data across Redshift environments:
+
+- Define **DEV**, **PREPROD**, **PROD**, and custom environments in a single `.env` file
+- Reference by name in YAML config — no hardcoded credentials
+- **JDBC URL Parsing** — Automatically extracts host, port, database
+- **Backward Compatible** — Legacy `REDSHIFT_HOST`/`REDSHIFT_DB` variables still work
+- Validate data migrations across **DEV → PREPROD → PROD** pipelines
+
+### 🗂️ File Format Support
+
+| Format | Extensions | Options |
+|:-------|:-----------|:--------|
+| **CSV** | `.csv` | `encoding` (auto-detects UTF-8, UTF-16, ISO-8859-1, CP1252) |
+| **JSON** | `.json` | `json_orient` (records, index, columns, values) |
+| **Parquet** | `.parquet` | — |
+| **Excel** | `.xlsx`, `.xls` | `sheet_name` (index or name) |
+
+### ⚡ CLI Interface
+
+```bash
+python main.py --config <path>                   # Run all validations
+python main.py --config <path> --name "My Test"  # Run specific validation
+python main.py --config <path> --debug           # Enable debug logging
+```
+
+### 🔑 Primary Key Intelligence
+
+```yaml
+primary_keys: id                    # Single key
+primary_keys: id,user_id,timestamp  # Composite keys
+# Omit for row-by-row positional comparison
+```
+
+- Shows **common**, **source-only**, and **target-only** primary keys
+- Identifies top culprit columns across all failures
+- Displays first 3–5 examples per failure type
+
+### 📝 Timestamped Output — Never Lose History
+
+Every run creates new timestamped files:
+```
+results/
+├── my_validation_20260420_184324.csv    # Machine-readable
+├── my_validation_20260420_184324.html   # Interactive visual report
+├── consolidated_20260420_184324.html    # Tabbed multi-validation report
+├── consolidated_20260420_184324.xlsx    # Excel workbook
+└── archive/                            # Auto-archived individual reports
+```
+
+---
+
+## 🏗️ Tech Stack
+
+<table>
+  <tr>
+    <th align="center" colspan="2">Core / Data Processing</th>
+  </tr>
+  <tr>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"><br>
+      <sub>3.9+</sub>
+    </td>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas"><br>
+      <sub>2.0+</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy"><br>
+      <sub>Data ops</sub>
+    </td>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/PyArrow-EE4C2C?style=for-the-badge&logo=apache&logoColor=white" alt="PyArrow"><br>
+      <sub>Parquet I/O</sub>
+    </td>
+  </tr>
+  <tr>
+    <th align="center" colspan="2">Database</th>
+  </tr>
+  <tr>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/Amazon_Redshift-8C4FFF?style=for-the-badge&logo=amazonredshift&logoColor=white" alt="Redshift"><br>
+      <sub>redshift-connector 2.0+</sub>
+    </td>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS"><br>
+      <sub>Cloud data warehouse</sub>
+    </td>
+  </tr>
+  <tr>
+    <th align="center" colspan="2">Visualization / Reporting</th>
+  </tr>
+  <tr>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="Chart.js"><br>
+      <sub>Pie & bar charts</sub>
+    </td>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/DataTables-336791?style=for-the-badge&logo=jquery&logoColor=white" alt="DataTables"><br>
+      <sub>Interactive tables</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5"><br>
+      <sub>Report output</sub>
+    </td>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3"><br>
+      <sub>Responsive styling</sub>
+    </td>
+  </tr>
+  <tr>
+    <th align="center" colspan="2">Data Sources</th>
+  </tr>
+  <tr>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white" alt="Tableau"><br>
+      <sub>TWBX extraction</sub>
+    </td>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white" alt="Excel"><br>
+      <sub>openpyxl engine</sub>
+    </td>
+  </tr>
+  <tr>
+    <th align="center" colspan="2">Configuration / Utilities</th>
+  </tr>
+  <tr>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/YAML-CB171E?style=for-the-badge&logo=yaml&logoColor=white" alt="YAML"><br>
+      <sub>Config-driven</sub>
+    </td>
+    <td align="center" width="120">
+      <img src="https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black" alt="dotenv"><br>
+      <sub>python-dotenv</sub>
+    </td>
+  </tr>
+</table>
+
+### 📋 Python Dependencies
+
+```
+pandas>=2.0.0          # Data manipulation & comparison
+redshift-connector>=2.0.0  # Amazon Redshift connectivity
+python-dotenv>=1.0.0   # Environment variable management
+pyyaml>=6.0            # YAML configuration parsing
+openpyxl>=3.1.0        # Excel read/write support
+pyarrow>=12.0.0        # Parquet file I/O
+```
+
+---
 
 ## 🚀 Quick Start
 
-### Step 1: One-Time Setup (5 minutes)
+### Step 1: One-Time Setup
 
 ```bash
-# Navigate to the project
-cd /Users/kkrishna/Library/CloudStorage/OneDrive-InfobloxInc/PycharmProjects/infoblox-DE/1UniversalFramework/universal-validator
+# Clone / navigate to the project
+cd universal-validator
 
-# Run setup script (creates virtual environment and installs dependencies)
+# Run setup script (creates venv + installs all dependencies)
 ./setup.sh
 
-# Configure your Redshift environments
+# Configure Redshift environments
 cp .env.example .env
-# .env is already configured with your DEV, PREPROD, PROD instances!
+# Edit .env with your DEV, PREPROD, PROD credentials
 ```
 
-### Step 2: Create Validation Config (2 minutes)
+### Step 2: Create a Validation Config
 
 Create `config/my_validation.yaml`:
 
@@ -47,42 +281,28 @@ validations:
       path: ./data/source.csv
     target:
       type: table
-      environment: DEV  # Uses your DEV Redshift instance
+      environment: DEV
       schema: edw_asis
       table: my_table_name
     primary_keys: id
     output_dir: ./results
 ```
 
-### Step 3: Run Validation
+### Step 3: Run
 
 ```bash
-# Activate virtual environment
 source venv/bin/activate
-
-# Run validation
 python main.py --config config/my_validation.yaml
 ```
 
 ### Step 4: View Results
 
-Each run creates timestamped files (e.g., `my_first_validation_20260127_183711.csv`):
-
 ```bash
-# Open HTML report in browser
-open results/my_first_validation_*.html
-
-# Or view CSV report
-cat results/my_first_validation_*.csv
+open results/my_first_validation_*.html   # Interactive HTML report
+cat results/my_first_validation_*.csv     # Machine-readable CSV
 ```
 
-**What you'll see in the HTML report:**
-- 📊 Summary dashboard with pass/fail metrics
-- 🥧 Pie charts showing status distribution
-- 📊 Bar charts for validation type breakdown
-- 📈 Column analysis showing which columns have most failures
-- 🔍 Drill-down tables with exact row-level details
-
+---
 
 ## 📊 Configuration Examples
 
@@ -95,23 +315,26 @@ cat results/my_first_validation_*.csv
     path: ./data/source.csv
   target:
     type: table
+    environment: DEV
     schema: edw_asis
     table: my_table
   primary_keys: id
   output_dir: ./results
 ```
 
-### Scenario 2: Table vs Table
+### Scenario 2: Table vs Table (Cross-Environment)
 
 ```yaml
-- name: "Table Comparison"
+- name: "DEV vs PROD Comparison"
   source:
     type: table
+    environment: DEV
     schema: edw_asis
     table: source_table
   target:
     type: table
-    schema: edw_tobe
+    environment: PROD
+    schema: edw_asis
     table: target_table
   primary_keys: customer_id
   output_dir: ./results
@@ -131,7 +354,7 @@ cat results/my_first_validation_*.csv
   output_dir: ./results
 ```
 
-### Scenario 4: DataSource vs DataSource
+### Scenario 4: Tableau DataSource vs DataSource
 
 ```yaml
 - name: "TWBX Comparison"
@@ -144,126 +367,106 @@ cat results/my_first_validation_*.csv
   output_dir: ./results
 ```
 
-### Scenario 5: DataSource vs Table
+### Scenario 5: Tableau DataSource vs Table
 
 ```yaml
-- name: "TWBX to Table"
+- name: "TWBX to Redshift"
   source:
     type: datasource
     path: ./datasources/my_data.twbx
   target:
     type: table
+    environment: PREPROD
     schema: edw_asis
     table: tableau_data
   primary_keys: record_id
   output_dir: ./results
 ```
 
-## 🔍 Validation Checks
+---
 
-The framework performs the following validations:
+## 🌍 Multi-Environment Support
 
-1. **Record Count Check**: Compares total row counts
-2. **Column Count Check**: Compares column counts and identifies missing columns
-3. **Duplicate Check**: Detects duplicate primary keys
-4. **Null Check**: Identifies null values in columns
-5. **Empty String Check**: Detects empty strings
-6. **Data Validation**: Compares actual data values with type coercion
-
-## 📈 Interactive HTML Reports
-
-The HTML reports include:
-
-- **Summary Dashboard**: Pass/fail metrics with visual cards
-- **Pie Chart**: Overall status distribution
-- **Bar Charts**: Validation type breakdown
-- **Column Analysis**: Horizontal bar chart showing top culprit columns
-- **Drill-Down Tables**: Sortable, filterable, searchable tables with:
-  - Failed checks (with primary key context)
-  - Passed checks
-  - All results
-- **Collapsible Sections**: Clean organization of results
-
-## ⚙️ Environment Variables
-
-Create a `.env` file for Redshift credentials:
+### `.env` Configuration
 
 ```bash
-REDSHIFT_HOST=your-cluster.region.redshift.amazonaws.com
-REDSHIFT_DB=your-database
-REDSHIFT_USER=your-username
-REDSHIFT_PASSWORD=your-password
-REDSHIFT_PORT=5439
-REDSHIFT_SCHEMA=public
+# DEV
+DEV_JDBC_URL=jdbc:redshift://dev-cluster.region.redshift.amazonaws.com:5439/dev_db
+DEV_USER=dev_user
+DEV_PASSWORD=dev_password
+DEV_SCHEMA=edw_asis
+
+# PREPROD
+PREPROD_JDBC_URL=jdbc:redshift://preprod-cluster.region.redshift.amazonaws.com:5439/preprod_db
+PREPROD_USER=preprod_user
+PREPROD_PASSWORD=preprod_password
+
+# PROD
+PROD_JDBC_URL=jdbc:redshift://prod-cluster.region.redshift.amazonaws.com:5439/prod_db
+PROD_USER=prod_user
+PROD_PASSWORD=prod_password
 ```
 
-## 🎨 File Format Support
-
-### CSV
-```yaml
-source:
-  type: file
-  path: ./data/file.csv
-  encoding: utf-8  # Optional: file encoding (auto-detects common formats if omitted)
-```
-
-### JSON
-```yaml
-source:
-  type: file
-  path: ./data/file.json
-  json_orient: records  # Optional: records, index, columns, values
-```
-
-### Parquet
-```yaml
-source:
-  type: file
-  path: ./data/file.parquet
-```
-
-### Excel
-```yaml
-source:
-  type: file
-  path: ./data/file.xlsx
-  sheet_name: 0  # Optional: sheet index or name
-```
-
-## 🔑 Primary Keys
-
-Primary keys enable intelligent row-matching:
-
-```yaml
-# Single primary key
-primary_keys: id
-
-# Multiple primary keys (comma-separated)
-primary_keys: id,user_id,timestamp
-
-# No primary key (row-by-row comparison)
-# primary_keys: (omit or leave empty)
-```
-
-## 📂 Relative Paths
-
-All file paths are resolved relative to the project root:
+### Usage in YAML
 
 ```yaml
 source:
-  path: ./data/source.csv          # Relative to project root
-  path: /absolute/path/to/file.csv # Absolute paths also supported
+  type: table
+  environment: DEV        # Just reference by name!
+  schema: edw_asis
+  table: my_table
 ```
+
+> **Tip:** Legacy `REDSHIFT_HOST` / `REDSHIFT_DB` variables are still supported for backward compatibility.
+
+📖 See [Multi-Environment Guide](docs/MULTI_ENVIRONMENT.md) for full details.
+
+---
+
+## 🏛️ Architecture
+
+```
+universal-validator/
+│
+├── main.py                    # CLI entry point
+│
+├── core/                      # 🧠 Core engine
+│   ├── validator.py           #    Orchestrates the full validation workflow
+│   ├── comparator.py          #    7 validation check implementations
+│   └── reporter.py            #    CSV, HTML, consolidated report generation
+│
+├── adapters/                  # 🔌 Plugin-based data source adapters
+│   ├── base_adapter.py        #    Abstract base class (load, get_metadata)
+│   ├── file_adapter.py        #    CSV, JSON, Parquet, Excel support
+│   ├── table_adapter.py       #    Redshift with multi-env support
+│   └── datasource_adapter.py  #    Tableau TWBX extraction & XML parsing
+│
+├── utils/                     # 🛠️ Utilities
+│   ├── helpers.py             #    Type coercion, comparison, formatting
+│   ├── env_config.py          #    Environment parsing, JDBC URL parsing
+│   └── html_template.py       #    Chart.js + DataTables HTML template
+│
+├── config/                    # ⚙️ YAML validation configurations
+│   ├── example_validations.yaml
+│   └── multi_env_examples.yaml
+│
+├── results/                   # 📊 Output reports (timestamped, auto-archived)
+│
+└── docs/                      # 📖 Documentation
+    ├── MULTI_ENVIRONMENT.md
+    └── MULTI_ENV_QUICKSTART.md
+```
+
+---
 
 ## 🛠️ Extending the Framework
 
 ### Adding a New Adapter
 
-1. Create a new adapter class inheriting from `BaseAdapter`
-2. Implement required methods: `load()`, `get_metadata()`
-3. Register in `core/validator.py`
-
-Example:
+1. Inherit from `BaseAdapter`
+2. Implement `load()` → returns `pd.DataFrame`
+3. Implement `get_metadata()` → returns `Dict[str, Any]`
+4. Register in `core/validator.py`
 
 ```python
 from adapters.base_adapter import BaseAdapter
@@ -272,87 +475,43 @@ class MyAdapter(BaseAdapter):
     def load(self) -> pd.DataFrame:
         # Load data and return DataFrame
         pass
-    
+
     def get_metadata(self) -> Dict[str, Any]:
         # Return metadata dictionary
         pass
 ```
 
-## 📝 Output Files
-
-Each validation generates two timestamped files:
-
-- **CSV**: `{validation_name}_{YYYYMMDD_HHMMSS}.csv` - Machine-readable results
-- **HTML**: `{validation_name}_{YYYYMMDD_HHMMSS}.html` - Interactive visual report
-
-**Example:**
-- `my_validation_20260127_183711.csv`
-- `my_validation_20260127_183711.html`
-
-**Benefit:** Each run creates new files, preserving complete history of all validation runs!
+---
 
 ## 🐛 Troubleshooting
 
-### File Not Found
-- Ensure paths are relative to project root or use absolute paths
-- Check file extensions match the format
+| Problem | Solution |
+|:--------|:---------|
+| **File Not Found** | Use relative paths from project root, or absolute paths |
+| **Redshift Connection Failed** | Verify `.env` credentials, check network/firewall rules |
+| **No Common Columns** | Check column name spelling and case sensitivity |
+| **Primary Key Not Found** | Ensure PK columns exist in both source and target |
+| **Encoding Errors** | Framework auto-tries 4 encodings; specify `encoding` in config if needed |
 
-### Redshift Connection Failed
-- Verify `.env` file exists and contains correct credentials
-- Check network connectivity and firewall rules
-
-### No Common Columns
-- Verify column names match between source and target
-- Check for case sensitivity
-
-### Primary Key Not Found
-- Ensure primary key columns exist in both source and target
-- Check column name spelling
-
-## 📚 Advanced Usage
-
-### Multiple Validations
-
-Run multiple validations in sequence:
-
-```yaml
-validations:
-  - name: "Validation 1"
-    # ... config ...
-  
-  - name: "Validation 2"
-    # ... config ...
-  
-  - name: "Validation 3"
-    # ... config ...
-```
-
-### Custom Output Directory
-
-Override output directory per validation:
-
-```yaml
-- name: "My Validation"
-  # ... source/target config ...
-  output_dir: ./custom_results
-```
-
-## 🤝 Contributing
-
-This framework is designed to be extensible. To add new features:
-
-1. Add new adapters in `adapters/`
-2. Extend validation checks in `core/comparator.py`
-3. Enhance reports in `core/reporter.py`
+---
 
 ## 📄 License
 
 Internal use only.
 
-## 🙏 Acknowledgments
+---
 
-Built with:
-- pandas (data manipulation)
-- redshift-connector (Redshift connectivity)
-- Chart.js (visualizations)
-- DataTables (interactive tables)
+<div align="center">
+
+**Built with ❤️ for Data Engineering**
+
+<p>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="Pandas">
+  <img src="https://img.shields.io/badge/Redshift-8C4FFF?style=flat-square&logo=amazonredshift&logoColor=white" alt="Redshift">
+  <img src="https://img.shields.io/badge/Tableau-E97627?style=flat-square&logo=tableau&logoColor=white" alt="Tableau">
+  <img src="https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white" alt="Chart.js">
+  <img src="https://img.shields.io/badge/YAML-CB171E?style=flat-square&logo=yaml&logoColor=white" alt="YAML">
+</p>
+
+</div>

@@ -1,5 +1,6 @@
 # Environment variables
 .env
+req.txt 
 
 # Python
 __pycache__/

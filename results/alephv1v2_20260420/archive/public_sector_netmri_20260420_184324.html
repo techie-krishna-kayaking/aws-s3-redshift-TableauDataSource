@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commercial_No_Rep_Management_Tokens - Validation Report</title>
+    <title>Public_Sector_NetMRI - Validation Report</title>
     
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -291,9 +291,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Commercial_No_Rep_Management_Tokens</h1>
+            <h1>📊 Public_Sector_NetMRI</h1>
             <div class="subtitle">Data Validation Report</div>
-            <div class="timestamp">Generated: 2026-04-20 17:20:23</div>
+            <div class="timestamp">Generated: 2026-04-20 18:43:24</div>
         </div>
         
         <div class="summary-cards">
@@ -303,15 +303,15 @@
             </div>
             <div class="card pass">
                 <div class="card-title">Passed Checks</div>
-                <div class="card-value">53</div>
+                <div class="card-value">60</div>
             </div>
             <div class="card fail">
                 <div class="card-title">Failed Checks</div>
-                <div class="card-value">12</div>
+                <div class="card-value">36</div>
             </div>
             <div class="card info">
                 <div class="card-title">Total Checks</div>
-                <div class="card-value">65</div>
+                <div class="card-value">96</div>
             </div>
         </div>
         
@@ -330,13 +330,13 @@
 
             <div class="metadata-item">
                 <div class="metadata-label">Source Path:</div>
-                <div class="metadata-value">./raw_data/aleph_apr/v1_dev_q1/Commercial (No Rep) Management Tokens_fy25_26.csv</div>
+                <div class="metadata-value">./raw_data/aleph_apr/v1_dev_q1/Public Sector NetMRI_fy25_26.csv</div>
             </div>
         
 
             <div class="metadata-item">
                 <div class="metadata-label">Source Rows:</div>
-                <div class="metadata-value">29</div>
+                <div class="metadata-value">172</div>
             </div>
         
 
@@ -354,13 +354,13 @@
 
             <div class="metadata-item">
                 <div class="metadata-label">Target Path:</div>
-                <div class="metadata-value">./raw_data/aleph_apr/V2_preprod/Commercial_Rep_Management_Tokens_FY26Q1.csv</div>
+                <div class="metadata-value">./raw_data/aleph_apr/V2_preprod/Public_Sector_NetMRI_FY26Q1.csv</div>
             </div>
         
 
             <div class="metadata-item">
                 <div class="metadata-label">Target Rows:</div>
-                <div class="metadata-value">46</div>
+                <div class="metadata-value">172</div>
             </div>
         
 
@@ -399,7 +399,7 @@
                 <h2 class="section-title">Detailed Results</h2>
                 
                 <!-- Failed Checks -->
-                <button class="collapsible active">❌ Failed Checks (12)</button>
+                <button class="collapsible active">❌ Failed Checks (36)</button>
                 <div class="collapsible-content active">
                     <table id="failedTable" class="display">
                         <thead>
@@ -416,133 +416,397 @@
                             
                     <tr>
                         
-                        <td>Record Count Check</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>-</td>
-                        <td>Source: 29 rows, Target: 0 rows (Note: Smart sub-setting applied - records filtered to matching PKs)</td>
-                        <td>'29'</td>
-                        <td>'0'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Null Check</td>
-                        <td>account ranking list</td>
-                        <td>-</td>
-                        <td>Source: 24 nulls, Target: 0 nulls</td>
-                        <td>'24'</td>
-                        <td>'0'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Null Check</td>
-                        <td>bill state</td>
-                        <td>-</td>
-                        <td>Source: 2 nulls, Target: 0 nulls</td>
+                        <td>account id='0014600001JL9n5AAD', order number='FEDR-185671', sku='IB-MNT-PRM', service start date='5/23/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 56)</td>
                         <td>'2'</td>
-                        <td>'0'</td>
+                        <td>-</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Null Check</td>
-                        <td>cohort arr size</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>Source: 22 nulls, Target: 0 nulls</td>
-                        <td>'22'</td>
-                        <td>'0'</td>
+                        <td>account id='0014600001JLOSvAAP', order number='FEDR-185704', sku='IB-MNT-PRM', service start date='5/25/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>'2'</td>
+                        <td>-</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Null Check</td>
-                        <td>distributor name</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>Source: 1 nulls, Target: 0 nulls</td>
-                        <td>'1'</td>
-                        <td>'0'</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-178302', sku='IB-MNT-PRM', service start date='10/17/2024'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>'2'</td>
+                        <td>-</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Null Check</td>
-                        <td>max. fortune rank</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>Source: 28 nulls, Target: 0 nulls</td>
-                        <td>'28'</td>
-                        <td>'0'</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-184547', sku='IB-MNT-PRM', service start date='4/27/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>'2'</td>
+                        <td>-</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Primary Key Match</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-191086', sku='IB-MNT-PRM', service start date='10/17/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>'2'</td>
                         <td>-</td>
-                        <td>Common: 0, Source-only: 29, Target-only: 0</td>
-                        <td>'29'</td>
-                        <td>'0'</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Primary Key Match</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>account id='0018Y00002wB9UxQAK', order number='REN-190555', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='10/31/2025'</td>
-                        <td>Primary key exists in Source but not in Target (showing first 5 of 29)</td>
-                        <td>'EXISTS'</td>
-                        <td>'MISSING'</td>
+                        <td>account id='0014600001JL9n5AAD', order number='FEDR-185671', sku='IB-MNT-PRM', service start date='5/23/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>-</td>
+                        <td>'2'</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Primary Key Match</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>account id='0014600001JLhdxAAD', order number='DIST-185212', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='4/30/2025'</td>
-                        <td>Primary key exists in Source but not in Target (showing first 5 of 29)</td>
-                        <td>'EXISTS'</td>
-                        <td>'MISSING'</td>
+                        <td>account id='0014600001JLOSvAAP', order number='FEDR-185704', sku='IB-MNT-PRM', service start date='5/25/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>-</td>
+                        <td>'2'</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Primary Key Match</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>account id='0014600001JLrHDAA1', order number='REN-183315', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='3/31/2025'</td>
-                        <td>Primary key exists in Source but not in Target (showing first 5 of 29)</td>
-                        <td>'EXISTS'</td>
-                        <td>'MISSING'</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-178302', sku='IB-MNT-PRM', service start date='10/17/2024'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>-</td>
+                        <td>'2'</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Primary Key Match</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>account id='0014600001JLuw0AAD', order number='DIST-190846', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='10/9/2025'</td>
-                        <td>Primary key exists in Source but not in Target (showing first 5 of 29)</td>
-                        <td>'EXISTS'</td>
-                        <td>'MISSING'</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-184547', sku='IB-MNT-PRM', service start date='4/27/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>-</td>
+                        <td>'2'</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Primary Key Match</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>account id='0018Y00002mS0gkQAC', order number='REN-189214', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='8/11/2025'</td>
-                        <td>Primary key exists in Source but not in Target (showing first 5 of 29)</td>
-                        <td>'EXISTS'</td>
-                        <td>'MISSING'</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-191086', sku='IB-MNT-PRM', service start date='10/17/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>-</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>7 mismatches in column bop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'</td>
+                        <td>Value mismatch (example 1 of 7)</td>
+                        <td>"'7919.26343457944'"</td>
+                        <td>"'7919.263434579439'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'</td>
+                        <td>Value mismatch (example 2 of 7)</td>
+                        <td>"'25045.837579673134'"</td>
+                        <td>"'25045.83757967313'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'</td>
+                        <td>Value mismatch (example 3 of 7)</td>
+                        <td>"'25029.696078431374'"</td>
+                        <td>"'25029.69607843137'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>7 mismatches in column eop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'</td>
+                        <td>Value mismatch (example 1 of 7)</td>
+                        <td>"'7919.26343457944'"</td>
+                        <td>"'7919.263434579439'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'</td>
+                        <td>Value mismatch (example 2 of 7)</td>
+                        <td>"'25045.837579673134'"</td>
+                        <td>"'25045.83757967313'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'</td>
+                        <td>Value mismatch (example 3 of 7)</td>
+                        <td>"'25029.696078431374'"</td>
+                        <td>"'25029.69607843137'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>-</td>
+                        <td>7 mismatches in column eop, unadjusted  </td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'</td>
+                        <td>Value mismatch (example 1 of 7)</td>
+                        <td>"'7919.26343457944'"</td>
+                        <td>"'7919.263434579439'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'</td>
+                        <td>Value mismatch (example 2 of 7)</td>
+                        <td>"'25045.837579673134'"</td>
+                        <td>"'25045.83757967313'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'</td>
+                        <td>Value mismatch (example 3 of 7)</td>
+                        <td>"'25029.696078431374'"</td>
+                        <td>"'25029.69607843137'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>-</td>
+                        <td>143 mismatches in column index#</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLOtIAAX', order number='FEDR-171228', sku='IB-MNT-PRM', service start date='3/30/2024'</td>
+                        <td>Value mismatch (example 1 of 143)</td>
+                        <td>"'9'"</td>
+                        <td>"'1'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLOtIAAX', order number='FEDR-171228', sku='NT-SUB-MRI-ADVISOR', service start date='3/30/2024'</td>
+                        <td>Value mismatch (example 2 of 143)</td>
+                        <td>"'16'"</td>
+                        <td>"'4'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLOtIAAX', order number='FEDR-171228', sku='NT-MRI-SWTL', service start date='3/30/2024'</td>
+                        <td>Value mismatch (example 3 of 143)</td>
+                        <td>"'23'"</td>
+                        <td>"'7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>-</td>
+                        <td>33 mismatches in column peak arr</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLGBmAAP', order number='FEDR-183069', sku='IB-MNT-PRM', service start date='5/27/2025'</td>
+                        <td>Value mismatch (example 1 of 33)</td>
+                        <td>"'14177.760000000002'"</td>
+                        <td>"'14177.759999999998'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLGBmAAP', order number='FEDR-183069', sku='NT-SUB-MRI-ADVISOR', service start date='5/27/2025'</td>
+                        <td>Value mismatch (example 2 of 33)</td>
+                        <td>"'14177.760000000002'"</td>
+                        <td>"'14177.759999999998'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLGBmAAP', order number='FEDR-183069', sku='NT-MRI-SWTL', service start date='5/27/2025'</td>
+                        <td>Value mismatch (example 3 of 33)</td>
+                        <td>"'14177.760000000002'"</td>
+                        <td>"'14177.759999999998'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>-</td>
+                        <td>7 mismatches in column previous arr</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'</td>
+                        <td>Value mismatch (example 1 of 7)</td>
+                        <td>"'7919.26343457944'"</td>
+                        <td>"'7919.263434579439'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'</td>
+                        <td>Value mismatch (example 2 of 7)</td>
+                        <td>"'25045.837579673134'"</td>
+                        <td>"'25045.83757967313'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'</td>
+                        <td>Value mismatch (example 3 of 7)</td>
+                        <td>"'25029.696078431374'"</td>
+                        <td>"'25029.69607843137'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>-</td>
+                        <td>1 mismatches in column rcn emp count</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>account id='0014600001JLHlRAAX', order number='REN-186052', sku='IB-MNT-PRM', service start date='6/5/2025'</td>
+                        <td>Value mismatch (example 1 of 1)</td>
+                        <td>"'200'"</td>
+                        <td>"'2000'"</td>
                     </tr>
                 
                         </tbody>
@@ -550,7 +814,7 @@
                 </div>
                 
                 <!-- Passed Checks -->
-                <button class="collapsible">✅ Passed Checks (53)</button>
+                <button class="collapsible">✅ Passed Checks (60)</button>
                 <div class="collapsible-content">
                     <table id="passedTable" class="display">
                         <thead>
@@ -564,6 +828,16 @@
                         </thead>
                         <tbody>
                             
+                    <tr>
+                        
+                        <td>Record Count Check</td>
+                        <td>-</td>
+                        <td>Source: 172 rows, Target: 172 rows</td>
+                        <td>'172'</td>
+                        <td>'172'</td>
+                    </tr>
+                
+
                     <tr>
                         
                         <td>Column Count Check</td>
@@ -1066,21 +1340,71 @@
 
                     <tr>
                         
-                        <td>Duplicate Check</td>
-                        <td>-</td>
-                        <td>No duplicates found in Source</td>
-                        <td>'0'</td>
-                        <td>-</td>
+                        <td>Null Check</td>
+                        <td>account ranking list</td>
+                        <td>Source: 172 nulls, Target: 172 nulls</td>
+                        <td>'172'</td>
+                        <td>'172'</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Duplicate Check</td>
-                        <td>-</td>
-                        <td>No duplicates found in Target</td>
-                        <td>-</td>
-                        <td>'0'</td>
+                        <td>Null Check</td>
+                        <td>arr size dynamic</td>
+                        <td>Source: 9 nulls, Target: 9 nulls</td>
+                        <td>'9'</td>
+                        <td>'9'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>bill state</td>
+                        <td>Source: 9 nulls, Target: 9 nulls</td>
+                        <td>'9'</td>
+                        <td>'9'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>bundle product code</td>
+                        <td>Source: 132 nulls, Target: 132 nulls</td>
+                        <td>'132'</td>
+                        <td>'132'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>cohort arr size</td>
+                        <td>Source: 102 nulls, Target: 102 nulls</td>
+                        <td>'102'</td>
+                        <td>'102'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>distributor name</td>
+                        <td>Source: 11 nulls, Target: 11 nulls</td>
+                        <td>'11'</td>
+                        <td>'11'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>max. fortune rank</td>
+                        <td>Source: 172 nulls, Target: 172 nulls</td>
+                        <td>'172'</td>
+                        <td>'172'</td>
                     </tr>
                 
 
@@ -1093,12 +1417,22 @@
                         <td>-</td>
                     </tr>
                 
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>Common: 143, Source-only: 0, Target-only: 0</td>
+                        <td>'143'</td>
+                        <td>'143'</td>
+                    </tr>
+                
                         </tbody>
                     </table>
                 </div>
                 
                 <!-- All Results -->
-                <button class="collapsible">📋 All Results (65)</button>
+                <button class="collapsible">📋 All Results (96)</button>
                 <div class="collapsible-content">
                     <table id="allTable" class="display">
                         <thead>
@@ -1115,13 +1449,13 @@
                         <tbody>
                             
                     <tr>
-                        <td><span class="badge fail">FAIL</span></td>
+                        <td><span class="badge pass">PASS</span></td>
                         <td>Record Count Check</td>
                         <td>-</td>
                         <td>-</td>
-                        <td>Source: 29 rows, Target: 0 rows (Note: Smart sub-setting applied - records filtered to matching PKs)</td>
-                        <td>'29'</td>
-                        <td>'0'</td>
+                        <td>Source: 172 rows, Target: 172 rows</td>
+                        <td>'172'</td>
+                        <td>'172'</td>
                     </tr>
                 
 
@@ -1676,79 +2010,189 @@
                 
 
                     <tr>
-                        <td><span class="badge pass">PASS</span></td>
+                        <td><span class="badge fail">FAIL</span></td>
                         <td>Duplicate Check</td>
                         <td>-</td>
+                        <td>account id='0014600001JL9n5AAD', order number='FEDR-185671', sku='IB-MNT-PRM', service start date='5/23/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>'2'</td>
                         <td>-</td>
-                        <td>No duplicates found in Source</td>
-                        <td>'0'</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge pass">PASS</span></td>
-                        <td>Duplicate Check</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>No duplicates found in Target</td>
-                        <td>-</td>
-                        <td>'0'</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLOSvAAP', order number='FEDR-185704', sku='IB-MNT-PRM', service start date='5/25/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>'2'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-178302', sku='IB-MNT-PRM', service start date='10/17/2024'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>'2'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-184547', sku='IB-MNT-PRM', service start date='4/27/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>'2'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-191086', sku='IB-MNT-PRM', service start date='10/17/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>'2'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JL9n5AAD', order number='FEDR-185671', sku='IB-MNT-PRM', service start date='5/23/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>-</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLOSvAAP', order number='FEDR-185704', sku='IB-MNT-PRM', service start date='5/25/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>-</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-178302', sku='IB-MNT-PRM', service start date='10/17/2024'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>-</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-184547', sku='IB-MNT-PRM', service start date='4/27/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>-</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLMVxAAP', order number='FEDR-191086', sku='IB-MNT-PRM', service start date='10/17/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 56)</td>
+                        <td>-</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
                         <td>Null Check</td>
                         <td>account ranking list</td>
                         <td>-</td>
-                        <td>Source: 24 nulls, Target: 0 nulls</td>
-                        <td>'24'</td>
-                        <td>'0'</td>
+                        <td>Source: 172 nulls, Target: 172 nulls</td>
+                        <td>'172'</td>
+                        <td>'172'</td>
                     </tr>
                 
 
                     <tr>
-                        <td><span class="badge fail">FAIL</span></td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>arr size dynamic</td>
+                        <td>-</td>
+                        <td>Source: 9 nulls, Target: 9 nulls</td>
+                        <td>'9'</td>
+                        <td>'9'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
                         <td>Null Check</td>
                         <td>bill state</td>
                         <td>-</td>
-                        <td>Source: 2 nulls, Target: 0 nulls</td>
-                        <td>'2'</td>
-                        <td>'0'</td>
+                        <td>Source: 9 nulls, Target: 9 nulls</td>
+                        <td>'9'</td>
+                        <td>'9'</td>
                     </tr>
                 
 
                     <tr>
-                        <td><span class="badge fail">FAIL</span></td>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>bundle product code</td>
+                        <td>-</td>
+                        <td>Source: 132 nulls, Target: 132 nulls</td>
+                        <td>'132'</td>
+                        <td>'132'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
                         <td>Null Check</td>
                         <td>cohort arr size</td>
                         <td>-</td>
-                        <td>Source: 22 nulls, Target: 0 nulls</td>
-                        <td>'22'</td>
-                        <td>'0'</td>
+                        <td>Source: 102 nulls, Target: 102 nulls</td>
+                        <td>'102'</td>
+                        <td>'102'</td>
                     </tr>
                 
 
                     <tr>
-                        <td><span class="badge fail">FAIL</span></td>
+                        <td><span class="badge pass">PASS</span></td>
                         <td>Null Check</td>
                         <td>distributor name</td>
                         <td>-</td>
-                        <td>Source: 1 nulls, Target: 0 nulls</td>
-                        <td>'1'</td>
-                        <td>'0'</td>
+                        <td>Source: 11 nulls, Target: 11 nulls</td>
+                        <td>'11'</td>
+                        <td>'11'</td>
                     </tr>
                 
 
                     <tr>
-                        <td><span class="badge fail">FAIL</span></td>
+                        <td><span class="badge pass">PASS</span></td>
                         <td>Null Check</td>
                         <td>max. fortune rank</td>
                         <td>-</td>
-                        <td>Source: 28 nulls, Target: 0 nulls</td>
-                        <td>'28'</td>
-                        <td>'0'</td>
+                        <td>Source: 172 nulls, Target: 172 nulls</td>
+                        <td>'172'</td>
+                        <td>'172'</td>
                     </tr>
                 
 
@@ -1764,68 +2208,299 @@
                 
 
                     <tr>
-                        <td><span class="badge fail">FAIL</span></td>
+                        <td><span class="badge pass">PASS</span></td>
                         <td>Primary Key Match</td>
                         <td>-</td>
                         <td>-</td>
-                        <td>Common: 0, Source-only: 29, Target-only: 0</td>
-                        <td>'29'</td>
-                        <td>'0'</td>
+                        <td>Common: 143, Source-only: 0, Target-only: 0</td>
+                        <td>'143'</td>
+                        <td>'143'</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
-                        <td>Primary Key Match</td>
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
                         <td>-</td>
-                        <td>account id='0018Y00002wB9UxQAK', order number='REN-190555', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='10/31/2025'</td>
-                        <td>Primary key exists in Source but not in Target (showing first 5 of 29)</td>
-                        <td>'EXISTS'</td>
-                        <td>'MISSING'</td>
+                        <td>7 mismatches in column bop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
-                        <td>Primary Key Match</td>
-                        <td>-</td>
-                        <td>account id='0014600001JLhdxAAD', order number='DIST-185212', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='4/30/2025'</td>
-                        <td>Primary key exists in Source but not in Target (showing first 5 of 29)</td>
-                        <td>'EXISTS'</td>
-                        <td>'MISSING'</td>
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'</td>
+                        <td>Value mismatch (example 1 of 7)</td>
+                        <td>"'7919.26343457944'"</td>
+                        <td>"'7919.263434579439'"</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
-                        <td>Primary Key Match</td>
-                        <td>-</td>
-                        <td>account id='0014600001JLrHDAA1', order number='REN-183315', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='3/31/2025'</td>
-                        <td>Primary key exists in Source but not in Target (showing first 5 of 29)</td>
-                        <td>'EXISTS'</td>
-                        <td>'MISSING'</td>
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'</td>
+                        <td>Value mismatch (example 2 of 7)</td>
+                        <td>"'25045.837579673134'"</td>
+                        <td>"'25045.83757967313'"</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
-                        <td>Primary Key Match</td>
-                        <td>-</td>
-                        <td>account id='0014600001JLuw0AAD', order number='DIST-190846', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='10/9/2025'</td>
-                        <td>Primary key exists in Source but not in Target (showing first 5 of 29)</td>
-                        <td>'EXISTS'</td>
-                        <td>'MISSING'</td>
+                        <td>Data Validation</td>
+                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'</td>
+                        <td>Value mismatch (example 3 of 7)</td>
+                        <td>"'25029.696078431374'"</td>
+                        <td>"'25029.69607843137'"</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
-                        <td>Primary Key Match</td>
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
                         <td>-</td>
-                        <td>account id='0018Y00002mS0gkQAC', order number='REN-189214', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='8/11/2025'</td>
-                        <td>Primary key exists in Source but not in Target (showing first 5 of 29)</td>
-                        <td>'EXISTS'</td>
-                        <td>'MISSING'</td>
+                        <td>7 mismatches in column eop (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'</td>
+                        <td>Value mismatch (example 1 of 7)</td>
+                        <td>"'7919.26343457944'"</td>
+                        <td>"'7919.263434579439'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'</td>
+                        <td>Value mismatch (example 2 of 7)</td>
+                        <td>"'25045.837579673134'"</td>
+                        <td>"'25045.83757967313'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'</td>
+                        <td>Value mismatch (example 3 of 7)</td>
+                        <td>"'25029.696078431374'"</td>
+                        <td>"'25029.69607843137'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>-</td>
+                        <td>7 mismatches in column eop, unadjusted  </td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'</td>
+                        <td>Value mismatch (example 1 of 7)</td>
+                        <td>"'7919.26343457944'"</td>
+                        <td>"'7919.263434579439'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'</td>
+                        <td>Value mismatch (example 2 of 7)</td>
+                        <td>"'25045.837579673134'"</td>
+                        <td>"'25045.83757967313'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>eop, unadjusted  </td>
+                        <td>account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'</td>
+                        <td>Value mismatch (example 3 of 7)</td>
+                        <td>"'25029.696078431374'"</td>
+                        <td>"'25029.69607843137'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>-</td>
+                        <td>143 mismatches in column index#</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLOtIAAX', order number='FEDR-171228', sku='IB-MNT-PRM', service start date='3/30/2024'</td>
+                        <td>Value mismatch (example 1 of 143)</td>
+                        <td>"'9'"</td>
+                        <td>"'1'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLOtIAAX', order number='FEDR-171228', sku='NT-SUB-MRI-ADVISOR', service start date='3/30/2024'</td>
+                        <td>Value mismatch (example 2 of 143)</td>
+                        <td>"'16'"</td>
+                        <td>"'4'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLOtIAAX', order number='FEDR-171228', sku='NT-MRI-SWTL', service start date='3/30/2024'</td>
+                        <td>Value mismatch (example 3 of 143)</td>
+                        <td>"'23'"</td>
+                        <td>"'7'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>-</td>
+                        <td>33 mismatches in column peak arr</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLGBmAAP', order number='FEDR-183069', sku='IB-MNT-PRM', service start date='5/27/2025'</td>
+                        <td>Value mismatch (example 1 of 33)</td>
+                        <td>"'14177.760000000002'"</td>
+                        <td>"'14177.759999999998'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLGBmAAP', order number='FEDR-183069', sku='NT-SUB-MRI-ADVISOR', service start date='5/27/2025'</td>
+                        <td>Value mismatch (example 2 of 33)</td>
+                        <td>"'14177.760000000002'"</td>
+                        <td>"'14177.759999999998'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLGBmAAP', order number='FEDR-183069', sku='NT-MRI-SWTL', service start date='5/27/2025'</td>
+                        <td>Value mismatch (example 3 of 33)</td>
+                        <td>"'14177.760000000002'"</td>
+                        <td>"'14177.759999999998'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>-</td>
+                        <td>7 mismatches in column previous arr</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='0014600001JLELGAA5', order number='FEDR-183335', sku='IB-MNT-PRM', service start date='2/27/2025'</td>
+                        <td>Value mismatch (example 1 of 7)</td>
+                        <td>"'7919.26343457944'"</td>
+                        <td>"'7919.263434579439'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='0014600001JL8peAAD', order number='FEDR-161371', sku='IB-MNT-PRM', service start date='5/1/2023'</td>
+                        <td>Value mismatch (example 2 of 7)</td>
+                        <td>"'25045.837579673134'"</td>
+                        <td>"'25045.83757967313'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>previous arr</td>
+                        <td>account id='0014600001JLMeGAAX', order number='FEDR-169544', sku='NT-MRI-SWTL', service start date='2/4/2024'</td>
+                        <td>Value mismatch (example 3 of 7)</td>
+                        <td>"'25029.696078431374'"</td>
+                        <td>"'25029.69607843137'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>-</td>
+                        <td>1 mismatches in column rcn emp count</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>rcn emp count</td>
+                        <td>account id='0014600001JLHlRAAX', order number='REN-186052', sku='IB-MNT-PRM', service start date='6/5/2025'</td>
+                        <td>Value mismatch (example 1 of 1)</td>
+                        <td>"'200'"</td>
+                        <td>"'2000'"</td>
                     </tr>
                 
                         </tbody>
@@ -1836,7 +2511,7 @@
         
         <div class="footer">
             <p>Universal Data Validation Framework v1.0</p>
-            <p class="timestamp">Report generated on 2026-04-20 17:20:23</p>
+            <p class="timestamp">Report generated on 2026-04-20 18:43:24</p>
         </div>
     </div>
     
@@ -1888,7 +2563,7 @@
         });
         
         // Chart.js visualizations
-        const chartData = {"pass_count": 53, "fail_count": 12, "skip_count": 0, "validation_types": ["record_count_check", "column_count_check", "metadata_type_check", "duplicate_check", "null_check", "empty_string_check", "primary_key_match"], "validation_fails": [1, 0, 0, 0, 5, 0, 6], "validation_passes": [0, 1, 49, 2, 0, 1, 0], "column_names": ["account ranking list", "bill state", "cohort arr size", "distributor name", "max. fortune rank"], "column_failures": [1, 1, 1, 1, 1]};
+        const chartData = {"pass_count": 60, "fail_count": 36, "skip_count": 0, "validation_types": ["record_count_check", "column_count_check", "metadata_type_check", "duplicate_check", "null_check", "empty_string_check", "primary_key_match", "data_validation"], "validation_fails": [0, 0, 0, 10, 0, 0, 0, 26], "validation_passes": [1, 1, 49, 0, 7, 1, 1, 0], "column_names": ["bop (adjusted, w/ late renewals extn)", "eop (adjusted, w/ late renewals extn)", "eop, unadjusted  ", "index#", "peak arr", "previous arr", "rcn emp count"], "column_failures": [4, 4, 4, 4, 4, 4, 2]};
         
         // Status Pie Chart
         new Chart(document.getElementById('statusChart'), {
