@@ -1,0 +1,62 @@
+# ------------------------------------------------------------
+# COMPARISON MODE — Two-dashboard diff (List format)
+# ------------------------------------------------------------
+comparison:
+  - dashboard_url_1: "https://prod-useast-b.online.tableau.com/#/site/infoblox/views/SalesToolsUtilizationDashboard/SalesToolsSummary"
+    dashboard_url_2: "https://prod-useast-b.online.tableau.com/#/site/infoblox/views/SalesToolsUtilizationDashboard-UATV1_1/SalesToolsSummary"
+    label_1: "Prod"
+    label_2: "UAT"
+    ssim_threshold: 0.98
+
+    # ---- Filter Scenarios (optional) --------------------------------
+    # Each scenario applies the SAME filter values to BOTH dashboards,
+    # then compares every tab.  Omit this section to compare as-is.
+    filter_scenarios:
+      - label: "Default All"
+        filters:
+          - name: "Start Date"
+            value: "1/1/2025"
+            type: "input"
+          - name: "End Date"
+            value: "7/31/2025"
+            type: "input"
+          - name: "Geo"
+            value: "(All)"
+          - name: "Region"
+            value: "(All)"
+          - name: "User Name"
+            value: "(All)"
+          - name: "User Role"
+            value: "(All)"
+      - label: "Americas Only"
+        filters:
+          - name: "Start Date"
+            value: "1/1/2025"
+            type: "input"
+          - name: "End Date"
+            value: "7/31/2025"
+            type: "input"
+          - name: "Geo"
+            value: "(All)"
+          - name: "Region"
+            value: "Americas"
+          - name: "User Name"
+            value: "(All)"
+          - name: "User Role"
+            value: "(All)"
+      - label: "EMEA Q1 2025"
+        filters:
+          - name: "Start Date"
+            value: "1/1/2025"
+            type: "input"
+          - name: "End Date"
+            value: "3/31/2025"
+            type: "input"
+          - name: "Geo"
+            value: "(All)"
+          - name: "Region"
+            value: "EMEA"
+          - name: "User Name"
+            value: "(All)"
+          - name: "User Role"
+            value: "(All)"

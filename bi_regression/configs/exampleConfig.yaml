@@ -1,0 +1,127 @@
+# ============================================================
+# Tableau Dashboard Testing Framework — Configuration File
+# ============================================================
+
+# Type of test to run: "smoke" | "comparison" | "performance"
+# If omitted, auto-detected from whichever section is present.
+test_type: "smoke"
+
+# ------------------------------------------------------------
+# COMPARISON MODE — Two-dashboard diff
+# ------------------------------------------------------------
+comparison:
+  dashboard_url_1: "https://your-tableau-cloud.com/views/DashboardA"
+  dashboard_url_2: "https://your-tableau-cloud.com/views/DashboardB"
+  label_1: "Production"        # Label shown in diff images and report
+  label_2: "Pre-Production"    # Label shown in diff images and report
+  ssim_threshold: 0.98         # Similarity score below this = FAIL (0.0 to 1.0)
+
+  # ---- Filter Scenarios (optional) --------------------------------
+  # Define one or more filter scenarios.  For each scenario the
+  # framework applies the SAME filter values to BOTH dashboards,
+  # waits for re-render, then compares every tab via SSIM.
+  #
+  # If this section is omitted (or empty), the comparison runs once
+  # with whatever filter state the dashboards load in.
+  #
+  # Filter types:
+  #   "dropdown" (default) — single-select dropdown / combobox
+  #   "input"              — text or date input field
+  filter_scenarios:
+    - label: "Default All"          # Human-readable name in the report
+      filters:
+        - name: "Geo"               # Filter label shown on the dashboard
+          value: "(All)"            # Value to select
+        - name: "Region"
+          value: "(All)"
+    - label: "Americas Only"
+      filters:
+        - name: "Region"
+          value: "Americas"
+    - label: "EMEA Q1 2025"
+      filters:
+        - name: "Start Date"
+          value: "1/1/2025"
+          type: "input"             # Use "input" for text / date fields
+        - name: "End Date"
+          value: "3/31/2025"
+          type: "input"
+        - name: "Region"
+          value: "EMEA"
+
+# ------------------------------------------------------------
+# SMOKE MODE — Single dashboard UI validation
+# ------------------------------------------------------------
+smoke:
+  dashboard_url: "https://your-tableau-cloud.com/views/Dashboard"
+  ui_standards:
+    fonts_allowed:
+      - "Arial"
+      - "Roboto"
+      - "Segoe UI"
+      - "Tableau Book"
+      - "Tableau Light"
+    font_sizes_allowed:
+      - "10px"
+      - "11px"
+      - "12px"
+      - "13px"
+      - "14px"
+      - "16px"
+    colors_allowed:
+      - "#FFFFFF"   # White
+      - "#000000"   # Black
+      - "#FF0000"   # Red
+      - "#4E79A7"   # Tableau Blue
+      - "#F28E2B"   # Tableau Orange
+      - "#E15759"   # Tableau Red
+      - "#76B7B2"   # Tableau Teal
+      - "#59A14F"   # Tableau Green
+
+# ------------------------------------------------------------
+# PERFORMANCE MODE — Dashboard render & interaction timing
+# ------------------------------------------------------------
+# Measures first-render and interaction times over N iterations.
+# Compares against thresholds and reports PASS/FAIL.
+# Generates an HTML report + CSV with all iteration data.
+performance:
+  iterations: 3                           # repeat each dashboard N times
+  dashboards:
+    - url: "https://your-tableau-cloud.com/views/Dashboard"
+      label: "Sales Dashboard"
+      interaction:
+        type: "filter"                    # "filter" or "tab_switch"
+        filter_name: "Region"
+        filter_value: "Americas"
+      thresholds:
+        first_render_ms: 15000            # max acceptable first-render time (ms)
+        interaction_ms: 8000              # max acceptable interaction time (ms)
+    - url: "https://your-tableau-cloud.com/views/AnotherDashboard"
+      label: "Finance Dashboard"
+      interaction:
+        type: "tab_switch"
+        tab_index: 1                      # switch to the 2nd tab (0-based)
+      thresholds:
+        first_render_ms: 12000
+        interaction_ms: 5000
+
+# ------------------------------------------------------------
+# BROWSER — Edge with persistent authenticated session
+# ------------------------------------------------------------
+browser:
+  # Your Edge user profile directory (contains your Okta SSO session cookies)
+  # On Mac this is typically: ~/Library/Application Support/Microsoft Edge
+  user_data_dir: "/Users/kkrishna/Library/Application Support/Microsoft Edge"
+  profile_dir: "Default"      # Profile folder inside user_data_dir
+  headless: false             # Keep false — you can watch the tool run
+  page_load_timeout: 90000    # ms — max wait for page load
+  render_wait_seconds: 6      # Extra seconds to wait for Tableau to finish rendering
+  max_retries: 3              # Number of retries if a page fails to load
+  viewport_width: 1920
+  viewport_height: 1080
+
+# ------------------------------------------------------------
+# OUTPUT — Where to save results
+# ------------------------------------------------------------
+output:
+  base_dir: "test_results"    # Folder created in project root

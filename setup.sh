@@ -1,8 +1,8 @@
 #!/bin/bash
-# Quick start script for Universal Data Validation Framework
+# Quick start script for BI Universal QA Tool
 
 echo "========================================="
-echo "Universal Data Validation Framework"
+echo "BI Universal QA Tool"
 echo "Quick Start Setup"
 echo "========================================="
 echo ""
@@ -22,6 +22,10 @@ echo "Installing dependencies..."
 pip install -q --upgrade pip
 pip install -q -r requirements.txt
 
+# Install Playwright browsers (needed for regression testing)
+echo "Installing Playwright browsers..."
+python -m playwright install chromium 2>/dev/null || echo "  (Playwright browser install skipped — install manually if needed)"
+
 echo ""
 echo "✅ Setup complete!"
 echo ""
@@ -29,18 +33,14 @@ echo "========================================="
 echo "Next Steps:"
 echo "========================================="
 echo ""
-echo "1. Configure Redshift credentials (if using table adapter):"
-echo "   cp .env.example .env"
-echo "   # Edit .env with your credentials"
+echo "--- Data Validation ---"
+echo "  python cli.py validate --config config/example_validations.yaml"
 echo ""
-echo "2. Run test validation:"
-echo "   python main.py --config config/test_validation.yaml"
+echo "--- Tableau Regression Testing ---"
+echo "  python cli.py regression --config bi_regression/configs/config.yaml"
 echo ""
-echo "3. View results:"
-echo "   open results/sample_csv_validation_test.html"
-echo ""
-echo "4. Create your own validation:"
-echo "   # Edit config/example_validations.yaml"
-echo "   python main.py --config config/your_config.yaml"
+echo "--- Or use the original entry points directly ---"
+echo "  python main.py --config config/my_validation.yaml"
+echo "  python -m bi_regression.run --config bi_regression/configs/config.yaml"
 echo ""
 echo "========================================="

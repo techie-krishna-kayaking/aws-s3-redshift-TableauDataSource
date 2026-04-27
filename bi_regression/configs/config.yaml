@@ -1,0 +1,9 @@
+# ------------------------------------------------------------
+# COMPARISON MODE — Two-dashboard diff (List format)
+# ------------------------------------------------------------
+comparison:
+  - dashboard_url_1: "https://prod-useast-b.online.tableau.com/#/site/infoblox/views/SalesToolsUtilizationDashboard/SalesToolsSummary"
+    dashboard_url_2: "https://prod-useast-b.online.tableau.com/#/site/infoblox/views/SalesToolsUtilizationDashboard-UATV1_1/SalesToolsSummary"
+    label_1: "Prod"
+    label_2: "UAT"
+    ssim_threshold: 0.98

@@ -1,0 +1,31 @@
+# ------------------------------------------------------------
+# PERFORMANCE MODE — Dashboard render & interaction timing
+# ------------------------------------------------------------
+# test_type: "performance"   ← auto-detected from section name
+#
+# Run:  python run.py --config config_performance.yaml
+# ------------------------------------------------------------
+
+performance:
+  iterations: 3                       # repeat each dashboard N times
+
+  dashboards:
+    - url: "https://prod-useast-b.online.tableau.com/#/site/infoblox/views/SalesToolsUtilizationDashboard/SalesToolsSummary"
+      label: "Sales Tools Summary"
+      interaction:
+        type: "filter"                # "filter" or "tab_switch"
+        filter_name: "Region"
+        filter_value: "Americas"
+      thresholds:
+        first_render_ms: 15000        # max 15 s to first render
+        interaction_ms: 8000          # max 8 s for filter change
+
+    # Add more dashboards as needed:
+    # - url: "https://..."
+    #   label: "Another Dashboard"
+    #   interaction:
+    #     type: "tab_switch"
+    #     tab_index: 1                # switch to second tab
+    #   thresholds:
+    #     first_render_ms: 12000
+    #     interaction_ms: 5000
