@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commercial_No_Rep_SaaS - Validation Report</title>
+    <title>SP_Maintenance_Core_DDI - Validation Report</title>
     
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -291,9 +291,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Commercial_No_Rep_SaaS</h1>
+            <h1>📊 SP_Maintenance_Core_DDI</h1>
             <div class="subtitle">Data Validation Report</div>
-            <div class="timestamp">Generated: 2026-04-20 18:43:23</div>
+            <div class="timestamp">Generated: 2026-04-21 10:12:00</div>
         </div>
         
         <div class="summary-cards">
@@ -303,15 +303,15 @@
             </div>
             <div class="card pass">
                 <div class="card-title">Passed Checks</div>
-                <div class="card-value">61</div>
+                <div class="card-value">60</div>
             </div>
             <div class="card fail">
                 <div class="card-title">Failed Checks</div>
-                <div class="card-value">49</div>
+                <div class="card-value">45</div>
             </div>
             <div class="card info">
                 <div class="card-title">Total Checks</div>
-                <div class="card-value">110</div>
+                <div class="card-value">105</div>
             </div>
         </div>
         
@@ -330,13 +330,13 @@
 
             <div class="metadata-item">
                 <div class="metadata-label">Source Path:</div>
-                <div class="metadata-value">./raw_data/aleph_apr/v1_dev_q1/Commercial (No Rep) SaaS_fy25_26.csv</div>
+                <div class="metadata-value">./raw_data/aleph_apr/v1_dev_q1/SP Maintenance Core DDI_fy25_26.csv</div>
             </div>
         
 
             <div class="metadata-item">
                 <div class="metadata-label">Source Rows:</div>
-                <div class="metadata-value">310</div>
+                <div class="metadata-value">162</div>
             </div>
         
 
@@ -354,13 +354,13 @@
 
             <div class="metadata-item">
                 <div class="metadata-label">Target Path:</div>
-                <div class="metadata-value">./raw_data/aleph_apr/V2_preprod/Commercial_No_Rep_SaaS_FY26Q1.csv</div>
+                <div class="metadata-value">./raw_data/aleph_apr/V2_preprod/SP_Maintenance_Core_DDI_FY26Q1.csv</div>
             </div>
         
 
             <div class="metadata-item">
                 <div class="metadata-label">Target Rows:</div>
-                <div class="metadata-value">310</div>
+                <div class="metadata-value">162</div>
             </div>
         
 
@@ -399,7 +399,7 @@
                 <h2 class="section-title">Detailed Results</h2>
                 
                 <!-- Failed Checks -->
-                <button class="collapsible active">❌ Failed Checks (49)</button>
+                <button class="collapsible active">❌ Failed Checks (45)</button>
                 <div class="collapsible-content active">
                     <table id="failedTable" class="display">
                         <thead>
@@ -416,67 +416,111 @@
                             
                     <tr>
                         
-                        <td>Null Check</td>
-                        <td>bill state</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>Source: 78 nulls, Target: 77 nulls</td>
-                        <td>'78'</td>
-                        <td>'77'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>account name</td>
-                        <td>-</td>
-                        <td>2 mismatches in column account name</td>
-                        <td>-</td>
+                        <td>account id='0014600001JLd6aAAD', order number='REN-183879', sku='IB-MNT-HW-ISP', service start date='3/28/2025'</td>
+                        <td>Source has 3 duplicate rows (showing first 5 of 80)</td>
+                        <td>'3'</td>
                         <td>-</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Data Validation</td>
-                        <td>account name</td>
-                        <td>account id='0014600001JLuJCAA1', order number='REN-189287', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='8/28/2025'</td>
-                        <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'PIRAMAL ENTERPRISES LTD'"</td>
-                        <td>"'Piramal Finance Limited'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>account name</td>
-                        <td>account id='0014600001JLuJCAA1', order number='REN-175880', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='8/28/2024'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'PIRAMAL ENTERPRISES LTD'"</td>
-                        <td>"'Piramal Finance Limited'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>bill state</td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>1 mismatches in column bill state</td>
-                        <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-175713', sku='IB-MNT-PRM-ISP', service start date='8/1/2024'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>'2'</td>
                         <td>-</td>
                     </tr>
                 
 
                     <tr>
                         
-                        <td>Data Validation</td>
-                        <td>bill state</td>
-                        <td>account id='0011M00002bQGrcQAG', order number='DIST-181631', sku='IB-SUB-THREAT-ADV', service start date='1/27/2025'</td>
-                        <td>Value mismatch (example 1 of 1)</td>
-                        <td>'nan'</td>
-                        <td>"'Tamil Nadu'"</td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-188748', sku='IB-MNT-HW', service start date='8/1/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>'2'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-188748', sku='IB-MNT-PRM', service start date='8/1/2025'</td>
+                        <td>Source has 3 duplicate rows (showing first 5 of 80)</td>
+                        <td>'3'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLLXsAAP', order number='REN-183554', sku='IB-MNT-PRM', service start date='2/16/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>'2'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLd6aAAD', order number='REN-183879', sku='IB-MNT-HW-ISP', service start date='3/28/2025'</td>
+                        <td>Target has 3 duplicate rows (showing first 5 of 80)</td>
+                        <td>-</td>
+                        <td>'3'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-175713', sku='IB-MNT-PRM-ISP', service start date='8/1/2024'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>-</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-188748', sku='IB-MNT-HW', service start date='8/1/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>-</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-188748', sku='IB-MNT-PRM', service start date='8/1/2025'</td>
+                        <td>Target has 3 duplicate rows (showing first 5 of 80)</td>
+                        <td>-</td>
+                        <td>'3'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLLXsAAP', order number='REN-183554', sku='IB-MNT-PRM', service start date='2/16/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>-</td>
+                        <td>'2'</td>
                     </tr>
                 
 
@@ -495,10 +539,10 @@
                         
                         <td>Data Validation</td>
                         <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-159711', sku='IB-MNT-PRM-ISP', service start date='12/31/2023'</td>
                         <td>Value mismatch (example 1 of 12)</td>
-                        <td>"'31909.028650646953'"</td>
-                        <td>"'31909.028650646957'"</td>
+                        <td>"'3906.339848356309'"</td>
+                        <td>"'3906.3398483563096'"</td>
                     </tr>
                 
 
@@ -506,10 +550,10 @@
                         
                         <td>Data Validation</td>
                         <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-EXTM', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 2 of 12)</td>
-                        <td>"'4381.5250696378835'"</td>
-                        <td>"'4381.525069637884'"</td>
+                        <td>"'31260.788426078034'"</td>
+                        <td>"'31260.788426078037'"</td>
                     </tr>
                 
 
@@ -517,43 +561,10 @@
                         
                         <td>Data Validation</td>
                         <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-PRM-ISP', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 3 of 12)</td>
-                        <td>"'25645.608628659476'"</td>
-                        <td>"'25645.60862865948'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>end customer</td>
-                        <td>-</td>
-                        <td>2 mismatches in column end customer</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>end customer</td>
-                        <td>account id='0018Y00002tf8ETQAY', order number='DIST-180332', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='12/20/2024'</td>
-                        <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'INOX LEASING AND FINANCE LIMITED'"</td>
-                        <td>"'GUJARAT FLUOROCHEMICALS LIMITED'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>end customer</td>
-                        <td>account id='0014600001JL9EAAA1', order number='REN-181202', sku='IB-SUB-THREAT-ADV', service start date='1/18/2025'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'OTTO BREMER FOUNDATION'"</td>
-                        <td>"'OLD NATIONAL BANCORP'"</td>
+                        <td>"'156077.2001581109'"</td>
+                        <td>"'156077.20015811088'"</td>
                     </tr>
                 
 
@@ -572,10 +583,10 @@
                         
                         <td>Data Validation</td>
                         <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-159711', sku='IB-MNT-PRM-ISP', service start date='12/31/2023'</td>
                         <td>Value mismatch (example 1 of 11)</td>
-                        <td>"'31909.028650646953'"</td>
-                        <td>"'31909.028650646957'"</td>
+                        <td>"'3906.339848356309'"</td>
+                        <td>"'3906.3398483563096'"</td>
                     </tr>
                 
 
@@ -583,10 +594,10 @@
                         
                         <td>Data Validation</td>
                         <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-EXTM', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 2 of 11)</td>
-                        <td>"'4381.5250696378835'"</td>
-                        <td>"'4381.525069637884'"</td>
+                        <td>"'31260.788426078034'"</td>
+                        <td>"'31260.788426078037'"</td>
                     </tr>
                 
 
@@ -594,10 +605,10 @@
                         
                         <td>Data Validation</td>
                         <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-PRM-ISP', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 3 of 11)</td>
-                        <td>"'25645.608628659476'"</td>
-                        <td>"'25645.60862865948'"</td>
+                        <td>"'156077.2001581109'"</td>
+                        <td>"'156077.20015811088'"</td>
                     </tr>
                 
 
@@ -606,7 +617,7 @@
                         <td>Data Validation</td>
                         <td>eop, unadjusted  </td>
                         <td>-</td>
-                        <td>11 mismatches in column eop, unadjusted  </td>
+                        <td>12 mismatches in column eop, unadjusted  </td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -616,10 +627,10 @@
                         
                         <td>Data Validation</td>
                         <td>eop, unadjusted  </td>
-                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
-                        <td>Value mismatch (example 1 of 11)</td>
-                        <td>"'31909.028650646953'"</td>
-                        <td>"'31909.028650646957'"</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-159711', sku='IB-MNT-PRM-ISP', service start date='12/31/2023'</td>
+                        <td>Value mismatch (example 1 of 12)</td>
+                        <td>"'3906.339848356309'"</td>
+                        <td>"'3906.3398483563096'"</td>
                     </tr>
                 
 
@@ -627,10 +638,10 @@
                         
                         <td>Data Validation</td>
                         <td>eop, unadjusted  </td>
-                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
-                        <td>Value mismatch (example 2 of 11)</td>
-                        <td>"'4381.5250696378835'"</td>
-                        <td>"'4381.525069637884'"</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-EXTM', service start date='4/1/2025'</td>
+                        <td>Value mismatch (example 2 of 12)</td>
+                        <td>"'31260.788426078034'"</td>
+                        <td>"'31260.788426078037'"</td>
                     </tr>
                 
 
@@ -638,10 +649,10 @@
                         
                         <td>Data Validation</td>
                         <td>eop, unadjusted  </td>
-                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
-                        <td>Value mismatch (example 3 of 11)</td>
-                        <td>"'25645.608628659476'"</td>
-                        <td>"'25645.60862865948'"</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-PRM-ISP', service start date='4/1/2025'</td>
+                        <td>Value mismatch (example 3 of 12)</td>
+                        <td>"'156077.2001581109'"</td>
+                        <td>"'156077.20015811088'"</td>
                     </tr>
                 
 
@@ -650,7 +661,7 @@
                         <td>Data Validation</td>
                         <td>index#</td>
                         <td>-</td>
-                        <td>310 mismatches in column index#</td>
+                        <td>117 mismatches in column index#</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -660,9 +671,9 @@
                         
                         <td>Data Validation</td>
                         <td>index#</td>
-                        <td>account id='0014600001JLJJ0AAP', order number='REN-178605', sku='IB-SUB-THREAT-ADV', service start date='12/29/2024'</td>
-                        <td>Value mismatch (example 1 of 310)</td>
-                        <td>"'13'"</td>
+                        <td>account id='0014600001JLCiDAAX', order number='REN-184553', sku='IB-MNT-EXTM', service start date='6/27/2025'</td>
+                        <td>Value mismatch (example 1 of 117)</td>
+                        <td>"'6'"</td>
                         <td>"'1'"</td>
                     </tr>
                 
@@ -671,10 +682,10 @@
                         
                         <td>Data Validation</td>
                         <td>index#</td>
-                        <td>account id='0018Y0000334IPkQAM', order number='REN-185123', sku='IB-SUB-THREAT-ADV', service start date='3/11/2025'</td>
-                        <td>Value mismatch (example 2 of 310)</td>
-                        <td>"'23'"</td>
-                        <td>"'6'"</td>
+                        <td>account id='0014600001JLCiDAAX', order number='REN-184553', sku='IB-MNT-PRM', service start date='6/27/2025'</td>
+                        <td>Value mismatch (example 2 of 117)</td>
+                        <td>"'10'"</td>
+                        <td>"'4'"</td>
                     </tr>
                 
 
@@ -682,9 +693,9 @@
                         
                         <td>Data Validation</td>
                         <td>index#</td>
-                        <td>account id='0014600001JLIJ9AAP', order number='DIST-153294', sku='IB-SUB-THREAT-ADV', service start date='10/24/2022'</td>
-                        <td>Value mismatch (example 3 of 310)</td>
-                        <td>"'34'"</td>
+                        <td>account id='0014600001JLd6aAAD', order number='REN-183879', sku='IB-MNT-HW-ISP', service start date='3/28/2025'</td>
+                        <td>Value mismatch (example 3 of 117)</td>
+                        <td>"'17'"</td>
                         <td>"'9'"</td>
                     </tr>
                 
@@ -692,42 +703,9 @@
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>industry [custom]</td>
-                        <td>-</td>
-                        <td>2 mismatches in column industry [custom]</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>industry [custom]</td>
-                        <td>account id='0018Y00002tf8ETQAY', order number='DIST-180332', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='12/20/2024'</td>
-                        <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'Financial Services'"</td>
-                        <td>"'Manufacturing'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>industry [custom]</td>
-                        <td>account id='0014600001JL9EAAA1', order number='REN-181202', sku='IB-SUB-THREAT-ADV', service start date='1/18/2025'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'Financial Services'"</td>
-                        <td>"'Banking'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
                         <td>peak arr</td>
                         <td>-</td>
-                        <td>46 mismatches in column peak arr</td>
+                        <td>37 mismatches in column peak arr</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -737,10 +715,10 @@
                         
                         <td>Data Validation</td>
                         <td>peak arr</td>
-                        <td>account id='0014600001JLJJ0AAP', order number='REN-178605', sku='IB-SUB-THREAT-ADV', service start date='12/29/2024'</td>
-                        <td>Value mismatch (example 1 of 46)</td>
-                        <td>"'27341.999999999996'"</td>
-                        <td>"'27342.0'"</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-175713', sku='IB-MNT-PRM-ISP', service start date='8/1/2024'</td>
+                        <td>Value mismatch (example 1 of 37)</td>
+                        <td>"'199991.2736527663'"</td>
+                        <td>"'199991.27365276628'"</td>
                     </tr>
                 
 
@@ -748,10 +726,10 @@
                         
                         <td>Data Validation</td>
                         <td>peak arr</td>
-                        <td>account id='0014600001JLIJ9AAP', order number='DIST-153294', sku='IB-SUB-THREAT-ADV', service start date='10/24/2022'</td>
-                        <td>Value mismatch (example 2 of 46)</td>
-                        <td>"'34680.0'"</td>
-                        <td>"'0.0'"</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-175713', sku='IB-MNT-HW', service start date='8/1/2024'</td>
+                        <td>Value mismatch (example 2 of 37)</td>
+                        <td>"'199991.2736527663'"</td>
+                        <td>"'199991.27365276628'"</td>
                     </tr>
                 
 
@@ -759,10 +737,10 @@
                         
                         <td>Data Validation</td>
                         <td>peak arr</td>
-                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
-                        <td>Value mismatch (example 3 of 46)</td>
-                        <td>"'31909.028650646953'"</td>
-                        <td>"'31909.028650646957'"</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-188748', sku='IB-MNT-HW', service start date='8/1/2025'</td>
+                        <td>Value mismatch (example 3 of 37)</td>
+                        <td>"'199991.2736527663'"</td>
+                        <td>"'199991.27365276628'"</td>
                     </tr>
                 
 
@@ -781,10 +759,10 @@
                         
                         <td>Data Validation</td>
                         <td>previous arr</td>
-                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-159711', sku='IB-MNT-PRM-ISP', service start date='12/31/2023'</td>
                         <td>Value mismatch (example 1 of 12)</td>
-                        <td>"'31909.028650646953'"</td>
-                        <td>"'31909.028650646957'"</td>
+                        <td>"'3906.339848356309'"</td>
+                        <td>"'3906.3398483563096'"</td>
                     </tr>
                 
 
@@ -792,10 +770,10 @@
                         
                         <td>Data Validation</td>
                         <td>previous arr</td>
-                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-EXTM', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 2 of 12)</td>
-                        <td>"'4381.5250696378835'"</td>
-                        <td>"'4381.525069637884'"</td>
+                        <td>"'31260.788426078034'"</td>
+                        <td>"'31260.788426078037'"</td>
                     </tr>
                 
 
@@ -803,10 +781,10 @@
                         
                         <td>Data Validation</td>
                         <td>previous arr</td>
-                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-PRM-ISP', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 3 of 12)</td>
-                        <td>"'25645.608628659476'"</td>
-                        <td>"'25645.60862865948'"</td>
+                        <td>"'156077.2001581109'"</td>
+                        <td>"'156077.20015811088'"</td>
                     </tr>
                 
 
@@ -815,7 +793,7 @@
                         <td>Data Validation</td>
                         <td>rcn emp count</td>
                         <td>-</td>
-                        <td>9 mismatches in column rcn emp count</td>
+                        <td>3 mismatches in column rcn emp count</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -825,21 +803,10 @@
                         
                         <td>Data Validation</td>
                         <td>rcn emp count</td>
-                        <td>account id='0011M00002bQGrcQAG', order number='DIST-181631', sku='IB-SUB-THREAT-ADV', service start date='1/27/2025'</td>
-                        <td>Value mismatch (example 1 of 9)</td>
-                        <td>"'83147'"</td>
-                        <td>"'42497'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>rcn emp count</td>
-                        <td>account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='4/26/2025'</td>
-                        <td>Value mismatch (example 2 of 9)</td>
+                        <td>account id='0014600001JLGPoAAP', order number='REN-176255', sku='IB-MNT-PRM', service start date='10/10/2024'</td>
+                        <td>Value mismatch (example 1 of 3)</td>
                         <td>"'490'"</td>
-                        <td>"'700'"</td>
+                        <td>"'600'"</td>
                     </tr>
                 
 
@@ -847,63 +814,30 @@
                         
                         <td>Data Validation</td>
                         <td>rcn emp count</td>
-                        <td>account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='4/26/2025'</td>
-                        <td>Value mismatch (example 3 of 9)</td>
+                        <td>account id='0014600001JLGPoAAP', order number='REN-190909', sku='IB-MNT-EXTM', service start date='10/10/2025'</td>
+                        <td>Value mismatch (example 2 of 3)</td>
                         <td>"'490'"</td>
-                        <td>"'700'"</td>
+                        <td>"'600'"</td>
                     </tr>
                 
 
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>sales rep</td>
+                        <td>rcn emp count</td>
+                        <td>account id='0014600001JLGPoAAP', order number='REN-190909', sku='IB-MNT-PRM', service start date='10/10/2025'</td>
+                        <td>Value mismatch (example 3 of 3)</td>
+                        <td>"'490'"</td>
+                        <td>"'600'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>refresh overlap adj</td>
                         <td>-</td>
-                        <td>20 mismatches in column sales rep</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>sales rep</td>
-                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
-                        <td>Value mismatch (example 1 of 20)</td>
-                        <td>"'Apichart Choempraphai'"</td>
-                        <td>"'Lee Anstiss'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>sales rep</td>
-                        <td>account id='0018Y00002j9fWJQAY', order number='REN-182358', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='2/18/2025'</td>
-                        <td>Value mismatch (example 2 of 20)</td>
-                        <td>"'Apichart Choempraphai'"</td>
-                        <td>"'Lee Anstiss'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>sales rep</td>
-                        <td>account id='0018Y00002j9fWJQAY', order number='REN-182358', sku='IB-SUB-B1DDI-LOG-MAN-GR-30-A', service start date='2/18/2025'</td>
-                        <td>Value mismatch (example 3 of 20)</td>
-                        <td>"'Apichart Choempraphai'"</td>
-                        <td>"'Lee Anstiss'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>variance</td>
-                        <td>-</td>
-                        <td>1 mismatches in column variance</td>
+                        <td>1 mismatches in column refresh overlap adj</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -912,20 +846,20 @@
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>variance</td>
-                        <td>account id='0018Y00002g84I3QAI', order number='REN-177124', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='9/28/2024'</td>
+                        <td>refresh overlap adj</td>
+                        <td>account id='0014600001JLCcAAAX', order number='REN-185436', sku='IB-MNT-PRM', service start date='5/25/2025'</td>
                         <td>Value mismatch (example 1 of 1)</td>
-                        <td>"'-24524.999999999996'"</td>
-                        <td>"'-24525.0'"</td>
+                        <td>"'-45544.91407624633'"</td>
+                        <td>"'-45544.914076246336'"</td>
                     </tr>
                 
 
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>sales rep</td>
                         <td>-</td>
-                        <td>2 mismatches in column variance (adjusted, w/ late renewals extn)</td>
+                        <td>2 mismatches in column sales rep</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -934,11 +868,22 @@
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>variance (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0011M00002eADvUQAW', order number='DIST-178105', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/18/2024'</td>
+                        <td>sales rep</td>
+                        <td>account id='0014600001JLGxMAAX', order number='REN-186217', sku='IB-MNT-EXTM', service start date='5/29/2025'</td>
                         <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'-6440.5999999999985'"</td>
-                        <td>"'-6440.599999999999'"</td>
+                        <td>"'Justin Stuck'"</td>
+                        <td>"'Pat Foley'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>sales rep</td>
+                        <td>account id='0014600001JLGxMAAX', order number='REN-186217', sku='IB-MNT-PRM', service start date='5/29/2025'</td>
+                        <td>Value mismatch (example 2 of 2)</td>
+                        <td>"'Justin Stuck'"</td>
+                        <td>"'Pat Foley'"</td>
                     </tr>
                 
 
@@ -946,10 +891,21 @@
                         
                         <td>Data Validation</td>
                         <td>variance (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0018Y00002g84I3QAI', order number='REN-177124', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='9/28/2024'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'-24524.999999999996'"</td>
-                        <td>"'-24525.0'"</td>
+                        <td>-</td>
+                        <td>1 mismatches in column variance (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Data Validation</td>
+                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLCcAAAX', order number='REN-185436', sku='IB-MNT-PRM', service start date='5/25/2025'</td>
+                        <td>Value mismatch (example 1 of 1)</td>
+                        <td>"'-45544.91407624633'"</td>
+                        <td>"'-45544.914076246336'"</td>
                     </tr>
                 
                         </tbody>
@@ -957,7 +913,7 @@
                 </div>
                 
                 <!-- Passed Checks -->
-                <button class="collapsible">✅ Passed Checks (61)</button>
+                <button class="collapsible">✅ Passed Checks (60)</button>
                 <div class="collapsible-content">
                     <table id="passedTable" class="display">
                         <thead>
@@ -975,9 +931,9 @@
                         
                         <td>Record Count Check</td>
                         <td>-</td>
-                        <td>Source: 310 rows, Target: 310 rows</td>
-                        <td>'310'</td>
-                        <td>'310'</td>
+                        <td>Source: 162 rows, Target: 162 rows</td>
+                        <td>'162'</td>
+                        <td>'162'</td>
                     </tr>
                 
 
@@ -1483,68 +1439,8 @@
 
                     <tr>
                         
-                        <td>Duplicate Check</td>
-                        <td>-</td>
-                        <td>No duplicates found in Source</td>
-                        <td>'0'</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Duplicate Check</td>
-                        <td>-</td>
-                        <td>No duplicates found in Target</td>
-                        <td>-</td>
-                        <td>'0'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
                         <td>Null Check</td>
                         <td>account ranking list</td>
-                        <td>Source: 216 nulls, Target: 216 nulls</td>
-                        <td>'216'</td>
-                        <td>'216'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Null Check</td>
-                        <td>arr size dynamic</td>
-                        <td>Source: 7 nulls, Target: 7 nulls</td>
-                        <td>'7'</td>
-                        <td>'7'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Null Check</td>
-                        <td>bundle product code</td>
-                        <td>Source: 31 nulls, Target: 31 nulls</td>
-                        <td>'31'</td>
-                        <td>'31'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Null Check</td>
-                        <td>cohort arr size</td>
-                        <td>Source: 140 nulls, Target: 140 nulls</td>
-                        <td>'140'</td>
-                        <td>'140'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Null Check</td>
-                        <td>distributor name</td>
                         <td>Source: 14 nulls, Target: 14 nulls</td>
                         <td>'14'</td>
                         <td>'14'</td>
@@ -1554,10 +1450,60 @@
                     <tr>
                         
                         <td>Null Check</td>
+                        <td>bill state</td>
+                        <td>Source: 28 nulls, Target: 28 nulls</td>
+                        <td>'28'</td>
+                        <td>'28'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>bundle product code</td>
+                        <td>Source: 76 nulls, Target: 76 nulls</td>
+                        <td>'76'</td>
+                        <td>'76'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>cohort arr size</td>
+                        <td>Source: 7 nulls, Target: 7 nulls</td>
+                        <td>'7'</td>
+                        <td>'7'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>distributor name</td>
+                        <td>Source: 84 nulls, Target: 84 nulls</td>
+                        <td>'84'</td>
+                        <td>'84'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
                         <td>max. fortune rank</td>
-                        <td>Source: 306 nulls, Target: 306 nulls</td>
-                        <td>'306'</td>
-                        <td>'306'</td>
+                        <td>Source: 113 nulls, Target: 113 nulls</td>
+                        <td>'113'</td>
+                        <td>'113'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>reseller name</td>
+                        <td>Source: 54 nulls, Target: 54 nulls</td>
+                        <td>'54'</td>
+                        <td>'54'</td>
                     </tr>
                 
 
@@ -1575,9 +1521,9 @@
                         
                         <td>Primary Key Match</td>
                         <td>-</td>
-                        <td>Common: 310, Source-only: 0, Target-only: 0</td>
-                        <td>'310'</td>
-                        <td>'310'</td>
+                        <td>Common: 117, Source-only: 0, Target-only: 0</td>
+                        <td>'117'</td>
+                        <td>'117'</td>
                     </tr>
                 
                         </tbody>
@@ -1585,7 +1531,7 @@
                 </div>
                 
                 <!-- All Results -->
-                <button class="collapsible">📋 All Results (110)</button>
+                <button class="collapsible">📋 All Results (105)</button>
                 <div class="collapsible-content">
                     <table id="allTable" class="display">
                         <thead>
@@ -1606,9 +1552,9 @@
                         <td>Record Count Check</td>
                         <td>-</td>
                         <td>-</td>
-                        <td>Source: 310 rows, Target: 310 rows</td>
-                        <td>'310'</td>
-                        <td>'310'</td>
+                        <td>Source: 162 rows, Target: 162 rows</td>
+                        <td>'162'</td>
+                        <td>'162'</td>
                     </tr>
                 
 
@@ -2163,24 +2109,112 @@
                 
 
                     <tr>
-                        <td><span class="badge pass">PASS</span></td>
+                        <td><span class="badge fail">FAIL</span></td>
                         <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>-</td>
-                        <td>No duplicates found in Source</td>
-                        <td>'0'</td>
+                        <td>account id='0014600001JLd6aAAD', order number='REN-183879', sku='IB-MNT-HW-ISP', service start date='3/28/2025'</td>
+                        <td>Source has 3 duplicate rows (showing first 5 of 80)</td>
+                        <td>'3'</td>
                         <td>-</td>
                     </tr>
                 
 
                     <tr>
-                        <td><span class="badge pass">PASS</span></td>
+                        <td><span class="badge fail">FAIL</span></td>
                         <td>Duplicate Check</td>
                         <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-175713', sku='IB-MNT-PRM-ISP', service start date='8/1/2024'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>'2'</td>
                         <td>-</td>
-                        <td>No duplicates found in Target</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
                         <td>-</td>
-                        <td>'0'</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-188748', sku='IB-MNT-HW', service start date='8/1/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>'2'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-188748', sku='IB-MNT-PRM', service start date='8/1/2025'</td>
+                        <td>Source has 3 duplicate rows (showing first 5 of 80)</td>
+                        <td>'3'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLLXsAAP', order number='REN-183554', sku='IB-MNT-PRM', service start date='2/16/2025'</td>
+                        <td>Source has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>'2'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLd6aAAD', order number='REN-183879', sku='IB-MNT-HW-ISP', service start date='3/28/2025'</td>
+                        <td>Target has 3 duplicate rows (showing first 5 of 80)</td>
+                        <td>-</td>
+                        <td>'3'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-175713', sku='IB-MNT-PRM-ISP', service start date='8/1/2024'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>-</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-188748', sku='IB-MNT-HW', service start date='8/1/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>-</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-188748', sku='IB-MNT-PRM', service start date='8/1/2025'</td>
+                        <td>Target has 3 duplicate rows (showing first 5 of 80)</td>
+                        <td>-</td>
+                        <td>'3'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>account id='0014600001JLLXsAAP', order number='REN-183554', sku='IB-MNT-PRM', service start date='2/16/2025'</td>
+                        <td>Target has 2 duplicate rows (showing first 5 of 80)</td>
+                        <td>-</td>
+                        <td>'2'</td>
                     </tr>
                 
 
@@ -2188,61 +2222,6 @@
                         <td><span class="badge pass">PASS</span></td>
                         <td>Null Check</td>
                         <td>account ranking list</td>
-                        <td>-</td>
-                        <td>Source: 216 nulls, Target: 216 nulls</td>
-                        <td>'216'</td>
-                        <td>'216'</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge pass">PASS</span></td>
-                        <td>Null Check</td>
-                        <td>arr size dynamic</td>
-                        <td>-</td>
-                        <td>Source: 7 nulls, Target: 7 nulls</td>
-                        <td>'7'</td>
-                        <td>'7'</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Null Check</td>
-                        <td>bill state</td>
-                        <td>-</td>
-                        <td>Source: 78 nulls, Target: 77 nulls</td>
-                        <td>'78'</td>
-                        <td>'77'</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge pass">PASS</span></td>
-                        <td>Null Check</td>
-                        <td>bundle product code</td>
-                        <td>-</td>
-                        <td>Source: 31 nulls, Target: 31 nulls</td>
-                        <td>'31'</td>
-                        <td>'31'</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge pass">PASS</span></td>
-                        <td>Null Check</td>
-                        <td>cohort arr size</td>
-                        <td>-</td>
-                        <td>Source: 140 nulls, Target: 140 nulls</td>
-                        <td>'140'</td>
-                        <td>'140'</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge pass">PASS</span></td>
-                        <td>Null Check</td>
-                        <td>distributor name</td>
                         <td>-</td>
                         <td>Source: 14 nulls, Target: 14 nulls</td>
                         <td>'14'</td>
@@ -2253,11 +2232,66 @@
                     <tr>
                         <td><span class="badge pass">PASS</span></td>
                         <td>Null Check</td>
+                        <td>bill state</td>
+                        <td>-</td>
+                        <td>Source: 28 nulls, Target: 28 nulls</td>
+                        <td>'28'</td>
+                        <td>'28'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>bundle product code</td>
+                        <td>-</td>
+                        <td>Source: 76 nulls, Target: 76 nulls</td>
+                        <td>'76'</td>
+                        <td>'76'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>cohort arr size</td>
+                        <td>-</td>
+                        <td>Source: 7 nulls, Target: 7 nulls</td>
+                        <td>'7'</td>
+                        <td>'7'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>distributor name</td>
+                        <td>-</td>
+                        <td>Source: 84 nulls, Target: 84 nulls</td>
+                        <td>'84'</td>
+                        <td>'84'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
                         <td>max. fortune rank</td>
                         <td>-</td>
-                        <td>Source: 306 nulls, Target: 306 nulls</td>
-                        <td>'306'</td>
-                        <td>'306'</td>
+                        <td>Source: 113 nulls, Target: 113 nulls</td>
+                        <td>'113'</td>
+                        <td>'113'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>reseller name</td>
+                        <td>-</td>
+                        <td>Source: 54 nulls, Target: 54 nulls</td>
+                        <td>'54'</td>
+                        <td>'54'</td>
                     </tr>
                 
 
@@ -2277,64 +2311,9 @@
                         <td>Primary Key Match</td>
                         <td>-</td>
                         <td>-</td>
-                        <td>Common: 310, Source-only: 0, Target-only: 0</td>
-                        <td>'310'</td>
-                        <td>'310'</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>account name</td>
-                        <td>-</td>
-                        <td>2 mismatches in column account name</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>account name</td>
-                        <td>account id='0014600001JLuJCAA1', order number='REN-189287', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='8/28/2025'</td>
-                        <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'PIRAMAL ENTERPRISES LTD'"</td>
-                        <td>"'Piramal Finance Limited'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>account name</td>
-                        <td>account id='0014600001JLuJCAA1', order number='REN-175880', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='8/28/2024'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'PIRAMAL ENTERPRISES LTD'"</td>
-                        <td>"'Piramal Finance Limited'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>bill state</td>
-                        <td>-</td>
-                        <td>1 mismatches in column bill state</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>bill state</td>
-                        <td>account id='0011M00002bQGrcQAG', order number='DIST-181631', sku='IB-SUB-THREAT-ADV', service start date='1/27/2025'</td>
-                        <td>Value mismatch (example 1 of 1)</td>
-                        <td>'nan'</td>
-                        <td>"'Tamil Nadu'"</td>
+                        <td>Common: 117, Source-only: 0, Target-only: 0</td>
+                        <td>'117'</td>
+                        <td>'117'</td>
                     </tr>
                 
 
@@ -2353,10 +2332,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-159711', sku='IB-MNT-PRM-ISP', service start date='12/31/2023'</td>
                         <td>Value mismatch (example 1 of 12)</td>
-                        <td>"'31909.028650646953'"</td>
-                        <td>"'31909.028650646957'"</td>
+                        <td>"'3906.339848356309'"</td>
+                        <td>"'3906.3398483563096'"</td>
                     </tr>
                 
 
@@ -2364,10 +2343,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-EXTM', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 2 of 12)</td>
-                        <td>"'4381.5250696378835'"</td>
-                        <td>"'4381.525069637884'"</td>
+                        <td>"'31260.788426078034'"</td>
+                        <td>"'31260.788426078037'"</td>
                     </tr>
                 
 
@@ -2375,43 +2354,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-PRM-ISP', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 3 of 12)</td>
-                        <td>"'25645.608628659476'"</td>
-                        <td>"'25645.60862865948'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>end customer</td>
-                        <td>-</td>
-                        <td>2 mismatches in column end customer</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>end customer</td>
-                        <td>account id='0018Y00002tf8ETQAY', order number='DIST-180332', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='12/20/2024'</td>
-                        <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'INOX LEASING AND FINANCE LIMITED'"</td>
-                        <td>"'GUJARAT FLUOROCHEMICALS LIMITED'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>end customer</td>
-                        <td>account id='0014600001JL9EAAA1', order number='REN-181202', sku='IB-SUB-THREAT-ADV', service start date='1/18/2025'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'OTTO BREMER FOUNDATION'"</td>
-                        <td>"'OLD NATIONAL BANCORP'"</td>
+                        <td>"'156077.2001581109'"</td>
+                        <td>"'156077.20015811088'"</td>
                     </tr>
                 
 
@@ -2430,10 +2376,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-159711', sku='IB-MNT-PRM-ISP', service start date='12/31/2023'</td>
                         <td>Value mismatch (example 1 of 11)</td>
-                        <td>"'31909.028650646953'"</td>
-                        <td>"'31909.028650646957'"</td>
+                        <td>"'3906.339848356309'"</td>
+                        <td>"'3906.3398483563096'"</td>
                     </tr>
                 
 
@@ -2441,10 +2387,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-EXTM', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 2 of 11)</td>
-                        <td>"'4381.5250696378835'"</td>
-                        <td>"'4381.525069637884'"</td>
+                        <td>"'31260.788426078034'"</td>
+                        <td>"'31260.788426078037'"</td>
                     </tr>
                 
 
@@ -2452,10 +2398,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-PRM-ISP', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 3 of 11)</td>
-                        <td>"'25645.608628659476'"</td>
-                        <td>"'25645.60862865948'"</td>
+                        <td>"'156077.2001581109'"</td>
+                        <td>"'156077.20015811088'"</td>
                     </tr>
                 
 
@@ -2464,7 +2410,7 @@
                         <td>Data Validation</td>
                         <td>eop, unadjusted  </td>
                         <td>-</td>
-                        <td>11 mismatches in column eop, unadjusted  </td>
+                        <td>12 mismatches in column eop, unadjusted  </td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -2474,10 +2420,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>eop, unadjusted  </td>
-                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
-                        <td>Value mismatch (example 1 of 11)</td>
-                        <td>"'31909.028650646953'"</td>
-                        <td>"'31909.028650646957'"</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-159711', sku='IB-MNT-PRM-ISP', service start date='12/31/2023'</td>
+                        <td>Value mismatch (example 1 of 12)</td>
+                        <td>"'3906.339848356309'"</td>
+                        <td>"'3906.3398483563096'"</td>
                     </tr>
                 
 
@@ -2485,10 +2431,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>eop, unadjusted  </td>
-                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
-                        <td>Value mismatch (example 2 of 11)</td>
-                        <td>"'4381.5250696378835'"</td>
-                        <td>"'4381.525069637884'"</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-EXTM', service start date='4/1/2025'</td>
+                        <td>Value mismatch (example 2 of 12)</td>
+                        <td>"'31260.788426078034'"</td>
+                        <td>"'31260.788426078037'"</td>
                     </tr>
                 
 
@@ -2496,10 +2442,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>eop, unadjusted  </td>
-                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
-                        <td>Value mismatch (example 3 of 11)</td>
-                        <td>"'25645.608628659476'"</td>
-                        <td>"'25645.60862865948'"</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-PRM-ISP', service start date='4/1/2025'</td>
+                        <td>Value mismatch (example 3 of 12)</td>
+                        <td>"'156077.2001581109'"</td>
+                        <td>"'156077.20015811088'"</td>
                     </tr>
                 
 
@@ -2508,7 +2454,7 @@
                         <td>Data Validation</td>
                         <td>index#</td>
                         <td>-</td>
-                        <td>310 mismatches in column index#</td>
+                        <td>117 mismatches in column index#</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -2518,9 +2464,9 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>index#</td>
-                        <td>account id='0014600001JLJJ0AAP', order number='REN-178605', sku='IB-SUB-THREAT-ADV', service start date='12/29/2024'</td>
-                        <td>Value mismatch (example 1 of 310)</td>
-                        <td>"'13'"</td>
+                        <td>account id='0014600001JLCiDAAX', order number='REN-184553', sku='IB-MNT-EXTM', service start date='6/27/2025'</td>
+                        <td>Value mismatch (example 1 of 117)</td>
+                        <td>"'6'"</td>
                         <td>"'1'"</td>
                     </tr>
                 
@@ -2529,10 +2475,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>index#</td>
-                        <td>account id='0018Y0000334IPkQAM', order number='REN-185123', sku='IB-SUB-THREAT-ADV', service start date='3/11/2025'</td>
-                        <td>Value mismatch (example 2 of 310)</td>
-                        <td>"'23'"</td>
-                        <td>"'6'"</td>
+                        <td>account id='0014600001JLCiDAAX', order number='REN-184553', sku='IB-MNT-PRM', service start date='6/27/2025'</td>
+                        <td>Value mismatch (example 2 of 117)</td>
+                        <td>"'10'"</td>
+                        <td>"'4'"</td>
                     </tr>
                 
 
@@ -2540,9 +2486,9 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>index#</td>
-                        <td>account id='0014600001JLIJ9AAP', order number='DIST-153294', sku='IB-SUB-THREAT-ADV', service start date='10/24/2022'</td>
-                        <td>Value mismatch (example 3 of 310)</td>
-                        <td>"'34'"</td>
+                        <td>account id='0014600001JLd6aAAD', order number='REN-183879', sku='IB-MNT-HW-ISP', service start date='3/28/2025'</td>
+                        <td>Value mismatch (example 3 of 117)</td>
+                        <td>"'17'"</td>
                         <td>"'9'"</td>
                     </tr>
                 
@@ -2550,42 +2496,9 @@
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>industry [custom]</td>
-                        <td>-</td>
-                        <td>2 mismatches in column industry [custom]</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>industry [custom]</td>
-                        <td>account id='0018Y00002tf8ETQAY', order number='DIST-180332', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='12/20/2024'</td>
-                        <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'Financial Services'"</td>
-                        <td>"'Manufacturing'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>industry [custom]</td>
-                        <td>account id='0014600001JL9EAAA1', order number='REN-181202', sku='IB-SUB-THREAT-ADV', service start date='1/18/2025'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'Financial Services'"</td>
-                        <td>"'Banking'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
                         <td>peak arr</td>
                         <td>-</td>
-                        <td>46 mismatches in column peak arr</td>
+                        <td>37 mismatches in column peak arr</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -2595,10 +2508,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>peak arr</td>
-                        <td>account id='0014600001JLJJ0AAP', order number='REN-178605', sku='IB-SUB-THREAT-ADV', service start date='12/29/2024'</td>
-                        <td>Value mismatch (example 1 of 46)</td>
-                        <td>"'27341.999999999996'"</td>
-                        <td>"'27342.0'"</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-175713', sku='IB-MNT-PRM-ISP', service start date='8/1/2024'</td>
+                        <td>Value mismatch (example 1 of 37)</td>
+                        <td>"'199991.2736527663'"</td>
+                        <td>"'199991.27365276628'"</td>
                     </tr>
                 
 
@@ -2606,10 +2519,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>peak arr</td>
-                        <td>account id='0014600001JLIJ9AAP', order number='DIST-153294', sku='IB-SUB-THREAT-ADV', service start date='10/24/2022'</td>
-                        <td>Value mismatch (example 2 of 46)</td>
-                        <td>"'34680.0'"</td>
-                        <td>"'0.0'"</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-175713', sku='IB-MNT-HW', service start date='8/1/2024'</td>
+                        <td>Value mismatch (example 2 of 37)</td>
+                        <td>"'199991.2736527663'"</td>
+                        <td>"'199991.27365276628'"</td>
                     </tr>
                 
 
@@ -2617,10 +2530,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>peak arr</td>
-                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
-                        <td>Value mismatch (example 3 of 46)</td>
-                        <td>"'31909.028650646953'"</td>
-                        <td>"'31909.028650646957'"</td>
+                        <td>account id='0014600001JL96BAAT', order number='REN-188748', sku='IB-MNT-HW', service start date='8/1/2025'</td>
+                        <td>Value mismatch (example 3 of 37)</td>
+                        <td>"'199991.2736527663'"</td>
+                        <td>"'199991.27365276628'"</td>
                     </tr>
                 
 
@@ -2639,10 +2552,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>previous arr</td>
-                        <td>account id='0014600001JLAB7AAP', order number='REN-188253', sku='IB-SUB-THREAT-ADV', service start date='7/31/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-159711', sku='IB-MNT-PRM-ISP', service start date='12/31/2023'</td>
                         <td>Value mismatch (example 1 of 12)</td>
-                        <td>"'31909.028650646953'"</td>
-                        <td>"'31909.028650646957'"</td>
+                        <td>"'3906.339848356309'"</td>
+                        <td>"'3906.3398483563096'"</td>
                     </tr>
                 
 
@@ -2650,10 +2563,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>previous arr</td>
-                        <td>account id='001R70000052ZusIAE', order number='REN-183340', sku='IB-SUB-THREAT-SOC-ASEC', service start date='3/18/2025'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-EXTM', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 2 of 12)</td>
-                        <td>"'4381.5250696378835'"</td>
-                        <td>"'4381.525069637884'"</td>
+                        <td>"'31260.788426078034'"</td>
+                        <td>"'31260.788426078037'"</td>
                     </tr>
                 
 
@@ -2661,10 +2574,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>previous arr</td>
-                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
+                        <td>account id='0014600001JLP1WAAX', order number='REN-183696', sku='IB-MNT-PRM-ISP', service start date='4/1/2025'</td>
                         <td>Value mismatch (example 3 of 12)</td>
-                        <td>"'25645.608628659476'"</td>
-                        <td>"'25645.60862865948'"</td>
+                        <td>"'156077.2001581109'"</td>
+                        <td>"'156077.20015811088'"</td>
                     </tr>
                 
 
@@ -2673,7 +2586,7 @@
                         <td>Data Validation</td>
                         <td>rcn emp count</td>
                         <td>-</td>
-                        <td>9 mismatches in column rcn emp count</td>
+                        <td>3 mismatches in column rcn emp count</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -2683,21 +2596,10 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>rcn emp count</td>
-                        <td>account id='0011M00002bQGrcQAG', order number='DIST-181631', sku='IB-SUB-THREAT-ADV', service start date='1/27/2025'</td>
-                        <td>Value mismatch (example 1 of 9)</td>
-                        <td>"'83147'"</td>
-                        <td>"'42497'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>rcn emp count</td>
-                        <td>account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-MGMT-1000', service start date='4/26/2025'</td>
-                        <td>Value mismatch (example 2 of 9)</td>
+                        <td>account id='0014600001JLGPoAAP', order number='REN-176255', sku='IB-MNT-PRM', service start date='10/10/2024'</td>
+                        <td>Value mismatch (example 1 of 3)</td>
                         <td>"'490'"</td>
-                        <td>"'700'"</td>
+                        <td>"'600'"</td>
                     </tr>
                 
 
@@ -2705,63 +2607,30 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>rcn emp count</td>
-                        <td>account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='4/26/2025'</td>
-                        <td>Value mismatch (example 3 of 9)</td>
+                        <td>account id='0014600001JLGPoAAP', order number='REN-190909', sku='IB-MNT-EXTM', service start date='10/10/2025'</td>
+                        <td>Value mismatch (example 2 of 3)</td>
                         <td>"'490'"</td>
-                        <td>"'700'"</td>
+                        <td>"'600'"</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>sales rep</td>
+                        <td>rcn emp count</td>
+                        <td>account id='0014600001JLGPoAAP', order number='REN-190909', sku='IB-MNT-PRM', service start date='10/10/2025'</td>
+                        <td>Value mismatch (example 3 of 3)</td>
+                        <td>"'490'"</td>
+                        <td>"'600'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>refresh overlap adj</td>
                         <td>-</td>
-                        <td>20 mismatches in column sales rep</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>sales rep</td>
-                        <td>account id='0014600001JLJsoAAH', order number='DIST-142376', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/29/2021'</td>
-                        <td>Value mismatch (example 1 of 20)</td>
-                        <td>"'Apichart Choempraphai'"</td>
-                        <td>"'Lee Anstiss'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>sales rep</td>
-                        <td>account id='0018Y00002j9fWJQAY', order number='REN-182358', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='2/18/2025'</td>
-                        <td>Value mismatch (example 2 of 20)</td>
-                        <td>"'Apichart Choempraphai'"</td>
-                        <td>"'Lee Anstiss'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>sales rep</td>
-                        <td>account id='0018Y00002j9fWJQAY', order number='REN-182358', sku='IB-SUB-B1DDI-LOG-MAN-GR-30-A', service start date='2/18/2025'</td>
-                        <td>Value mismatch (example 3 of 20)</td>
-                        <td>"'Apichart Choempraphai'"</td>
-                        <td>"'Lee Anstiss'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>variance</td>
-                        <td>-</td>
-                        <td>1 mismatches in column variance</td>
+                        <td>1 mismatches in column refresh overlap adj</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -2770,20 +2639,20 @@
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>variance</td>
-                        <td>account id='0018Y00002g84I3QAI', order number='REN-177124', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='9/28/2024'</td>
+                        <td>refresh overlap adj</td>
+                        <td>account id='0014600001JLCcAAAX', order number='REN-185436', sku='IB-MNT-PRM', service start date='5/25/2025'</td>
                         <td>Value mismatch (example 1 of 1)</td>
-                        <td>"'-24524.999999999996'"</td>
-                        <td>"'-24525.0'"</td>
+                        <td>"'-45544.91407624633'"</td>
+                        <td>"'-45544.914076246336'"</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>sales rep</td>
                         <td>-</td>
-                        <td>2 mismatches in column variance (adjusted, w/ late renewals extn)</td>
+                        <td>2 mismatches in column sales rep</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -2792,11 +2661,22 @@
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>variance (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0011M00002eADvUQAW', order number='DIST-178105', sku='IB-SUB-THREAT-BIZ-CLOUD', service start date='10/18/2024'</td>
+                        <td>sales rep</td>
+                        <td>account id='0014600001JLGxMAAX', order number='REN-186217', sku='IB-MNT-EXTM', service start date='5/29/2025'</td>
                         <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'-6440.5999999999985'"</td>
-                        <td>"'-6440.599999999999'"</td>
+                        <td>"'Justin Stuck'"</td>
+                        <td>"'Pat Foley'"</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>sales rep</td>
+                        <td>account id='0014600001JLGxMAAX', order number='REN-186217', sku='IB-MNT-PRM', service start date='5/29/2025'</td>
+                        <td>Value mismatch (example 2 of 2)</td>
+                        <td>"'Justin Stuck'"</td>
+                        <td>"'Pat Foley'"</td>
                     </tr>
                 
 
@@ -2804,10 +2684,21 @@
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
                         <td>variance (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0018Y00002g84I3QAI', order number='REN-177124', sku='IB-SUB-B1DDI-BIZ-GR-A', service start date='9/28/2024'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'-24524.999999999996'"</td>
-                        <td>"'-24525.0'"</td>
+                        <td>-</td>
+                        <td>1 mismatches in column variance (adjusted, w/ late renewals extn)</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Data Validation</td>
+                        <td>variance (adjusted, w/ late renewals extn)</td>
+                        <td>account id='0014600001JLCcAAAX', order number='REN-185436', sku='IB-MNT-PRM', service start date='5/25/2025'</td>
+                        <td>Value mismatch (example 1 of 1)</td>
+                        <td>"'-45544.91407624633'"</td>
+                        <td>"'-45544.914076246336'"</td>
                     </tr>
                 
                         </tbody>
@@ -2818,7 +2709,7 @@
         
         <div class="footer">
             <p>Universal Data Validation Framework v1.0</p>
-            <p class="timestamp">Report generated on 2026-04-20 18:43:23</p>
+            <p class="timestamp">Report generated on 2026-04-21 10:12:00</p>
         </div>
     </div>
     
@@ -2870,7 +2761,7 @@
         });
         
         // Chart.js visualizations
-        const chartData = {"pass_count": 61, "fail_count": 49, "skip_count": 0, "validation_types": ["record_count_check", "column_count_check", "metadata_type_check", "duplicate_check", "null_check", "empty_string_check", "primary_key_match", "data_validation"], "validation_fails": [0, 0, 0, 0, 1, 0, 0, 48], "validation_passes": [1, 1, 49, 2, 6, 1, 1, 0], "column_names": ["bop (adjusted, w/ late renewals extn)", "eop (adjusted, w/ late renewals extn)", "eop, unadjusted  ", "index#", "peak arr", "previous arr", "rcn emp count", "sales rep", "account name", "bill state", "end customer", "industry [custom]", "variance (adjusted, w/ late renewals extn)", "variance"], "column_failures": [4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2]};
+        const chartData = {"pass_count": 60, "fail_count": 45, "skip_count": 0, "validation_types": ["record_count_check", "column_count_check", "metadata_type_check", "duplicate_check", "null_check", "empty_string_check", "primary_key_match", "data_validation"], "validation_fails": [0, 0, 0, 10, 0, 0, 0, 35], "validation_passes": [1, 1, 49, 0, 7, 1, 1, 0], "column_names": ["bop (adjusted, w/ late renewals extn)", "eop (adjusted, w/ late renewals extn)", "eop, unadjusted  ", "index#", "peak arr", "previous arr", "rcn emp count", "sales rep", "refresh overlap adj", "variance (adjusted, w/ late renewals extn)"], "column_failures": [4, 4, 4, 4, 4, 4, 4, 3, 2, 2]};
         
         // Status Pie Chart
         new Chart(document.getElementById('statusChart'), {

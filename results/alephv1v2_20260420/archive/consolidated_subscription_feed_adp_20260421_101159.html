@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consolidated_Reporting_Tokens - Validation Report</title>
+    <title>Consolidated_Subscription_Feed_ADP - Validation Report</title>
     
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -291,9 +291,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Consolidated_Reporting_Tokens</h1>
+            <h1>📊 Consolidated_Subscription_Feed_ADP</h1>
             <div class="subtitle">Data Validation Report</div>
-            <div class="timestamp">Generated: 2026-04-20 18:43:24</div>
+            <div class="timestamp">Generated: 2026-04-21 10:11:59</div>
         </div>
         
         <div class="summary-cards">
@@ -303,15 +303,15 @@
             </div>
             <div class="card pass">
                 <div class="card-title">Passed Checks</div>
-                <div class="card-value">61</div>
+                <div class="card-value">60</div>
             </div>
             <div class="card fail">
                 <div class="card-title">Failed Checks</div>
-                <div class="card-value">44</div>
+                <div class="card-value">6</div>
             </div>
             <div class="card info">
                 <div class="card-title">Total Checks</div>
-                <div class="card-value">105</div>
+                <div class="card-value">66</div>
             </div>
         </div>
         
@@ -330,13 +330,13 @@
 
             <div class="metadata-item">
                 <div class="metadata-label">Source Path:</div>
-                <div class="metadata-value">./raw_data/aleph_apr/v1_dev_q1/Consolidated Reporting Tokens_fy25_26.csv</div>
+                <div class="metadata-value">./raw_data/aleph_apr/v1_dev_q1/Consolidated Subscription Feed ADP_fy25_26.csv</div>
             </div>
         
 
             <div class="metadata-item">
                 <div class="metadata-label">Source Rows:</div>
-                <div class="metadata-value">171</div>
+                <div class="metadata-value">3</div>
             </div>
         
 
@@ -354,13 +354,13 @@
 
             <div class="metadata-item">
                 <div class="metadata-label">Target Path:</div>
-                <div class="metadata-value">./raw_data/aleph_apr/V2_preprod/Consolidated_Reporting_Tokens_FY26Q1.csv</div>
+                <div class="metadata-value">./raw_data/aleph_apr/V2_preprod/Consolidated_Subscription_Feed_ADP_FY26Q1.csv</div>
             </div>
         
 
             <div class="metadata-item">
                 <div class="metadata-label">Target Rows:</div>
-                <div class="metadata-value">171</div>
+                <div class="metadata-value">3</div>
             </div>
         
 
@@ -399,7 +399,7 @@
                 <h2 class="section-title">Detailed Results</h2>
                 
                 <!-- Failed Checks -->
-                <button class="collapsible active">❌ Failed Checks (44)</button>
+                <button class="collapsible active">❌ Failed Checks (6)</button>
                 <div class="collapsible-content active">
                     <table id="failedTable" class="display">
                         <thead>
@@ -417,9 +417,9 @@
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>index#</td>
                         <td>-</td>
-                        <td>3 mismatches in column bop (adjusted, w/ late renewals extn)</td>
+                        <td>3 mismatches in column index#</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -428,42 +428,42 @@
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLH0kAAH', order number='REN-155583', sku='PT-SUB-ADP', service start date='10/6/2022'</td>
                         <td>Value mismatch (example 1 of 3)</td>
-                        <td>"'27279.999999999996'"</td>
-                        <td>"'27280.0'"</td>
+                        <td>"'6'"</td>
+                        <td>"'1'"</td>
                     </tr>
                 
 
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0018Y00002w9XJCQA2', order number='DIST-181287', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='1/17/2025'</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLMEIAA5', order number='FEDR-125205', sku='PT-SUB-ADP', service start date='9/17/2021'</td>
                         <td>Value mismatch (example 2 of 3)</td>
-                        <td>"'3581.8131868131873'"</td>
-                        <td>"'3581.8131868131877'"</td>
+                        <td>"'25'"</td>
+                        <td>"'2'"</td>
                     </tr>
                 
 
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLO1BAAX', order number='REN-188383', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/28/2025'</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLBEMAA5', order number='REN-154344', sku='PT-SUB-ADP', service start date='12/2/2022'</td>
                         <td>Value mismatch (example 3 of 3)</td>
-                        <td>"'404.7999999999999'"</td>
-                        <td>"'404.8'"</td>
+                        <td>"'33'"</td>
+                        <td>"'6'"</td>
                     </tr>
                 
 
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>end customer</td>
+                        <td>peak arr</td>
                         <td>-</td>
-                        <td>1 mismatches in column end customer</td>
+                        <td>1 mismatches in column peak arr</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -472,429 +472,11 @@
                     <tr>
                         
                         <td>Data Validation</td>
-                        <td>end customer</td>
-                        <td>account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLH0kAAH', order number='REN-155583', sku='PT-SUB-ADP', service start date='10/6/2022'</td>
                         <td>Value mismatch (example 1 of 1)</td>
-                        <td>"'DOWLAIS GROUP PLC'"</td>
-                        <td>"'DAUCH CORPORATION'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>-</td>
-                        <td>5 mismatches in column eop (adjusted, w/ late renewals extn)</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'</td>
-                        <td>Value mismatch (example 1 of 5)</td>
-                        <td>"'401439.99999999994'"</td>
-                        <td>"'401440.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'</td>
-                        <td>Value mismatch (example 2 of 5)</td>
-                        <td>"'27279.999999999996'"</td>
-                        <td>"'27280.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'</td>
-                        <td>Value mismatch (example 3 of 5)</td>
-                        <td>"'212.87999999999997'"</td>
-                        <td>"'212.88'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>eop, unadjusted  </td>
-                        <td>-</td>
-                        <td>5 mismatches in column eop, unadjusted  </td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>eop, unadjusted  </td>
-                        <td>account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'</td>
-                        <td>Value mismatch (example 1 of 5)</td>
-                        <td>"'401439.99999999994'"</td>
-                        <td>"'401440.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>eop, unadjusted  </td>
-                        <td>account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'</td>
-                        <td>Value mismatch (example 2 of 5)</td>
-                        <td>"'27279.999999999996'"</td>
-                        <td>"'27280.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>eop, unadjusted  </td>
-                        <td>account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'</td>
-                        <td>Value mismatch (example 3 of 5)</td>
-                        <td>"'212.87999999999997'"</td>
-                        <td>"'212.88'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>index#</td>
-                        <td>-</td>
-                        <td>170 mismatches in column index#</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>index#</td>
-                        <td>account id='001R700000QnZnIIAV', order number='DIST-184897', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='4/27/2025'</td>
-                        <td>Value mismatch (example 1 of 170)</td>
-                        <td>"'10'"</td>
-                        <td>"'8'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>index#</td>
-                        <td>account id='0011M00002G3zpvQAB', order number='DIST-181281', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='1/16/2025'</td>
-                        <td>Value mismatch (example 2 of 170)</td>
-                        <td>"'22'"</td>
-                        <td>"'17'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>index#</td>
-                        <td>account id='0018Y00002wB9UxQAK', order number='REN-190555', sku='IB-TOKENS-REPORTING-40', service start date='10/31/2025'</td>
-                        <td>Value mismatch (example 3 of 170)</td>
-                        <td>"'26'"</td>
-                        <td>"'21'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>industry [custom]</td>
-                        <td>-</td>
-                        <td>1 mismatches in column industry [custom]</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>industry [custom]</td>
-                        <td>account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'</td>
-                        <td>Value mismatch (example 1 of 1)</td>
-                        <td>"'Aerospace & Defense'"</td>
-                        <td>"'Manufacturing'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>peak arr</td>
-                        <td>-</td>
-                        <td>7 mismatches in column peak arr</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>peak arr</td>
-                        <td>account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'</td>
-                        <td>Value mismatch (example 1 of 7)</td>
-                        <td>"'401439.99999999994'"</td>
-                        <td>"'401440.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>peak arr</td>
-                        <td>account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'</td>
-                        <td>Value mismatch (example 2 of 7)</td>
-                        <td>"'212.87999999999997'"</td>
-                        <td>"'212.88'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>peak arr</td>
-                        <td>account id='0014600001JLImkAAH', order number='DIST-178187', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='10/22/2024'</td>
-                        <td>Value mismatch (example 3 of 7)</td>
-                        <td>"'192000.00000000003'"</td>
+                        <td>"'85214.27993333334'"</td>
                         <td>"'0.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>previous arr</td>
-                        <td>-</td>
-                        <td>3 mismatches in column previous arr</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>previous arr</td>
-                        <td>account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'</td>
-                        <td>Value mismatch (example 1 of 3)</td>
-                        <td>"'27279.999999999996'"</td>
-                        <td>"'27280.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>previous arr</td>
-                        <td>account id='0018Y00002w9XJCQA2', order number='DIST-181287', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='1/17/2025'</td>
-                        <td>Value mismatch (example 2 of 3)</td>
-                        <td>"'3581.8131868131873'"</td>
-                        <td>"'3581.8131868131877'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>previous arr</td>
-                        <td>account id='0014600001JLO1BAAX', order number='REN-188383', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/28/2025'</td>
-                        <td>Value mismatch (example 3 of 3)</td>
-                        <td>"'404.7999999999999'"</td>
-                        <td>"'404.8'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>rcn emp count</td>
-                        <td>-</td>
-                        <td>5 mismatches in column rcn emp count</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>rcn emp count</td>
-                        <td>account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='4/26/2025'</td>
-                        <td>Value mismatch (example 1 of 5)</td>
-                        <td>"'490'"</td>
-                        <td>"'700'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>rcn emp count</td>
-                        <td>account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'</td>
-                        <td>Value mismatch (example 2 of 5)</td>
-                        <td>"'23327'"</td>
-                        <td>"'18000'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>rcn emp count</td>
-                        <td>account id='0014600001JL71YAAT', order number='DIST-179190', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='11/20/2024'</td>
-                        <td>Value mismatch (example 3 of 5)</td>
-                        <td>"'6000'"</td>
-                        <td>"'5500'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>reseller name</td>
-                        <td>-</td>
-                        <td>3 mismatches in column reseller name</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>reseller name</td>
-                        <td>account id='0011M00002G4IbKQAV', order number='REN-186088', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/4/2025'</td>
-                        <td>Value mismatch (example 1 of 3)</td>
-                        <td>"'Computacenter - USA'"</td>
-                        <td>"'Computacenter United States Inc.'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>reseller name</td>
-                        <td>account id='0018Y00002kykqyQAA', order number='REN-188349', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/31/2025'</td>
-                        <td>Value mismatch (example 2 of 3)</td>
-                        <td>"'Computacenter - USA'"</td>
-                        <td>"'Computacenter United States Inc.'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>reseller name</td>
-                        <td>account id='0014600001JLO1BAAX', order number='REN-188383', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/28/2025'</td>
-                        <td>Value mismatch (example 3 of 3)</td>
-                        <td>"'Computacenter - USA'"</td>
-                        <td>"'Computacenter United States Inc.'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>variance</td>
-                        <td>-</td>
-                        <td>2 mismatches in column variance</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>variance</td>
-                        <td>account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'</td>
-                        <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'401439.99999999994'"</td>
-                        <td>"'401440.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>variance</td>
-                        <td>account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'212.87999999999997'"</td>
-                        <td>"'212.88'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>variance (adjusted, w/ late renewals extn)</td>
-                        <td>-</td>
-                        <td>2 mismatches in column variance (adjusted, w/ late renewals extn)</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>variance (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'</td>
-                        <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'401439.99999999994'"</td>
-                        <td>"'401440.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>variance (adjusted, w/ late renewals extn)</td>
-                        <td>account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'212.87999999999997'"</td>
-                        <td>"'212.88'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>year of cohort date fy</td>
-                        <td>-</td>
-                        <td>1 mismatches in column year of cohort date fy</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Data Validation</td>
-                        <td>year of cohort date fy</td>
-                        <td>account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'</td>
-                        <td>Value mismatch (example 1 of 1)</td>
-                        <td>"'FY 2023'"</td>
-                        <td>"'FY 2019'"</td>
                     </tr>
                 
                         </tbody>
@@ -902,7 +484,7 @@
                 </div>
                 
                 <!-- Passed Checks -->
-                <button class="collapsible">✅ Passed Checks (61)</button>
+                <button class="collapsible">✅ Passed Checks (60)</button>
                 <div class="collapsible-content">
                     <table id="passedTable" class="display">
                         <thead>
@@ -920,9 +502,9 @@
                         
                         <td>Record Count Check</td>
                         <td>-</td>
-                        <td>Source: 171 rows, Target: 171 rows</td>
-                        <td>'171'</td>
-                        <td>'171'</td>
+                        <td>Source: 3 rows, Target: 3 rows</td>
+                        <td>'3'</td>
+                        <td>'3'</td>
                     </tr>
                 
 
@@ -1450,9 +1032,9 @@
                         
                         <td>Null Check</td>
                         <td>account ranking list</td>
-                        <td>Source: 106 nulls, Target: 106 nulls</td>
-                        <td>'106'</td>
-                        <td>'106'</td>
+                        <td>Source: 1 nulls, Target: 1 nulls</td>
+                        <td>'1'</td>
+                        <td>'1'</td>
                     </tr>
                 
 
@@ -1460,6 +1042,26 @@
                         
                         <td>Null Check</td>
                         <td>arr size dynamic</td>
+                        <td>Source: 1 nulls, Target: 1 nulls</td>
+                        <td>'1'</td>
+                        <td>'1'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>bundle product code</td>
+                        <td>Source: 2 nulls, Target: 2 nulls</td>
+                        <td>'2'</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>cohort arr size</td>
                         <td>Source: 3 nulls, Target: 3 nulls</td>
                         <td>'3'</td>
                         <td>'3'</td>
@@ -1469,40 +1071,10 @@
                     <tr>
                         
                         <td>Null Check</td>
-                        <td>bill state</td>
-                        <td>Source: 51 nulls, Target: 51 nulls</td>
-                        <td>'51'</td>
-                        <td>'51'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Null Check</td>
-                        <td>cohort arr size</td>
-                        <td>Source: 140 nulls, Target: 140 nulls</td>
-                        <td>'140'</td>
-                        <td>'140'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Null Check</td>
-                        <td>distributor name</td>
-                        <td>Source: 20 nulls, Target: 20 nulls</td>
-                        <td>'20'</td>
-                        <td>'20'</td>
-                    </tr>
-                
-
-                    <tr>
-                        
-                        <td>Null Check</td>
                         <td>max. fortune rank</td>
-                        <td>Source: 140 nulls, Target: 140 nulls</td>
-                        <td>'140'</td>
-                        <td>'140'</td>
+                        <td>Source: 1 nulls, Target: 1 nulls</td>
+                        <td>'1'</td>
+                        <td>'1'</td>
                     </tr>
                 
 
@@ -1520,9 +1092,9 @@
                         
                         <td>Primary Key Match</td>
                         <td>-</td>
-                        <td>Common: 171, Source-only: 0, Target-only: 0</td>
-                        <td>'171'</td>
-                        <td>'171'</td>
+                        <td>Common: 3, Source-only: 0, Target-only: 0</td>
+                        <td>'3'</td>
+                        <td>'3'</td>
                     </tr>
                 
                         </tbody>
@@ -1530,7 +1102,7 @@
                 </div>
                 
                 <!-- All Results -->
-                <button class="collapsible">📋 All Results (105)</button>
+                <button class="collapsible">📋 All Results (66)</button>
                 <div class="collapsible-content">
                     <table id="allTable" class="display">
                         <thead>
@@ -1551,9 +1123,9 @@
                         <td>Record Count Check</td>
                         <td>-</td>
                         <td>-</td>
-                        <td>Source: 171 rows, Target: 171 rows</td>
-                        <td>'171'</td>
-                        <td>'171'</td>
+                        <td>Source: 3 rows, Target: 3 rows</td>
+                        <td>'3'</td>
+                        <td>'3'</td>
                     </tr>
                 
 
@@ -2134,9 +1706,9 @@
                         <td>Null Check</td>
                         <td>account ranking list</td>
                         <td>-</td>
-                        <td>Source: 106 nulls, Target: 106 nulls</td>
-                        <td>'106'</td>
-                        <td>'106'</td>
+                        <td>Source: 1 nulls, Target: 1 nulls</td>
+                        <td>'1'</td>
+                        <td>'1'</td>
                     </tr>
                 
 
@@ -2144,6 +1716,28 @@
                         <td><span class="badge pass">PASS</span></td>
                         <td>Null Check</td>
                         <td>arr size dynamic</td>
+                        <td>-</td>
+                        <td>Source: 1 nulls, Target: 1 nulls</td>
+                        <td>'1'</td>
+                        <td>'1'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>bundle product code</td>
+                        <td>-</td>
+                        <td>Source: 2 nulls, Target: 2 nulls</td>
+                        <td>'2'</td>
+                        <td>'2'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>cohort arr size</td>
                         <td>-</td>
                         <td>Source: 3 nulls, Target: 3 nulls</td>
                         <td>'3'</td>
@@ -2154,44 +1748,11 @@
                     <tr>
                         <td><span class="badge pass">PASS</span></td>
                         <td>Null Check</td>
-                        <td>bill state</td>
-                        <td>-</td>
-                        <td>Source: 51 nulls, Target: 51 nulls</td>
-                        <td>'51'</td>
-                        <td>'51'</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge pass">PASS</span></td>
-                        <td>Null Check</td>
-                        <td>cohort arr size</td>
-                        <td>-</td>
-                        <td>Source: 140 nulls, Target: 140 nulls</td>
-                        <td>'140'</td>
-                        <td>'140'</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge pass">PASS</span></td>
-                        <td>Null Check</td>
-                        <td>distributor name</td>
-                        <td>-</td>
-                        <td>Source: 20 nulls, Target: 20 nulls</td>
-                        <td>'20'</td>
-                        <td>'20'</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge pass">PASS</span></td>
-                        <td>Null Check</td>
                         <td>max. fortune rank</td>
                         <td>-</td>
-                        <td>Source: 140 nulls, Target: 140 nulls</td>
-                        <td>'140'</td>
-                        <td>'140'</td>
+                        <td>Source: 1 nulls, Target: 1 nulls</td>
+                        <td>'1'</td>
+                        <td>'1'</td>
                     </tr>
                 
 
@@ -2211,18 +1772,18 @@
                         <td>Primary Key Match</td>
                         <td>-</td>
                         <td>-</td>
-                        <td>Common: 171, Source-only: 0, Target-only: 0</td>
-                        <td>'171'</td>
-                        <td>'171'</td>
+                        <td>Common: 3, Source-only: 0, Target-only: 0</td>
+                        <td>'3'</td>
+                        <td>'3'</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>bop (adjusted, w/ late renewals extn)</td>
+                        <td>index#</td>
                         <td>-</td>
-                        <td>3 mismatches in column bop (adjusted, w/ late renewals extn)</td>
+                        <td>3 mismatches in column index#</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -2231,42 +1792,42 @@
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLH0kAAH', order number='REN-155583', sku='PT-SUB-ADP', service start date='10/6/2022'</td>
                         <td>Value mismatch (example 1 of 3)</td>
-                        <td>"'27279.999999999996'"</td>
-                        <td>"'27280.0'"</td>
+                        <td>"'6'"</td>
+                        <td>"'1'"</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0018Y00002w9XJCQA2', order number='DIST-181287', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='1/17/2025'</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLMEIAA5', order number='FEDR-125205', sku='PT-SUB-ADP', service start date='9/17/2021'</td>
                         <td>Value mismatch (example 2 of 3)</td>
-                        <td>"'3581.8131868131873'"</td>
-                        <td>"'3581.8131868131877'"</td>
+                        <td>"'25'"</td>
+                        <td>"'2'"</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>bop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLO1BAAX', order number='REN-188383', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/28/2025'</td>
+                        <td>index#</td>
+                        <td>account id='0014600001JLBEMAA5', order number='REN-154344', sku='PT-SUB-ADP', service start date='12/2/2022'</td>
                         <td>Value mismatch (example 3 of 3)</td>
-                        <td>"'404.7999999999999'"</td>
-                        <td>"'404.8'"</td>
+                        <td>"'33'"</td>
+                        <td>"'6'"</td>
                     </tr>
                 
 
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>end customer</td>
+                        <td>peak arr</td>
                         <td>-</td>
-                        <td>1 mismatches in column end customer</td>
+                        <td>1 mismatches in column peak arr</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
@@ -2275,429 +1836,11 @@
                     <tr>
                         <td><span class="badge fail">FAIL</span></td>
                         <td>Data Validation</td>
-                        <td>end customer</td>
-                        <td>account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'</td>
+                        <td>peak arr</td>
+                        <td>account id='0014600001JLH0kAAH', order number='REN-155583', sku='PT-SUB-ADP', service start date='10/6/2022'</td>
                         <td>Value mismatch (example 1 of 1)</td>
-                        <td>"'DOWLAIS GROUP PLC'"</td>
-                        <td>"'DAUCH CORPORATION'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>-</td>
-                        <td>5 mismatches in column eop (adjusted, w/ late renewals extn)</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'</td>
-                        <td>Value mismatch (example 1 of 5)</td>
-                        <td>"'401439.99999999994'"</td>
-                        <td>"'401440.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'</td>
-                        <td>Value mismatch (example 2 of 5)</td>
-                        <td>"'27279.999999999996'"</td>
-                        <td>"'27280.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>eop (adjusted, w/ late renewals extn)</td>
-                        <td>account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'</td>
-                        <td>Value mismatch (example 3 of 5)</td>
-                        <td>"'212.87999999999997'"</td>
-                        <td>"'212.88'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>eop, unadjusted  </td>
-                        <td>-</td>
-                        <td>5 mismatches in column eop, unadjusted  </td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>eop, unadjusted  </td>
-                        <td>account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'</td>
-                        <td>Value mismatch (example 1 of 5)</td>
-                        <td>"'401439.99999999994'"</td>
-                        <td>"'401440.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>eop, unadjusted  </td>
-                        <td>account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'</td>
-                        <td>Value mismatch (example 2 of 5)</td>
-                        <td>"'27279.999999999996'"</td>
-                        <td>"'27280.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>eop, unadjusted  </td>
-                        <td>account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'</td>
-                        <td>Value mismatch (example 3 of 5)</td>
-                        <td>"'212.87999999999997'"</td>
-                        <td>"'212.88'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>index#</td>
-                        <td>-</td>
-                        <td>170 mismatches in column index#</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>index#</td>
-                        <td>account id='001R700000QnZnIIAV', order number='DIST-184897', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='4/27/2025'</td>
-                        <td>Value mismatch (example 1 of 170)</td>
-                        <td>"'10'"</td>
-                        <td>"'8'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>index#</td>
-                        <td>account id='0011M00002G3zpvQAB', order number='DIST-181281', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='1/16/2025'</td>
-                        <td>Value mismatch (example 2 of 170)</td>
-                        <td>"'22'"</td>
-                        <td>"'17'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>index#</td>
-                        <td>account id='0018Y00002wB9UxQAK', order number='REN-190555', sku='IB-TOKENS-REPORTING-40', service start date='10/31/2025'</td>
-                        <td>Value mismatch (example 3 of 170)</td>
-                        <td>"'26'"</td>
-                        <td>"'21'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>industry [custom]</td>
-                        <td>-</td>
-                        <td>1 mismatches in column industry [custom]</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>industry [custom]</td>
-                        <td>account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'</td>
-                        <td>Value mismatch (example 1 of 1)</td>
-                        <td>"'Aerospace & Defense'"</td>
-                        <td>"'Manufacturing'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>peak arr</td>
-                        <td>-</td>
-                        <td>7 mismatches in column peak arr</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>peak arr</td>
-                        <td>account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'</td>
-                        <td>Value mismatch (example 1 of 7)</td>
-                        <td>"'401439.99999999994'"</td>
-                        <td>"'401440.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>peak arr</td>
-                        <td>account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'</td>
-                        <td>Value mismatch (example 2 of 7)</td>
-                        <td>"'212.87999999999997'"</td>
-                        <td>"'212.88'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>peak arr</td>
-                        <td>account id='0014600001JLImkAAH', order number='DIST-178187', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='10/22/2024'</td>
-                        <td>Value mismatch (example 3 of 7)</td>
-                        <td>"'192000.00000000003'"</td>
+                        <td>"'85214.27993333334'"</td>
                         <td>"'0.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>previous arr</td>
-                        <td>-</td>
-                        <td>3 mismatches in column previous arr</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>previous arr</td>
-                        <td>account id='0014600001JLE5wAAH', order number='REN-182195', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='2/10/2025'</td>
-                        <td>Value mismatch (example 1 of 3)</td>
-                        <td>"'27279.999999999996'"</td>
-                        <td>"'27280.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>previous arr</td>
-                        <td>account id='0018Y00002w9XJCQA2', order number='DIST-181287', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='1/17/2025'</td>
-                        <td>Value mismatch (example 2 of 3)</td>
-                        <td>"'3581.8131868131873'"</td>
-                        <td>"'3581.8131868131877'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>previous arr</td>
-                        <td>account id='0014600001JLO1BAAX', order number='REN-188383', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/28/2025'</td>
-                        <td>Value mismatch (example 3 of 3)</td>
-                        <td>"'404.7999999999999'"</td>
-                        <td>"'404.8'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>rcn emp count</td>
-                        <td>-</td>
-                        <td>5 mismatches in column rcn emp count</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>rcn emp count</td>
-                        <td>account id='0014600001aOx2gAAC', order number='FEDR-184807', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='4/26/2025'</td>
-                        <td>Value mismatch (example 1 of 5)</td>
-                        <td>"'490'"</td>
-                        <td>"'700'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>rcn emp count</td>
-                        <td>account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'</td>
-                        <td>Value mismatch (example 2 of 5)</td>
-                        <td>"'23327'"</td>
-                        <td>"'18000'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>rcn emp count</td>
-                        <td>account id='0014600001JL71YAAT', order number='DIST-179190', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='11/20/2024'</td>
-                        <td>Value mismatch (example 3 of 5)</td>
-                        <td>"'6000'"</td>
-                        <td>"'5500'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>reseller name</td>
-                        <td>-</td>
-                        <td>3 mismatches in column reseller name</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>reseller name</td>
-                        <td>account id='0011M00002G4IbKQAV', order number='REN-186088', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/4/2025'</td>
-                        <td>Value mismatch (example 1 of 3)</td>
-                        <td>"'Computacenter - USA'"</td>
-                        <td>"'Computacenter United States Inc.'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>reseller name</td>
-                        <td>account id='0018Y00002kykqyQAA', order number='REN-188349', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/31/2025'</td>
-                        <td>Value mismatch (example 2 of 3)</td>
-                        <td>"'Computacenter - USA'"</td>
-                        <td>"'Computacenter United States Inc.'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>reseller name</td>
-                        <td>account id='0014600001JLO1BAAX', order number='REN-188383', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='7/28/2025'</td>
-                        <td>Value mismatch (example 3 of 3)</td>
-                        <td>"'Computacenter - USA'"</td>
-                        <td>"'Computacenter United States Inc.'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>variance</td>
-                        <td>-</td>
-                        <td>2 mismatches in column variance</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>variance</td>
-                        <td>account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'</td>
-                        <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'401439.99999999994'"</td>
-                        <td>"'401440.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>variance</td>
-                        <td>account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'212.87999999999997'"</td>
-                        <td>"'212.88'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>variance (adjusted, w/ late renewals extn)</td>
-                        <td>-</td>
-                        <td>2 mismatches in column variance (adjusted, w/ late renewals extn)</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>variance (adjusted, w/ late renewals extn)</td>
-                        <td>account id='0014600001JLbLTAA1', order number='REN-190289', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='9/30/2025'</td>
-                        <td>Value mismatch (example 1 of 2)</td>
-                        <td>"'401439.99999999994'"</td>
-                        <td>"'401440.0'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>variance (adjusted, w/ late renewals extn)</td>
-                        <td>account id='001R700000UESj7IAH', order number='DIST-191216', sku='IB-TOKENS-REPORTING-40', service start date='10/20/2025'</td>
-                        <td>Value mismatch (example 2 of 2)</td>
-                        <td>"'212.87999999999997'"</td>
-                        <td>"'212.88'"</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>year of cohort date fy</td>
-                        <td>-</td>
-                        <td>1 mismatches in column year of cohort date fy</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                
-
-                    <tr>
-                        <td><span class="badge fail">FAIL</span></td>
-                        <td>Data Validation</td>
-                        <td>year of cohort date fy</td>
-                        <td>account id='0011M00002Qr9ncQAB', order number='REN-186049', sku='IB-TOKENS-UDDI-REPORTING-40', service start date='6/28/2025'</td>
-                        <td>Value mismatch (example 1 of 1)</td>
-                        <td>"'FY 2023'"</td>
-                        <td>"'FY 2019'"</td>
                     </tr>
                 
                         </tbody>
@@ -2708,7 +1851,7 @@
         
         <div class="footer">
             <p>Universal Data Validation Framework v1.0</p>
-            <p class="timestamp">Report generated on 2026-04-20 18:43:24</p>
+            <p class="timestamp">Report generated on 2026-04-21 10:11:59</p>
         </div>
     </div>
     
@@ -2760,7 +1903,7 @@
         });
         
         // Chart.js visualizations
-        const chartData = {"pass_count": 61, "fail_count": 44, "skip_count": 0, "validation_types": ["record_count_check", "column_count_check", "metadata_type_check", "duplicate_check", "null_check", "empty_string_check", "primary_key_match", "data_validation"], "validation_fails": [0, 0, 0, 0, 0, 0, 0, 44], "validation_passes": [1, 1, 49, 2, 6, 1, 1, 0], "column_names": ["bop (adjusted, w/ late renewals extn)", "eop (adjusted, w/ late renewals extn)", "eop, unadjusted  ", "index#", "peak arr", "previous arr", "rcn emp count", "reseller name", "variance", "variance (adjusted, w/ late renewals extn)", "end customer", "industry [custom]", "year of cohort date fy"], "column_failures": [4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 2, 2, 2]};
+        const chartData = {"pass_count": 60, "fail_count": 6, "skip_count": 0, "validation_types": ["record_count_check", "column_count_check", "metadata_type_check", "duplicate_check", "null_check", "empty_string_check", "primary_key_match", "data_validation"], "validation_fails": [0, 0, 0, 0, 0, 0, 0, 6], "validation_passes": [1, 1, 49, 2, 5, 1, 1, 0], "column_names": ["index#", "peak arr"], "column_failures": [4, 2]};
         
         // Status Pie Chart
         new Chart(document.getElementById('statusChart'), {
