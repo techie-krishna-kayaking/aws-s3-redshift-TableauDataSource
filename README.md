@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛡️ BI Universal QA Tool
+# 🛡️ DATA & BI Universal QA Tool
 
 <p align="center">
   <strong>A unified quality assurance toolkit combining data validation and Tableau regression testing for BI/data engineering workflows.</strong>
@@ -439,7 +439,7 @@ Internal use only.
 
 <div align="center">
 
-**Built with ❤️ for Data Engineering**
+**Built by 👨‍💻 Krishna with ❤️ for Data Engineering**
 
 <p>
   <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
