@@ -1,9 +1,9 @@
 <div align="center">
 
-# 🛡️ Universal Data Validation Framework
+# 🛡️ BI Universal QA Tool
 
 <p align="center">
-  <strong>A powerful, plugin-based data validation engine for comparing data across files, databases, and Tableau datasources — with rich interactive HTML reports.</strong>
+  <strong>A unified quality assurance toolkit combining data validation and Tableau regression testing for BI/data engineering workflows.</strong>
 </p>
 
 <p align="center">
@@ -11,24 +11,75 @@
   <img src="https://img.shields.io/badge/pandas-2.0+-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
   <img src="https://img.shields.io/badge/Amazon_Redshift-8C4FFF?style=for-the-badge&logo=amazonredshift&logoColor=white" alt="Redshift">
   <img src="https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white" alt="Tableau">
+  <img src="https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white" alt="Playwright">
   <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="Chart.js">
   <img src="https://img.shields.io/badge/YAML-CB171E?style=for-the-badge&logo=yaml&logoColor=white" alt="YAML">
 </p>
 
 <p align="center">
   <a href="#-quick-start">Quick Start</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-comparison-scenarios">Scenarios</a> •
-  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-data-validation">Validation</a> •
+  <a href="#-tableau-regression-testing">Regression</a> •
   <a href="#-configuration-examples">Config</a> •
-  <a href="#-multi-environment-support">Multi-Env</a>
+  <a href="#-multi-environment-support">Multi-Env</a> •
+  <a href="#-architecture">Architecture</a>
 </p>
 
 </div>
 
 ---
 
-## 📸 What You Get
+## Overview
+
+| Tool | Command | What It Does |
+|---|---|---|
+| **Data Validation** | `cli.py validate` | Compares data across files, Redshift tables, and Tableau datasources |
+| **Tableau Regression** | `cli.py regression` | Smoke, visual comparison, and performance testing of Tableau dashboards |
+
+---
+
+## � Quick Start
+
+### Step 1: Setup (One-time)
+
+```bash
+cd universal-validator
+./setup.sh            # creates venv, installs all dependencies
+```
+
+### Step 2: Configure (if using Redshift)
+
+```bash
+cp .env.example .env
+# Edit .env with your Redshift credentials
+```
+
+### Step 3: Activate & Run
+
+```bash
+source venv/bin/activate
+
+# Data Validation
+python cli.py validate --config config/my_validation.yaml
+python cli.py validate --config config/my_validation.yaml --name "CSV to Redshift"
+python cli.py validate --config config/my_validation.yaml --debug
+
+# Tableau Regression Testing
+python cli.py regression --config bi_regression/configs/config.yaml
+```
+
+### Direct Entry Points (also still work)
+
+```bash
+python main.py --config config/my_validation.yaml                         # data validation
+python -m bi_regression.run --config bi_regression/configs/config.yaml    # regression
+```
+
+### Step 4: View Results
+
+```bash
+open results/my_first_validation_*.html   # Interactive HTML report
+```
 
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
@@ -45,7 +96,7 @@
 
 ---
 
-## ✨ Features
+## 📊 Data Validation
 
 ### 🔄 5 Universal Comparison Scenarios
 
@@ -116,14 +167,6 @@ Seamlessly compare data across Redshift environments:
 | **Parquet** | `.parquet` | — |
 | **Excel** | `.xlsx`, `.xls` | `sheet_name` (index or name) |
 
-### ⚡ CLI Interface
-
-```bash
-python main.py --config <path>                   # Run all validations
-python main.py --config <path> --name "My Test"  # Run specific validation
-python main.py --config <path> --debug           # Enable debug logging
-```
-
 ### 🔑 Primary Key Intelligence
 
 ```yaml
@@ -150,157 +193,35 @@ results/
 
 ---
 
-## 🏗️ Tech Stack
+## � Tableau Regression Testing
 
-<table>
-  <tr>
-    <th align="center" colspan="2">Core / Data Processing</th>
-  </tr>
-  <tr>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"><br>
-      <sub>3.9+</sub>
-    </td>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas"><br>
-      <sub>2.0+</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy"><br>
-      <sub>Data ops</sub>
-    </td>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/PyArrow-EE4C2C?style=for-the-badge&logo=apache&logoColor=white" alt="PyArrow"><br>
-      <sub>Parquet I/O</sub>
-    </td>
-  </tr>
-  <tr>
-    <th align="center" colspan="2">Database</th>
-  </tr>
-  <tr>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/Amazon_Redshift-8C4FFF?style=for-the-badge&logo=amazonredshift&logoColor=white" alt="Redshift"><br>
-      <sub>redshift-connector 2.0+</sub>
-    </td>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS"><br>
-      <sub>Cloud data warehouse</sub>
-    </td>
-  </tr>
-  <tr>
-    <th align="center" colspan="2">Visualization / Reporting</th>
-  </tr>
-  <tr>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="Chart.js"><br>
-      <sub>Pie & bar charts</sub>
-    </td>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/DataTables-336791?style=for-the-badge&logo=jquery&logoColor=white" alt="DataTables"><br>
-      <sub>Interactive tables</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5"><br>
-      <sub>Report output</sub>
-    </td>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3"><br>
-      <sub>Responsive styling</sub>
-    </td>
-  </tr>
-  <tr>
-    <th align="center" colspan="2">Data Sources</th>
-  </tr>
-  <tr>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white" alt="Tableau"><br>
-      <sub>TWBX extraction</sub>
-    </td>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white" alt="Excel"><br>
-      <sub>openpyxl engine</sub>
-    </td>
-  </tr>
-  <tr>
-    <th align="center" colspan="2">Configuration / Utilities</th>
-  </tr>
-  <tr>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/YAML-CB171E?style=for-the-badge&logo=yaml&logoColor=white" alt="YAML"><br>
-      <sub>Config-driven</sub>
-    </td>
-    <td align="center" width="120">
-      <img src="https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black" alt="dotenv"><br>
-      <sub>python-dotenv</sub>
-    </td>
-  </tr>
-</table>
+Three test modes for Tableau Cloud dashboards using Playwright + Edge.
 
-### 📋 Python Dependencies
+| Mode | Config Key | What It Does |
+|---|---|---|
+| **Smoke** | `smoke:` | Validates fonts, colors, sizes against brand standards |
+| **Comparison** | `comparison:` | SSIM pixel diff between two dashboard environments |
+| **Performance** | `performance:` | Measures render & interaction timing across N iterations |
 
+```bash
+python cli.py regression --config bi_regression/configs/config.yaml
 ```
-pandas>=2.0.0          # Data manipulation & comparison
-redshift-connector>=2.0.0  # Amazon Redshift connectivity
-python-dotenv>=1.0.0   # Environment variable management
-pyyaml>=6.0            # YAML configuration parsing
-openpyxl>=3.1.0        # Excel read/write support
-pyarrow>=12.0.0        # Parquet file I/O
-```
+
+See `bi_regression/configs/exampleConfig.yaml` for config examples.
 
 ---
 
-## 🚀 Quick Start
+## 📋 Dependencies
 
-### Step 1: One-Time Setup
+All dependencies are in a single `requirements.txt`. Key libraries:
 
-```bash
-# Clone / navigate to the project
-cd universal-validator
-
-# Run setup script (creates venv + installs all dependencies)
-./setup.sh
-
-# Configure Redshift environments
-cp .env.example .env
-# Edit .env with your DEV, PREPROD, PROD credentials
-```
-
-### Step 2: Create a Validation Config
-
-Create `config/my_validation.yaml`:
-
-```yaml
-validations:
-  - name: "My First Validation"
-    source:
-      type: file
-      path: ./data/source.csv
-    target:
-      type: table
-      environment: DEV
-      schema: edw_asis
-      table: my_table_name
-    primary_keys: id
-    output_dir: ./results
-```
-
-### Step 3: Run
-
-```bash
-source venv/bin/activate
-python main.py --config config/my_validation.yaml
-```
-
-### Step 4: View Results
-
-```bash
-open results/my_first_validation_*.html   # Interactive HTML report
-cat results/my_first_validation_*.csv     # Machine-readable CSV
-```
+| Data Validation | Tableau Regression |
+|---|---|
+| pandas, pyarrow | playwright |
+| redshift-connector | opencv-python, scikit-image |
+| openpyxl | pydantic, jinja2 |
+| python-dotenv | Pillow, numpy, rich |
+| pyyaml | pyyaml |
 
 ---
 
@@ -428,9 +349,12 @@ source:
 ```
 universal-validator/
 │
-├── main.py                    # CLI entry point
+├── cli.py                     # Unified CLI entry point
+├── main.py                    # Data validation entry point (original)
+├── requirements.txt           # Merged dependencies
+├── setup.sh                   # Quick start setup script
 │
-├── core/                      # 🧠 Core engine
+├── core/                      # 🧠 Validation engine
 │   ├── validator.py           #    Orchestrates the full validation workflow
 │   ├── comparator.py          #    7 validation check implementations
 │   └── reporter.py            #    CSV, HTML, consolidated report generation
@@ -446,15 +370,26 @@ universal-validator/
 │   ├── env_config.py          #    Environment parsing, JDBC URL parsing
 │   └── html_template.py       #    Chart.js + DataTables HTML template
 │
-├── config/                    # ⚙️ YAML validation configurations
-│   ├── example_validations.yaml
-│   └── multi_env_examples.yaml
+├── bi_regression/             # 🎭 Tableau Dashboard Testing Framework
+│   ├── run.py                 #    Regression CLI entry point
+│   ├── browser_manager.py     #    Edge browser lifecycle (Playwright)
+│   ├── comparison_runner.py   #    SSIM-based visual diff
+│   ├── config_parser.py       #    Pydantic config models
+│   ├── filter_manager.py      #    Tableau filter interaction
+│   ├── performance_tester.py  #    Render/interaction timing
+│   ├── reporter.py            #    Smoke/comparison HTML reports
+│   ├── smoke_tester.py        #    UI standards validation
+│   ├── visual_diff.py         #    SSIM image comparison
+│   └── configs/               #    Regression YAML configs
 │
+├── scripts/                   # Helper scripts
+│   ├── start_edge_debug.sh    #    Launch Edge with remote debugging
+│   └── inspect_dom.py         #    Tableau DOM inspector utility
+│
+├── config/                    # ⚙️ Validation YAML configurations
 ├── results/                   # 📊 Output reports (timestamped, auto-archived)
-│
+├── raw_data/                  # Source data files
 └── docs/                      # 📖 Documentation
-    ├── MULTI_ENVIRONMENT.md
-    └── MULTI_ENV_QUICKSTART.md
 ```
 
 ---
@@ -487,6 +422,7 @@ class MyAdapter(BaseAdapter):
 
 | Problem | Solution |
 |:--------|:---------|
+| **Module Not Found** | Run `source venv/bin/activate` to activate virtual environment |
 | **File Not Found** | Use relative paths from project root, or absolute paths |
 | **Redshift Connection Failed** | Verify `.env` credentials, check network/firewall rules |
 | **No Common Columns** | Check column name spelling and case sensitivity |
