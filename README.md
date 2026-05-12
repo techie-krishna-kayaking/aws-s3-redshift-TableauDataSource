@@ -122,6 +122,7 @@ open results/my_first_validation_*.html   # Interactive HTML report
 
 ### 📊 Interactive HTML Reports
 
+- **QA Sign-off Summary** — Copy-pasteable block at the top with source/target info, pass/fail counts, and a one-line failure reason
 - **Summary Dashboard** — Pass/fail/skip count cards with status badges
 - **Pie Chart** — Overall validation status distribution
 - **Bar Charts** — Validation type breakdown (pass/fail per type)
@@ -129,6 +130,16 @@ open results/my_first_validation_*.html   # Interactive HTML report
 - **Drill-Down Tables** — Sortable, searchable, paginated tables with primary key context
 - **Collapsible Sections** — Clean, organized expand/collapse layout
 - **Metadata Panel** — Source/target info with row & column counts
+
+#### QA Sign-off Block (appears at the top of every report)
+
+```
+📋 QA Sign-off
+Source Type: file | Source Path: ./data/SF_profile.csv | Source Rows: 75 | Source Columns: 559
+Target Type: table | Target Path: edw_asis.salesforce_profile | Target Rows: 75 | Target Columns: 623
+Total Validations: 47 | Pass: 44 | Fail: 3
+❌ Failures: 3 data value check (e.g. column "status") — Mismatch: source='Active', target='Inactive'
+```
 
 ### 📦 Consolidated Reporting
 
@@ -152,11 +163,12 @@ When running multiple validations in one config, the framework automatically gen
 
 Seamlessly compare data across Redshift environments:
 
-- Define **DEV**, **PREPROD**, **PROD**, and custom environments in a single `.env` file
+- Define **DEV**, **DEV_REVOPS**, **PREPROD**, **PROD**, and any custom environments in a single `.env` file
 - Reference by name in YAML config — no hardcoded credentials
 - **JDBC URL Parsing** — Automatically extracts host, port, database
 - **Backward Compatible** — Legacy `REDSHIFT_HOST`/`REDSHIFT_DB` variables still work
 - Validate data migrations across **DEV → PREPROD → PROD** pipelines
+- Mix environment-based and direct connection config in the same validation
 
 ### 🗂️ File Format Support
 
@@ -227,9 +239,12 @@ All dependencies are in a single `requirements.txt`. Key libraries:
 
 ## 📊 Configuration Examples
 
-### Scenario 1: File vs Redshift Table
+> **📖 Full reference:** [`config/multi_env_examples.yaml`](config/multi_env_examples.yaml) — 24 ready-to-copy scenarios covering every combination.
+
+### 5 Core Comparison Scenarios
 
 ```yaml
+# 1. File → Redshift Table (ETL validation)
 - name: "CSV to Redshift"
   source:
     type: file
@@ -241,29 +256,23 @@ All dependencies are in a single `requirements.txt`. Key libraries:
     table: my_table
   primary_keys: id
   output_dir: ./results
-```
 
-### Scenario 2: Table vs Table (Cross-Environment)
-
-```yaml
-- name: "DEV vs PROD Comparison"
+# 2. Table → Table (cross-schema or cross-environment)
+- name: "DEV vs PROD"
   source:
     type: table
     environment: DEV
     schema: edw_asis
-    table: source_table
+    table: customers
   target:
     type: table
     environment: PROD
     schema: edw_asis
-    table: target_table
+    table: customers
   primary_keys: customer_id
   output_dir: ./results
-```
 
-### Scenario 3: File vs File
-
-```yaml
+# 3. File → File (format migration / export check)
 - name: "CSV to Parquet"
   source:
     type: file
@@ -273,11 +282,8 @@ All dependencies are in a single `requirements.txt`. Key libraries:
     path: ./data/target.parquet
   primary_keys: id
   output_dir: ./results
-```
 
-### Scenario 4: Tableau DataSource vs DataSource
-
-```yaml
+# 4. Tableau Datasource → Datasource (pre/post-RCA)
 - name: "TWBX Comparison"
   source:
     type: datasource
@@ -286,11 +292,8 @@ All dependencies are in a single `requirements.txt`. Key libraries:
     type: datasource
     path: ./datasources/post_rca.twbx
   output_dir: ./results
-```
 
-### Scenario 5: Tableau DataSource vs Table
-
-```yaml
+# 5. Tableau Datasource → Redshift Table (dashboard accuracy)
 - name: "TWBX to Redshift"
   source:
     type: datasource
@@ -303,6 +306,85 @@ All dependencies are in a single `requirements.txt`. Key libraries:
   primary_keys: record_id
   output_dir: ./results
 ```
+
+### File Format Options
+
+```yaml
+# CSV with custom separator & encoding
+source:
+  type: file
+  path: ./data/export.tsv
+  sep: "\t"                       # Also supports "|" or any delimiter
+  encoding: iso-8859-1             # Auto-detects if omitted
+
+# JSON with orientation
+source:
+  type: file
+  path: ./data/api_response.json
+  json_orient: records             # records | index | columns | values
+
+# Excel with specific sheet
+source:
+  type: file
+  path: ./data/report.xlsx
+  sheet_name: "Q4 Summary"         # By name or index (0, 1, 2…)
+
+# Parquet (no extra options needed)
+source:
+  type: file
+  path: ./data/warehouse.parquet
+```
+
+### Primary Key Options
+
+```yaml
+primary_keys: id                              # Single key
+primary_keys: order_id,line_item_id,timestamp  # Composite key (3 columns)
+# Omit primary_keys entirely for row-by-row positional comparison
+```
+
+### Selective Column Loading (Redshift)
+
+```yaml
+target:
+  type: table
+  environment: DEV
+  schema: edw_asis
+  table: crm_accounts
+  columns:                          # Only fetch these columns
+    - account_id
+    - account_name
+    - annual_revenue
+```
+
+### All 24 Scenarios at a Glance
+
+| # | Scenario | Source | Target | Key Feature |
+|---|:---------|:-------|:-------|:------------|
+| 1 | CSV → Redshift | file | table | Basic ETL validation |
+| 2 | Table → Table (same env) | table | table | Cross-schema comparison |
+| 3 | CSV → Parquet | file | file | Format migration |
+| 4 | TWBX → TWBX | datasource | datasource | Pre/post-RCA |
+| 5 | TWBX → Redshift | datasource | table | Dashboard accuracy |
+| 6 | DEV → PREPROD | table | table | Migration validation |
+| 7 | PREPROD → PROD | table | table | Pre-deploy check |
+| 8 | DEV → DEV_REVOPS | table | table | Same cluster, different users |
+| 9 | CSV → PROD | file | table | Production upload |
+| 10 | Env + direct config | table | table | Legacy + modern mixed |
+| 11 | TSV → Redshift | file (tsv) | table | Custom separator |
+| 12 | Pipe-delimited → CSV | file | file | `sep: "\|"` |
+| 13 | Latin-1 CSV → Redshift | file | table | Explicit encoding |
+| 14 | JSON → Redshift | file (json) | table | `json_orient: records` |
+| 15 | JSON → CSV | file (json) | file | Cross-format |
+| 16 | Parquet → Redshift | file (parquet) | table | Composite PK |
+| 17 | Excel sheet → CSV | file (xlsx) | file | `sheet_name` |
+| 18 | Excel → Redshift | file (xlsx) | table | Sheet by index |
+| 19 | Parquet → Parquet | file | file | Version comparison |
+| 20 | Composite PK | file | table | 3-column PK |
+| 21 | No PK (row-by-row) | file | table | Positional comparison |
+| 22 | Selective columns | file | table | `columns:` filter |
+| 23 | Named datasource | datasource | datasource | `datasource_name` |
+| 24 | TWBX → CSV | datasource | file | Metadata export check |
 
 ---
 
