@@ -11,3 +11,4 @@ validations:
       table: salesforce_profile
     primary_keys: id
     output_dir: ./results/sf_profile_validation
+

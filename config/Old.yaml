@@ -107,3 +107,27 @@ validations:
     primary_keys: id
     output_dir: ./results/intellum
     
+  - name: "SF Profile Validation"
+    source:
+      type: file
+      path: ./data/SF_profile.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: salesforce_profile
+    primary_keys: id
+    output_dir: ./results/sf_profile_validation
+
+validations:
+  - name: "Salesforce QuoteHistory"
+    source:
+      type: file
+      path: ./raw_data/sfdc-quotehistory/quotehistory.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: salesforce_quotehistory
+    primary_keys: id
+    output_dir: ./results/
