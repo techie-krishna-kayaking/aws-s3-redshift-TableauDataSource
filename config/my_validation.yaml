@@ -1,38 +1,43 @@
 
 validations:
-  - name: "Clari Entries Validation"
+  - name: "DNS_Armor_GCP_query"
     source:
-      type: file
-      path: ./raw_data/clari/clari_entries-a56e2625d54740969625257617a90786.csv
+      type: table
+      environment: PREPROD
+      schema: edw_stage
+      table: stg_dns_armor_gcp_query
     target:
       type: table
       environment: PREPROD
       schema: edw_asis
-      table: clari_entries
-    primary_keys: timeframeid, timeperiodid, fieldid, userid, report_name
-    output_dir: ./results/clari_validation
+      table: dns_armor_gcp_query
+    primary_keys: time_to
+    output_dir: ./results/DNS_Armor_GCP
 
-  - name: "Clari Fields Validation"
+  - name: "DNS_Armor_GCP_query_region_split"
     source:
-      type: file
-      path: ./raw_data/clari/clari_fields-b5f2f4068f6c4dd28d031de36016d5ae.csv
+      type: table
+      environment: PREPROD
+      schema: edw_stage
+      table: stg_dns_armor_gcp_query_region_split
     target:
       type: table
       environment: PREPROD
       schema: edw_asis
-      table: clari_fields
-    primary_keys: fieldname, fieldid, report_name
-    output_dir: ./results/clari_validation
+      table: dns_armor_gcp_query_region_split
+    primary_keys: time_to
+    output_dir: ./results/DNS_Armor_GCP
 
-  - name: "Clari Users Validation"
+  - name: "DNS_Armor_GCP_monthly_consumption"
     source:
-      type: file
-      path: ./raw_data/clari/clari_users-4c4ae92a219e447199386de26724cf44.csv
+      type: table
+      environment: PREPROD
+      schema: edw_stage
+      table: stg_dns_armor_monthly_consumption
     target:
       type: table
       environment: PREPROD
       schema: edw_asis
-      table: clari_users
-    primary_keys: userid, report_name
-    output_dir: ./results/clari_validation
-
+      table: dns_armor_monthly_consumption
+    primary_keys: obscured_account_id, obscured_organization_id, active_unique_project_count, royalty_due, active_unique_workload_count,total_queries_count, usage_month
+    output_dir: ./results/DNS_Armor_GCP

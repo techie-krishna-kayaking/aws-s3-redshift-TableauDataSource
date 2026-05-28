@@ -1,0 +1,29 @@
+validation,result,column,pk,detail,source_value,target_value
+record_count_check,PASS,,,"Source: 4 rows, Target: 4 rows",4,4
+column_count_check,PASS,,,"Source: 15 columns, Target: 22 columns, Common: 13 | Source-only: ['edw_batch_id', 'edw_run_date'] | Target-only: ['edw_act_fl', 'edw_end_dt', 'edw_hash_key', 'edw_ld_dt', 'edw_src_cd', 'edw_strt_dt', 'edw_updt_dt', 'edw_user_nm', 'row_id']",15,22
+metadata_type_check,PASS,cp_whu,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,overage_total_workload_hours,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,regions,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,time_from,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,time_from_epoch,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,time_to,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,time_to_epoch,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,total,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,total_allocations_workload_hours,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,total_consumed_workload_hours,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,total_queries,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,total_vm_instances,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,wh_unit,,"Compatible types: Source 'object', Target 'object'",object,object
+duplicate_check,PASS,,,No duplicates found in Source,0,
+duplicate_check,PASS,,,No duplicates found in Target,,0
+null_check,PASS,,,No null values found in any common columns,0,0
+empty_string_check,PASS,,,No empty strings found,,
+primary_key_match,FAIL,,,"Common: 0, Source-only: 4, Target-only: 4",4,4
+primary_key_match,FAIL,,time_to=Timestamp('2026-01-31 23:59:59'),Primary key exists in Source but not in Target (showing first 5 of 4),EXISTS,MISSING
+primary_key_match,FAIL,,time_to=Timestamp('2026-02-28 23:59:59'),Primary key exists in Source but not in Target (showing first 5 of 4),EXISTS,MISSING
+primary_key_match,FAIL,,time_to=Timestamp('2026-03-31 23:59:59'),Primary key exists in Source but not in Target (showing first 5 of 4),EXISTS,MISSING
+primary_key_match,FAIL,,time_to=Timestamp('2026-04-30 23:59:59'),Primary key exists in Source but not in Target (showing first 5 of 4),EXISTS,MISSING
+primary_key_match,FAIL,,time_to=Timestamp('2026-01-31 23:59:00'),Primary key exists in Target but not in Source (showing first 5 of 4),MISSING,EXISTS
+primary_key_match,FAIL,,time_to=Timestamp('2026-02-28 23:59:00'),Primary key exists in Target but not in Source (showing first 5 of 4),MISSING,EXISTS
+primary_key_match,FAIL,,time_to=Timestamp('2026-03-31 23:59:00'),Primary key exists in Target but not in Source (showing first 5 of 4),MISSING,EXISTS
+primary_key_match,FAIL,,time_to=Timestamp('2026-04-30 23:59:00'),Primary key exists in Target but not in Source (showing first 5 of 4),MISSING,EXISTS

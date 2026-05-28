@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS_Armor_GCP_query_region_split - Validation Report</title>
+    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 95%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .card-title {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .card-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .card.pass .card-value {
+            color: #28a745;
+        }
+        
+        .card.fail .card-value {
+            color: #dc3545;
+        }
+        
+        .card.info .card-value {
+            color: #17a2b8;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 3px;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        table.dataTable {
+            width: 100% !important;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table.dataTable thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+        
+        table.dataTable tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table.dataTable tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .badge.pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .badge.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .badge.skip {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .badge.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .metadata-item {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .metadata-label {
+            font-weight: 600;
+            color: #666;
+            min-width: 120px;
+        }
+        
+        .metadata-value {
+            color: #333;
+            word-break: break-all;
+        }
+        
+        .collapsible {
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 8px;
+            margin: 10px 0;
+            transition: background 0.3s ease;
+        }
+        
+        .collapsible:hover {
+            background: #764ba2;
+        }
+        
+        .collapsible::after {
+            content: '\25BC';
+            float: right;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .collapsible.active::after {
+            transform: rotate(-180deg);
+        }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            background: white;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .collapsible-content.active {
+            max-height: none;
+            padding: 20px;
+            border: 2px solid #667eea;
+            border-top: none;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .timestamp {
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        .qa-signoff {
+            margin: 0 30px 30px;
+            padding: 20px 24px;
+            background: #f0f4ff;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.92em;
+            line-height: 1.7;
+        }
+
+        .qa-signoff-title {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .qa-signoff .qa-line {
+            color: #333;
+        }
+
+        .qa-signoff .qa-fail-reason {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .qa-signoff .qa-pass-msg {
+            color: #28a745;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 DNS_Armor_GCP_query_region_split</h1>
+            <div class="subtitle">Data Validation Report</div>
+            <div class="timestamp">Generated: 2026-05-28 15:04:29</div>
+        </div>
+        
+        <div class="summary-cards">
+            <div class="card fail">
+                <div class="card-title">Overall Status</div>
+                <div class="card-value">❌ FAIL</div>
+            </div>
+            <div class="card pass">
+                <div class="card-title">Passed Checks</div>
+                <div class="card-value">12</div>
+            </div>
+            <div class="card fail">
+                <div class="card-title">Failed Checks</div>
+                <div class="card-value">17</div>
+            </div>
+            <div class="card info">
+                <div class="card-title">Total Checks</div>
+                <div class="card-value">29</div>
+            </div>
+        </div>
+        
+        <!-- QA Sign-off Summary -->
+        <div class="qa-signoff">
+            <div class="qa-signoff-title">📋 QA Sign-off</div>
+            <div class="qa-line">Source Type: table | Source Path: edw_stage.stg_dns_armor_gcp_query_region_split | Source Rows: 172 | Source Columns: 10</div>
+            <div class="qa-line">Target Type: table | Target Path: edw_asis.dns_armor_gcp_query_region_split | Target Rows: 172 | Target Columns: 17</div>
+            <div class="qa-line">Total Validations: 29 | Pass: 12 | Fail: 17</div>
+            <div class="qa-fail-reason">❌ Failures: 8 duplicate check, 9 primary key match — Source has 43 duplicate rows (showing first 5 of 172)</div>
+        </div>
+
+        <div class="content">
+            <!-- Metadata Section -->
+            <div class="section">
+                <h2 class="section-title">Validation Configuration</h2>
+                <div class="metadata">
+                    <div class="metadata-grid">
+                        
+            <div class="metadata-item">
+                <div class="metadata-label">Source Type:</div>
+                <div class="metadata-value">table</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Source Path:</div>
+                <div class="metadata-value">edw_stage.stg_dns_armor_gcp_query_region_split</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Source Rows:</div>
+                <div class="metadata-value">172</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Source Columns:</div>
+                <div class="metadata-value">10</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Type:</div>
+                <div class="metadata-value">table</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Path:</div>
+                <div class="metadata-value">edw_asis.dns_armor_gcp_query_region_split</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Rows:</div>
+                <div class="metadata-value">172</div>
+            </div>
+        
+
+            <div class="metadata-item">
+                <div class="metadata-label">Target Columns:</div>
+                <div class="metadata-value">17</div>
+            </div>
+        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visualizations Section -->
+            <div class="section">
+                <h2 class="section-title">Validation Overview</h2>
+                <div class="chart-grid">
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="validationTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column-Level Analysis -->
+            <div class="section">
+                <h2 class="section-title">Column-Level Analysis</h2>
+                <div class="chart-container" style="height: 500px;">
+                    <canvas id="columnChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Detailed Results -->
+            <div class="section">
+                <h2 class="section-title">Detailed Results</h2>
+                
+                <!-- Failed Checks -->
+                <button class="collapsible active">❌ Failed Checks (17)</button>
+                <div class="collapsible-content active">
+                    <table id="failedTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Validation Type</th>
+                                <th>Column</th>
+                                <th>Primary Key</th>
+                                <th>Detail</th>
+                                <th>Source Value</th>
+                                <th>Target Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-01-31 23:59:59')</td>
+                        <td>Source has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>'43'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-02-28 23:59:59')</td>
+                        <td>Source has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>'43'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-03-31 23:59:59')</td>
+                        <td>Source has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>'43'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-04-30 23:59:59')</td>
+                        <td>Source has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>'43'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-01-31 23:59:00')</td>
+                        <td>Target has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>-</td>
+                        <td>'43'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-02-28 23:59:00')</td>
+                        <td>Target has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>-</td>
+                        <td>'43'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-03-31 23:59:00')</td>
+                        <td>Target has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>-</td>
+                        <td>'43'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-04-30 23:59:00')</td>
+                        <td>Target has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>-</td>
+                        <td>'43'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Common: 0, Source-only: 4, Target-only: 4</td>
+                        <td>'4'</td>
+                        <td>'4'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-01-31 23:59:59')</td>
+                        <td>Primary key exists in Source but not in Target (showing first 5 of 4)</td>
+                        <td>'EXISTS'</td>
+                        <td>'MISSING'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-02-28 23:59:59')</td>
+                        <td>Primary key exists in Source but not in Target (showing first 5 of 4)</td>
+                        <td>'EXISTS'</td>
+                        <td>'MISSING'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-03-31 23:59:59')</td>
+                        <td>Primary key exists in Source but not in Target (showing first 5 of 4)</td>
+                        <td>'EXISTS'</td>
+                        <td>'MISSING'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-04-30 23:59:59')</td>
+                        <td>Primary key exists in Source but not in Target (showing first 5 of 4)</td>
+                        <td>'EXISTS'</td>
+                        <td>'MISSING'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-01-31 23:59:00')</td>
+                        <td>Primary key exists in Target but not in Source (showing first 5 of 4)</td>
+                        <td>'MISSING'</td>
+                        <td>'EXISTS'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-02-28 23:59:00')</td>
+                        <td>Primary key exists in Target but not in Source (showing first 5 of 4)</td>
+                        <td>'MISSING'</td>
+                        <td>'EXISTS'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-03-31 23:59:00')</td>
+                        <td>Primary key exists in Target but not in Source (showing first 5 of 4)</td>
+                        <td>'MISSING'</td>
+                        <td>'EXISTS'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-04-30 23:59:00')</td>
+                        <td>Primary key exists in Target but not in Source (showing first 5 of 4)</td>
+                        <td>'MISSING'</td>
+                        <td>'EXISTS'</td>
+                    </tr>
+                
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Passed Checks -->
+                <button class="collapsible">✅ Passed Checks (12)</button>
+                <div class="collapsible-content">
+                    <table id="passedTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Validation Type</th>
+                                <th>Column</th>
+                                <th>Detail</th>
+                                <th>Source Value</th>
+                                <th>Target Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                    <tr>
+                        
+                        <td>Record Count Check</td>
+                        <td>-</td>
+                        <td>Source: 172 rows, Target: 172 rows</td>
+                        <td>'172'</td>
+                        <td>'172'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Column Count Check</td>
+                        <td>-</td>
+                        <td>Source: 10 columns, Target: 17 columns, Common: 8 | Source-only: ['edw_batch_id', 'edw_run_date'] | Target-only: ['edw_act_fl', 'edw_end_dt', 'edw_hash_key', 'edw_ld_dt', 'edw_src_cd', 'edw_strt_dt', 'edw_updt_dt', 'edw_user_nm', 'row_id']</td>
+                        <td>'10'</td>
+                        <td>'17'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>cp_whu</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>logs</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>region</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>time_from</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>time_from_epoch</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>time_to</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>time_to_epoch</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Metadata Type Check</td>
+                        <td>wh_unit</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Null Check</td>
+                        <td>-</td>
+                        <td>No null values found in any common columns</td>
+                        <td>'0'</td>
+                        <td>'0'</td>
+                    </tr>
+                
+
+                    <tr>
+                        
+                        <td>Empty String Check</td>
+                        <td>-</td>
+                        <td>No empty strings found</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- All Results -->
+                <button class="collapsible">📋 All Results (29)</button>
+                <div class="collapsible-content">
+                    <table id="allTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Validation Type</th>
+                                <th>Column</th>
+                                <th>Primary Key</th>
+                                <th>Detail</th>
+                                <th>Source Value</th>
+                                <th>Target Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Record Count Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Source: 172 rows, Target: 172 rows</td>
+                        <td>'172'</td>
+                        <td>'172'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Column Count Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Source: 10 columns, Target: 17 columns, Common: 8 | Source-only: ['edw_batch_id', 'edw_run_date'] | Target-only: ['edw_act_fl', 'edw_end_dt', 'edw_hash_key', 'edw_ld_dt', 'edw_src_cd', 'edw_strt_dt', 'edw_updt_dt', 'edw_user_nm', 'row_id']</td>
+                        <td>'10'</td>
+                        <td>'17'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>cp_whu</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>logs</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>region</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>time_from</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>time_from_epoch</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>time_to</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>time_to_epoch</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Metadata Type Check</td>
+                        <td>wh_unit</td>
+                        <td>-</td>
+                        <td>Compatible types: Source 'object', Target 'object'</td>
+                        <td>'object'</td>
+                        <td>'object'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-01-31 23:59:59')</td>
+                        <td>Source has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>'43'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-02-28 23:59:59')</td>
+                        <td>Source has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>'43'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-03-31 23:59:59')</td>
+                        <td>Source has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>'43'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-04-30 23:59:59')</td>
+                        <td>Source has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>'43'</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-01-31 23:59:00')</td>
+                        <td>Target has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>-</td>
+                        <td>'43'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-02-28 23:59:00')</td>
+                        <td>Target has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>-</td>
+                        <td>'43'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-03-31 23:59:00')</td>
+                        <td>Target has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>-</td>
+                        <td>'43'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Duplicate Check</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-04-30 23:59:00')</td>
+                        <td>Target has 43 duplicate rows (showing first 5 of 172)</td>
+                        <td>-</td>
+                        <td>'43'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Null Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>No null values found in any common columns</td>
+                        <td>'0'</td>
+                        <td>'0'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge pass">PASS</span></td>
+                        <td>Empty String Check</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>No empty strings found</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Common: 0, Source-only: 4, Target-only: 4</td>
+                        <td>'4'</td>
+                        <td>'4'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-01-31 23:59:59')</td>
+                        <td>Primary key exists in Source but not in Target (showing first 5 of 4)</td>
+                        <td>'EXISTS'</td>
+                        <td>'MISSING'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-02-28 23:59:59')</td>
+                        <td>Primary key exists in Source but not in Target (showing first 5 of 4)</td>
+                        <td>'EXISTS'</td>
+                        <td>'MISSING'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-03-31 23:59:59')</td>
+                        <td>Primary key exists in Source but not in Target (showing first 5 of 4)</td>
+                        <td>'EXISTS'</td>
+                        <td>'MISSING'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-04-30 23:59:59')</td>
+                        <td>Primary key exists in Source but not in Target (showing first 5 of 4)</td>
+                        <td>'EXISTS'</td>
+                        <td>'MISSING'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-01-31 23:59:00')</td>
+                        <td>Primary key exists in Target but not in Source (showing first 5 of 4)</td>
+                        <td>'MISSING'</td>
+                        <td>'EXISTS'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-02-28 23:59:00')</td>
+                        <td>Primary key exists in Target but not in Source (showing first 5 of 4)</td>
+                        <td>'MISSING'</td>
+                        <td>'EXISTS'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-03-31 23:59:00')</td>
+                        <td>Primary key exists in Target but not in Source (showing first 5 of 4)</td>
+                        <td>'MISSING'</td>
+                        <td>'EXISTS'</td>
+                    </tr>
+                
+
+                    <tr>
+                        <td><span class="badge fail">FAIL</span></td>
+                        <td>Primary Key Match</td>
+                        <td>-</td>
+                        <td>time_to=Timestamp('2026-04-30 23:59:00')</td>
+                        <td>Primary key exists in Target but not in Source (showing first 5 of 4)</td>
+                        <td>'MISSING'</td>
+                        <td>'EXISTS'</td>
+                    </tr>
+                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Universal Data Validation Framework v1.0</p>
+            <p class="timestamp">Report generated on 2026-05-28 15:04:29</p>
+        </div>
+    </div>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <script>
+        // Collapsible sections
+        const collapsibles = document.querySelectorAll('.collapsible');
+        collapsibles.forEach(coll => {
+            coll.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                content.classList.toggle('active');
+            });
+        });
+        
+        // Initialize DataTables
+        $(document).ready(function() {
+            $('#failedTable').DataTable({
+                pageLength: 25,
+                order: [[0, 'asc']],
+                scrollX: true,
+                autoWidth: true,
+                language: {
+                    search: "Search failures:"
+                }
+            });
+            
+            $('#passedTable').DataTable({
+                pageLength: 25,
+                order: [[0, 'asc']],
+                scrollX: true,
+                autoWidth: true,
+                language: {
+                    search: "Search passed:"
+                }
+            });
+            
+            $('#allTable').DataTable({
+                pageLength: 50,
+                order: [[0, 'asc']],
+                scrollX: true,
+                autoWidth: true,
+                language: {
+                    search: "Search all:"
+                }
+            });
+        });
+        
+        // Chart.js visualizations
+        const chartData = {"pass_count": 12, "fail_count": 17, "skip_count": 0, "validation_types": ["record_count_check", "column_count_check", "metadata_type_check", "duplicate_check", "null_check", "empty_string_check", "primary_key_match"], "validation_fails": [0, 0, 0, 8, 0, 0, 9], "validation_passes": [1, 1, 8, 0, 1, 1, 0], "column_names": [], "column_failures": []};
+        
+        // Status Pie Chart
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Passed', 'Failed', 'Skipped'],
+                datasets: [{
+                    data: [chartData.pass_count, chartData.fail_count, chartData.skip_count],
+                    backgroundColor: ['#28a745', '#dc3545', '#ffc107'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Validation Status Distribution',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+        
+        // Validation Type Bar Chart
+        new Chart(document.getElementById('validationTypeChart'), {
+            type: 'bar',
+            data: {
+                labels: chartData.validation_types,
+                datasets: [{
+                    label: 'Failed',
+                    data: chartData.validation_fails,
+                    backgroundColor: '#dc3545'
+                }, {
+                    label: 'Passed',
+                    data: chartData.validation_passes,
+                    backgroundColor: '#28a745'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Validation Type Breakdown',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, beginAtZero: true }
+                }
+            }
+        });
+        
+        // Column-Level Failures Chart
+        if (chartData.column_failures.length > 0) {
+            new Chart(document.getElementById('columnChart'), {
+                type: 'bar',
+                data: {
+                    labels: chartData.column_names,
+                    datasets: [{
+                        label: 'Failures per Column',
+                        data: chartData.column_failures,
+                        backgroundColor: '#dc3545'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Column-Level Failure Analysis (Top Culprits)',
+                            font: { size: 16, weight: 'bold' }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: { beginAtZero: true, title: { display: true, text: 'Number of Failures' } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

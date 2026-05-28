@@ -1,0 +1,28 @@
+validation,result,column,pk,detail,source_value,target_value
+record_count_check,PASS,,,"Source: 2721 rows, Target: 2721 rows",2721,2721
+column_count_check,PASS,,,"Source: 20 columns, Target: 27 columns, Common: 18 | Source-only: ['edw_batch_id', 'edw_run_date'] | Target-only: ['edw_act_fl', 'edw_end_dt', 'edw_hash_key', 'edw_ld_dt', 'edw_src_cd', 'edw_strt_dt', 'edw_updt_dt', 'edw_user_nm', 'row_id']",20,27
+metadata_type_check,PASS,active_unique_project_count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,active_unique_workload_count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,country_code,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,end_date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,file_date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,hourly_rate,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,hours,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,instance_type,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,is_google_usage,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,is_trial_exempt,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,new_or_existing,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,obscured_account_id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,obscured_organization_id,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,royalty_due,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,start_date,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,total_queries_count,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,usage_location,,"Compatible types: Source 'object', Target 'object'",object,object
+metadata_type_check,PASS,usage_month,,"Compatible types: Source 'object', Target 'object'",object,object
+duplicate_check,PASS,,,No duplicates found in Source,0,
+duplicate_check,PASS,,,No duplicates found in Target,,0
+null_check,PASS,file_date,,"Source: 2721 nulls, Target: 2721 nulls",2721,2721
+null_check,PASS,obscured_organization_id,,"Source: 530 nulls, Target: 530 nulls",530,530
+empty_string_check,PASS,,,No empty strings found,,
+primary_key_match,PASS,,,"Common: 2721, Source-only: 0, Target-only: 0",2721,2721
+data_validation,PASS,,,All values match for 2721 common records across 18 columns,,
