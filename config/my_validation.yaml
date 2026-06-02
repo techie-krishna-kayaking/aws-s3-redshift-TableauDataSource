@@ -1,6 +1,7 @@
 
 validations:
   - name: "DNS_Armor_GCP_query"
+    regression: true  # Set to true for comprehensive validation, false for basic checks
     source:
       type: table
       environment: PREPROD
@@ -15,6 +16,7 @@ validations:
     output_dir: ./results/DNS_Armor_GCP
 
   - name: "DNS_Armor_GCP_query_region_split"
+    regression: false  # Set to true for comprehensive validation, false for basic checks
     source:
       type: table
       environment: PREPROD
@@ -29,6 +31,7 @@ validations:
     output_dir: ./results/DNS_Armor_GCP
 
   - name: "DNS_Armor_GCP_monthly_consumption"
+    regression: false  # Set to true for comprehensive validation, false for basic checks
     source:
       type: table
       environment: PREPROD

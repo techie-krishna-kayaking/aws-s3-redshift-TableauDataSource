@@ -41,6 +41,7 @@ class Validator:
         self.target_config = config.get('target', {})
         self.primary_keys = [pk.lower() for pk in parse_primary_keys(config.get('primary_keys', ''))]
         self.output_dir = Path(config.get('output_dir', './results'))
+        self.regression = config.get('regression', False)  # Enable comprehensive validations
         
         # Propagate common file settings from root config to source and target
         common_settings = ['sep', 'encoding', 'format', 'sheet_name', 'json_orient']
@@ -135,7 +136,8 @@ class Validator:
             source_df=source_df,
             target_df=target_df,
             primary_keys=self.primary_keys,
-            validation_name=self.name
+            validation_name=self.name,
+            regression_mode=self.regression
         )
         
         # Pass metadata for type checking

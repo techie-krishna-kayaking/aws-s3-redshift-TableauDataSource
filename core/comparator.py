@@ -6,6 +6,9 @@ import pandas as pd
 import numpy as np
 from typing import Dict, List, Any, Tuple, Optional
 import logging
+import hashlib
+import re
+from datetime import datetime
 
 from utils.helpers import (
     parse_primary_keys,
@@ -31,10 +34,12 @@ class Comparator:
     - Empty string detection
     - Row-by-row data comparison
     - Metadata type validation
+    - Extended regression validations (precision, case sensitivity, etc.)
     """
     
     def __init__(self, source_df: pd.DataFrame, target_df: pd.DataFrame,
-                 primary_keys: List[str] = None, validation_name: str = "Validation"):
+                 primary_keys: List[str] = None, validation_name: str = "Validation",
+                 regression_mode: bool = False):
         """
         Initialize comparator.
         
@@ -43,6 +48,7 @@ class Comparator:
             target_df: Target DataFrame
             primary_keys: List of primary key column names
             validation_name: Name of this validation (for reporting)
+            regression_mode: Enable comprehensive regression validations
         """
         self.source_df = source_df
         self.target_df = target_df
@@ -50,9 +56,12 @@ class Comparator:
         self.validation_name = validation_name
         self.common_cols = get_common_columns(source_df, target_df)
         self.subset_applied = False
+        self.regression_mode = regression_mode
         
         logger.info(f"Initialized comparator: {len(source_df)} source rows, "
                    f"{len(target_df)} target rows, {len(self.common_cols)} common columns")
+        if regression_mode:
+            logger.info("⚡ REGRESSION MODE ENABLED - Running comprehensive validations")
     
     def run_all_checks(self, source_metadata: Dict[str, Any] = None, 
                       target_metadata: Dict[str, Any] = None,
@@ -71,8 +80,10 @@ class Comparator:
         self.subset_applied = subset_applied
         results = []
         
-        logger.info("Running all validation checks...")
+        mode = "REGRESSION" if self.regression_mode else "STANDARD"
+        logger.info(f"Running {mode} validation checks...")
         
+        # STANDARD CHECKS (always run)
         # 1. Record count check
         results.append(self._check_record_counts())
         
@@ -95,7 +106,38 @@ class Comparator:
         # 7. Data validation
         results.extend(self._check_data_values())
         
-        logger.info(f"Completed all checks: {len(results)} result records")
+        # REGRESSION CHECKS (only run if regression_mode=True)
+        if self.regression_mode and source_metadata and target_metadata:
+            logger.info("Running additional regression validations...")
+            
+            # 8. Column order check
+            results.extend(self._check_column_order(source_metadata, target_metadata))
+            
+            # 9. Column precision/scale/length
+            results.extend(self._check_column_specs(source_metadata, target_metadata))
+            
+            # 10. Distinct value count
+            results.extend(self._check_distinct_values())
+            
+            # 11. Date range (MIN/MAX)
+            results.extend(self._check_date_ranges())
+            
+            # 12. Case sensitivity
+            results.extend(self._check_case_sensitivity())
+            
+            # 13. Leading zero preservation
+            results.extend(self._check_leading_zeros())
+            
+            # 14. Special/unicode characters
+            results.extend(self._check_special_characters())
+            
+            # 15. Hash/checksum comparison
+            results.extend(self._check_row_checksums())
+            
+            # 16. Symmetric difference
+            results.extend(self._check_symmetric_difference())
+        
+        logger.info(f"Completed {mode} validation: {len(results)} result records")
         
         return results
     
@@ -548,3 +590,425 @@ class Comparator:
             })
         
         return failures
+    
+    # ==================== REGRESSION VALIDATIONS ====================
+    
+    def _check_column_order(self, source_metadata: Dict[str, Any], 
+                           target_metadata: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Check if column order matches between source and target."""
+        results = []
+        
+        source_cols = [c['name'] for c in source_metadata.get('columns', [])]
+        target_cols = [c['name'] for c in target_metadata.get('columns', [])]
+        
+        common_cols_ordered = [c for c in source_cols if c in target_cols]
+        
+        for i, (s_col, t_col) in enumerate(zip(common_cols_ordered, common_cols_ordered)):
+            source_order = source_cols.index(s_col) if s_col in source_cols else -1
+            target_order = target_cols.index(t_col) if t_col in target_cols else -1
+            
+            if source_order != target_order:
+                results.append({
+                    "validation": "column_order_check",
+                    "result": "FAIL",
+                    "column": s_col,
+                    "pk": "",
+                    "detail": f"Column order differs",
+                    "source_value": str(source_order),
+                    "target_value": str(target_order)
+                })
+        
+        if not results:
+            results.append({
+                "validation": "column_order_check",
+                "result": "PASS",
+                "column": "",
+                "pk": "",
+                "detail": "Column order matches",
+                "source_value": "",
+                "target_value": ""
+            })
+        
+        return results
+    
+    def _check_column_specs(self, source_metadata: Dict[str, Any], 
+                           target_metadata: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Check column precision, scale, length specifications."""
+        results = []
+        
+        source_cols = {c['name']: c for c in source_metadata.get('columns', [])}
+        target_cols = {c['name']: c for c in target_metadata.get('columns', [])}
+        
+        for col in self.common_cols:
+            s_meta = source_cols.get(col, {})
+            t_meta = target_cols.get(col, {})
+            
+            # Check length
+            s_len = s_meta.get('length')
+            t_len = t_meta.get('length')
+            
+            if s_len and t_len and s_len != t_len:
+                results.append({
+                    "validation": "column_length_check",
+                    "result": "FAIL",
+                    "column": col,
+                    "pk": "",
+                    "detail": f"Length mismatch in column {col}",
+                    "source_value": str(s_len),
+                    "target_value": str(t_len)
+                })
+            
+            # Check precision and scale (numeric)
+            s_precision = s_meta.get('precision')
+            t_precision = t_meta.get('precision')
+            s_scale = s_meta.get('scale')
+            t_scale = t_meta.get('scale')
+            
+            if s_precision and t_precision and (s_precision != t_precision or s_scale != t_scale):
+                results.append({
+                    "validation": "column_precision_check",
+                    "result": "FAIL",
+                    "column": col,
+                    "pk": "",
+                    "detail": f"Precision/Scale mismatch: {s_precision},{s_scale} vs {t_precision},{t_scale}",
+                    "source_value": f"{s_precision},{s_scale}",
+                    "target_value": f"{t_precision},{t_scale}"
+                })
+        
+        if not results:
+            results.append({
+                "validation": "column_specs_check",
+                "result": "PASS",
+                "column": "",
+                "pk": "",
+                "detail": "All column specifications match",
+                "source_value": "",
+                "target_value": ""
+            })
+        
+        return results
+    
+    def _check_distinct_values(self) -> List[Dict[str, Any]]:
+        """Check distinct value counts per column."""
+        results = []
+        
+        for col in self.common_cols:
+            if col not in self.source_df.columns or col not in self.target_df.columns:
+                continue
+            
+            source_distinct = self.source_df[col].nunique()
+            target_distinct = self.target_df[col].nunique()
+            
+            if source_distinct != target_distinct:
+                results.append({
+                    "validation": "distinct_value_check",
+                    "result": "FAIL",
+                    "column": col,
+                    "pk": "",
+                    "detail": f"Distinct value count differs",
+                    "source_value": str(source_distinct),
+                    "target_value": str(target_distinct)
+                })
+        
+        if not results:
+            results.append({
+                "validation": "distinct_value_check",
+                "result": "PASS",
+                "column": "",
+                "pk": "",
+                "detail": "All columns have matching distinct value counts",
+                "source_value": "",
+                "target_value": ""
+            })
+        
+        return results
+    
+    def _check_date_ranges(self) -> List[Dict[str, Any]]:
+        """Check MIN/MAX date ranges for date/datetime columns."""
+        results = []
+        
+        for col in self.common_cols:
+            if col not in self.source_df.columns or col not in self.target_df.columns:
+                continue
+            
+            try:
+                # Try to detect date columns
+                source_col = pd.to_datetime(self.source_df[col], errors='coerce')
+                target_col = pd.to_datetime(self.target_df[col], errors='coerce')
+                
+                # Check if there are any valid dates
+                if source_col.isna().all() or target_col.isna().all():
+                    continue
+                
+                source_min = source_col.min()
+                source_max = source_col.max()
+                target_min = target_col.min()
+                target_max = target_col.max()
+                
+                if source_min != target_min or source_max != target_max:
+                    results.append({
+                        "validation": "date_range_check",
+                        "result": "FAIL",
+                        "column": col,
+                        "pk": "",
+                        "detail": f"Date range mismatch",
+                        "source_value": f"{source_min} to {source_max}",
+                        "target_value": f"{target_min} to {target_max}"
+                    })
+            except:
+                pass  # Not a date column
+        
+        if not results:
+            results.append({
+                "validation": "date_range_check",
+                "result": "PASS",
+                "column": "",
+                "pk": "",
+                "detail": "All date ranges match",
+                "source_value": "",
+                "target_value": ""
+            })
+        
+        return results
+    
+    def _check_case_sensitivity(self) -> List[Dict[str, Any]]:
+        """Check for case sensitivity differences in string columns."""
+        results = []
+        
+        for col in self.common_cols:
+            if col not in self.source_df.columns or col not in self.target_df.columns:
+                continue
+            
+            try:
+                # Only check string columns
+                if self.source_df[col].dtype == 'object' and self.target_df[col].dtype == 'object':
+                    # Check a sample for case issues
+                    for idx in range(min(100, len(self.source_df))):  # Check first 100
+                        s_val = str(self.source_df[col].iloc[idx])
+                        t_val = str(self.target_df[col].iloc[idx])
+                        
+                        if s_val.lower() == t_val.lower() and s_val != t_val:
+                            results.append({
+                                "validation": "case_sensitivity_check",
+                                "result": "FAIL",
+                                "column": col,
+                                "pk": "",
+                                "detail": f"Case difference detected: '{s_val}' vs '{t_val}'",
+                                "source_value": s_val,
+                                "target_value": t_val
+                            })
+                            break
+            except:
+                pass
+        
+        if not results:
+            results.append({
+                "validation": "case_sensitivity_check",
+                "result": "PASS",
+                "column": "",
+                "pk": "",
+                "detail": "No case sensitivity mismatches found",
+                "source_value": "",
+                "target_value": ""
+            })
+        
+        return results
+    
+    def _check_leading_zeros(self) -> List[Dict[str, Any]]:
+        """Check for leading zero preservation in numeric strings."""
+        results = []
+        
+        for col in self.common_cols:
+            if col not in self.source_df.columns or col not in self.target_df.columns:
+                continue
+            
+            try:
+                # Check string columns for leading zeros
+                for idx in range(min(100, len(self.source_df))):
+                    s_val = str(self.source_df[col].iloc[idx])
+                    t_val = str(self.target_df[col].iloc[idx])
+                    
+                    # Check if one has leading zero and other doesn't
+                    if s_val.startswith('0') != t_val.startswith('0'):
+                        if s_val.replace('0', '', 1) == t_val.replace('0', '', 1):
+                            results.append({
+                                "validation": "leading_zero_check",
+                                "result": "FAIL",
+                                "column": col,
+                                "pk": "",
+                                "detail": f"Leading zero mismatch: '{s_val}' vs '{t_val}'",
+                                "source_value": s_val,
+                                "target_value": t_val
+                            })
+                            break
+            except:
+                pass
+        
+        if not results:
+            results.append({
+                "validation": "leading_zero_check",
+                "result": "PASS",
+                "column": "",
+                "pk": "",
+                "detail": "No leading zero mismatches found",
+                "source_value": "",
+                "target_value": ""
+            })
+        
+        return results
+    
+    def _check_special_characters(self) -> List[Dict[str, Any]]:
+        """Check for special/unicode character integrity."""
+        results = []
+        
+        for col in self.common_cols:
+            if col not in self.source_df.columns or col not in self.target_df.columns:
+                continue
+            
+            try:
+                # Check for non-ASCII characters
+                for idx in range(min(100, len(self.source_df))):
+                    s_val = str(self.source_df[col].iloc[idx])
+                    t_val = str(self.target_df[col].iloc[idx])
+                    
+                    s_ascii = all(ord(c) < 128 for c in s_val if c != '\x00')
+                    t_ascii = all(ord(c) < 128 for c in t_val if c != '\x00')
+                    
+                    if s_ascii != t_ascii:
+                        results.append({
+                            "validation": "special_char_check",
+                            "result": "FAIL",
+                            "column": col,
+                            "pk": "",
+                            "detail": "Special/Unicode character difference detected",
+                            "source_value": repr(s_val)[:100],
+                            "target_value": repr(t_val)[:100]
+                        })
+                        break
+            except:
+                pass
+        
+        if not results:
+            results.append({
+                "validation": "special_char_check",
+                "result": "PASS",
+                "column": "",
+                "pk": "",
+                "detail": "No special character integrity issues found",
+                "source_value": "",
+                "target_value": ""
+            })
+        
+        return results
+    
+    def _check_row_checksums(self) -> List[Dict[str, Any]]:
+        """Compare row-level checksums using hash."""
+        results = []
+        
+        def row_hash(row) -> str:
+            """Generate hash for a row."""
+            row_str = '|'.join(str(v) for v in row)
+            return hashlib.md5(row_str.encode()).hexdigest()
+        
+        if not self.primary_keys:
+            return [{
+                "validation": "checksum_check",
+                "result": "SKIP",
+                "column": "",
+                "pk": "",
+                "detail": "No primary key defined",
+                "source_value": "",
+                "target_value": ""
+            }]
+        
+        source_clean = self.source_df.drop_duplicates(subset=self.primary_keys)
+        target_clean = self.target_df.drop_duplicates(subset=self.primary_keys)
+        
+        source_idx = source_clean.set_index(self.primary_keys)
+        target_idx = target_clean.set_index(self.primary_keys)
+        
+        common_index = source_idx.index.intersection(target_idx.index)
+        
+        checksum_mismatches = 0
+        for pk_tuple in common_index:
+            s_row = source_idx.loc[pk_tuple]
+            t_row = target_idx.loc[pk_tuple]
+            
+            s_hash = row_hash(s_row)
+            t_hash = row_hash(t_row)
+            
+            if s_hash != t_hash:
+                checksum_mismatches += 1
+                if checksum_mismatches <= 5:
+                    if not isinstance(pk_tuple, tuple):
+                        pk_tuple = (pk_tuple,)
+                    pk_str = format_pk_values(pk_tuple, self.primary_keys)
+                    results.append({
+                        "validation": "checksum_check",
+                        "result": "FAIL",
+                        "column": "",
+                        "pk": pk_str,
+                        "detail": f"Row checksum mismatch",
+                        "source_value": s_hash[:16],
+                        "target_value": t_hash[:16]
+                    })
+        
+        if checksum_mismatches == 0:
+            results.append({
+                "validation": "checksum_check",
+                "result": "PASS",
+                "column": "",
+                "pk": "",
+                "detail": f"All {len(common_index)} row checksums match",
+                "source_value": "",
+                "target_value": ""
+            })
+        elif checksum_mismatches > 5:
+            results.append({
+                "validation": "checksum_check",
+                "result": "INFO",
+                "column": "",
+                "pk": "",
+                "detail": f"... and {checksum_mismatches - 5} more checksum mismatches",
+                "source_value": "",
+                "target_value": ""
+            })
+        
+        return results
+    
+    def _check_symmetric_difference(self) -> List[Dict[str, Any]]:
+        """Check symmetric difference (records only in source or target)."""
+        results = []
+        
+        if not self.primary_keys:
+            return [{
+                "validation": "symmetric_difference_check",
+                "result": "SKIP",
+                "column": "",
+                "pk": "",
+                "detail": "No primary key defined",
+                "source_value": "",
+                "target_value": ""
+            }]
+        
+        source_clean = self.source_df.drop_duplicates(subset=self.primary_keys)
+        target_clean = self.target_df.drop_duplicates(subset=self.primary_keys)
+        
+        source_idx = source_clean.set_index(self.primary_keys)
+        target_idx = target_clean.set_index(self.primary_keys)
+        
+        source_only = source_idx.index.difference(target_idx.index)
+        target_only = target_idx.index.difference(source_idx.index)
+        symmetric_diff = len(source_only) + len(target_only)
+        
+        results.append({
+            "validation": "symmetric_difference_check",
+            "result": "PASS" if symmetric_diff == 0 else "FAIL",
+            "column": "",
+            "pk": "",
+            "detail": f"Symmetric difference: {symmetric_diff} records (Source-only: {len(source_only)}, Target-only: {len(target_only)})",
+            "source_value": str(len(source_only)),
+            "target_value": str(len(target_only))
+        })
+        
+        return results

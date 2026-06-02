@@ -31,10 +31,10 @@
 
 ## Overview
 
-| Tool | Command | What It Does |
-|---|---|---|
-| **Data Validation** | `cli.py validate` | Compares data across files, Redshift tables, and Tableau datasources |
-| **Tableau Regression** | `cli.py regression` | Smoke, visual comparison, and performance testing of Tableau dashboards |
+| Tool | Command | What It Does | Modes |
+|---|---|---|---|
+| **Data Validation** | `cli.py validate` | Compares data across files, Redshift tables, and Tableau datasources | Standard (7 checks) or Regression (16 checks) |
+| **Tableau Regression** | `cli.py regression` | Smoke, visual comparison, and performance testing of Tableau dashboards | Smoke, Visual Diff, Performance |
 
 ---
 
@@ -115,6 +115,78 @@ python3 cli.py regression --config bi_regression/configs/config.yaml
 | 5 | **Null Analysis** | Detects null/NA values per column with counts |
 | 6 | **Empty String Detection** | Identifies empty strings in all columns |
 | 7 | **Data Value Comparison** | PK-based record matching or row-by-row comparison with type coercion |
+
+### 🚀 Advanced Regression Validations (NEW!)
+
+Enable comprehensive regression mode with `regression: true` in your YAML config to unlock 9 additional validation checks:
+
+| # | Check | Description |
+|---|:------|:------------|
+| 8 | **Column Order** | Validates column ordinal positions match between source and target |
+| 9 | **Precision/Scale/Length** | Verifies numeric precision, scale, and column length specifications |
+| 10 | **Distinct Value Count** | Compares unique value counts per column |
+| 11 | **Date Range (MIN/MAX)** | Validates minimum and maximum values for date/datetime columns |
+| 12 | **Case Sensitivity** | Detects case-only differences in string values |
+| 13 | **Leading Zero Preservation** | Ensures leading zeros are maintained in numeric strings |
+| 14 | **Special/Unicode Characters** | Validates special character and unicode integrity |
+| 15 | **Row Checksums** | MD5 hash-based row-level validation |
+| 16 | **Symmetric Difference** | Identifies records existing only in source or target |
+
+#### Regression Mode Configuration
+
+```yaml
+validations:
+  - name: "Full Regression Suite"
+    regression: true           # Enable all 16 validations
+    source:
+      type: table
+      environment: DEV
+      schema: edw_asis
+      table: my_table
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: my_table
+    primary_keys: id
+    output_dir: ./results
+
+  - name: "Quick Smoke Test"
+    regression: false          # Run only 7 basic validations (default)
+    source:
+      type: file
+      path: ./data/source.csv
+    target:
+      type: table
+      environment: PROD
+      schema: edw_asis
+      table: my_table
+    primary_keys: id
+    output_dir: ./results
+```
+
+**Validation Count:**
+- **Standard Mode** (`regression: false`) — 7 core checks
+- **Regression Mode** (`regression: true`) — All 16 checks (core + 9 advanced)
+
+#### When to Use Regression Mode?
+
+**Use `regression: false` (Standard Mode) for:**
+- ✅ Fast smoke tests on ETL pipelines
+- ✅ Quick data load validations
+- ✅ Daily automated checks
+- ✅ Record & column count verification
+- ✅ Data type compatibility checks
+
+**Use `regression: true` (Regression Mode) for:**
+- ✅ Pre-deployment validation to production
+- ✅ Major schema changes or refactoring
+- ✅ Data quality audits & compliance checks
+- ✅ Numeric precision validation (financial data)
+- ✅ Character encoding & special character integrity
+- ✅ Comprehensive reconciliation & audit trails
+- ✅ Post-migration verification
+- ✅ Complex ETL with multiple transformations
 
 ### 📊 Interactive HTML Reports
 
@@ -242,6 +314,7 @@ All dependencies are in a single `requirements.txt`. Key libraries:
 ```yaml
 # 1. File → Redshift Table (ETL validation)
 - name: "CSV to Redshift"
+  regression: false               # Use basic 7 checks
   source:
     type: file
     path: ./data/source.csv
@@ -255,6 +328,7 @@ All dependencies are in a single `requirements.txt`. Key libraries:
 
 # 2. Table → Table (cross-schema or cross-environment)
 - name: "DEV vs PROD"
+  regression: true                # Use all 16 validations for regression
   source:
     type: table
     environment: DEV
@@ -270,6 +344,7 @@ All dependencies are in a single `requirements.txt`. Key libraries:
 
 # 3. File → File (format migration / export check)
 - name: "CSV to Parquet"
+  regression: false
   source:
     type: file
     path: ./data/source.csv
@@ -281,6 +356,7 @@ All dependencies are in a single `requirements.txt`. Key libraries:
 
 # 4. Tableau Datasource → Datasource (pre/post-RCA)
 - name: "TWBX Comparison"
+  regression: true                # Full validation suite
   source:
     type: datasource
     path: ./datasources/pre_rca.twbx
@@ -291,6 +367,7 @@ All dependencies are in a single `requirements.txt`. Key libraries:
 
 # 5. Tableau Datasource → Redshift Table (dashboard accuracy)
 - name: "TWBX to Redshift"
+  regression: false
   source:
     type: datasource
     path: ./datasources/my_data.twbx
