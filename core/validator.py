@@ -282,27 +282,32 @@ class Validator:
         
         # Smart Sub-setting Logic
         subset_applied = False
-        if self.primary_keys and len(source_df) != len(target_df):
+        # Filter primary keys to only those that exist in both source and target
+        valid_pks = [pk for pk in self.primary_keys if pk in source_df.columns and pk in target_df.columns]
+        
+        if valid_pks and len(source_df) != len(target_df):
             logger.info("Dataset sizes differ. Applying smart sub-setting based on primary keys...")
             
             if len(source_df) < len(target_df):
                 logger.info(f"Source ({len(source_df)}) is smaller than Target ({len(target_df)}). Filtering Target...")
                 # Take PKs from source
-                source_pks = source_df[self.primary_keys].drop_duplicates()
+                source_pks = source_df[valid_pks].drop_duplicates()
                 # Filter target
                 original_target_len = len(target_df)
-                target_df = target_df.merge(source_pks, on=self.primary_keys, how='inner')
+                target_df = target_df.merge(source_pks, on=valid_pks, how='inner')
                 logger.info(f"Target filtered from {original_target_len} to {len(target_df)} rows")
                 subset_applied = True
             else:
                 logger.info(f"Target ({len(target_df)}) is smaller than Source ({len(source_df)}). Filtering Source...")
                 # Take PKs from target
-                target_pks = target_df[self.primary_keys].drop_duplicates()
+                target_pks = target_df[valid_pks].drop_duplicates()
                 # Filter source
                 original_source_len = len(source_df)
-                source_df = source_df.merge(target_pks, on=self.primary_keys, how='inner')
+                source_df = source_df.merge(target_pks, on=valid_pks, how='inner')
                 logger.info(f"Source filtered from {original_source_len} to {len(source_df)} rows")
                 subset_applied = True
+        elif self.primary_keys and not valid_pks:
+            logger.warning(f"No valid primary keys found in dataframes. Configured PKs {self.primary_keys} not found in both source and target. Skipping smart sub-setting.")
 
         # Run comparison
         logger.info("\nRunning comparisons...")

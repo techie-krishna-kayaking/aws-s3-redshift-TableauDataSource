@@ -241,16 +241,29 @@ class Comparator:
                 "target_value": ""
             }]
         
+        # Check if all PK columns exist in both dataframes
+        valid_pks = [pk for pk in self.primary_keys if pk in self.source_df.columns and pk in self.target_df.columns]
+        if not valid_pks:
+            return [{
+                "validation": "duplicate_check",
+                "result": "SKIP",
+                "column": "",
+                "pk": "",
+                "detail": f"Primary key columns {self.primary_keys} not found in both source and target - duplicate check skipped",
+                "source_value": "",
+                "target_value": ""
+            }]
+        
         # Check source duplicates
-        source_dups = self.source_df[self.primary_keys].duplicated(keep=False)
+        source_dups = self.source_df[valid_pks].duplicated(keep=False)
         source_dup_count = source_dups.sum()
         
         if source_dup_count > 0:
-            dup_values = self.source_df[source_dups][self.primary_keys].drop_duplicates()
+            dup_values = self.source_df[source_dups][valid_pks].drop_duplicates()
             for idx, row in dup_values.head(5).iterrows():  # Limit to first 5
-                pk_vals = tuple(row[c] for c in self.primary_keys)
-                pk_str = format_pk_values(pk_vals, self.primary_keys)
-                count = ((self.source_df[self.primary_keys] == row).all(axis=1)).sum()
+                pk_vals = tuple(row[c] for c in valid_pks)
+                pk_str = format_pk_values(pk_vals, valid_pks)
+                count = ((self.source_df[valid_pks] == row).all(axis=1)).sum()
                 results.append({
                     "validation": "duplicate_check",
                     "result": "FAIL",
@@ -272,15 +285,15 @@ class Comparator:
             })
         
         # Check target duplicates
-        target_dups = self.target_df[self.primary_keys].duplicated(keep=False)
+        target_dups = self.target_df[valid_pks].duplicated(keep=False)
         target_dup_count = target_dups.sum()
         
         if target_dup_count > 0:
-            dup_values = self.target_df[target_dups][self.primary_keys].drop_duplicates()
+            dup_values = self.target_df[target_dups][valid_pks].drop_duplicates()
             for idx, row in dup_values.head(5).iterrows():
-                pk_vals = tuple(row[c] for c in self.primary_keys)
-                pk_str = format_pk_values(pk_vals, self.primary_keys)
-                count = ((self.target_df[self.primary_keys] == row).all(axis=1)).sum()
+                pk_vals = tuple(row[c] for c in valid_pks)
+                pk_str = format_pk_values(pk_vals, valid_pks)
+                count = ((self.target_df[valid_pks] == row).all(axis=1)).sum()
                 results.append({
                     "validation": "duplicate_check",
                     "result": "FAIL",
