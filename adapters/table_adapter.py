@@ -153,9 +153,14 @@ class TableAdapter(BaseAdapter):
             logger.warning(f"Error getting columns for {self.schema}.{self.table}: {e}")
             return []
     
-    def load(self) -> pd.DataFrame:
+    def load(self, pk_columns: Optional[List[str]] = None, pk_values: Optional[List[tuple]] = None) -> pd.DataFrame:
         """
-        Load data from Redshift table.
+        Load data from Redshift table with optional PK-based filtering.
+        
+        Args:
+            pk_columns: List of primary key column names for WHERE clause filtering (optional)
+            pk_values: List of tuples of PK values to filter by (optional)
+                       If provided, only rows matching these PK values are loaded
         
         Returns:
             DataFrame with table contents
@@ -183,7 +188,16 @@ class TableAdapter(BaseAdapter):
             cols_sql = ", ".join([f'"{c}"' for c in select_cols])
             sql = f'SELECT {cols_sql} FROM "{self.schema}"."{self.table}"'
             
-            logger.info(f"Loading table: {self.schema}.{self.table} ({len(select_cols)} columns)")
+            # Add WHERE clause for PK filtering if provided
+            if pk_columns and pk_values:
+                where_clause = self._build_pk_where_clause(pk_columns, pk_values)
+                if where_clause:
+                    sql += f' WHERE {where_clause}'
+                    logger.info(f"Loading table: {self.schema}.{self.table} ({len(select_cols)} columns) with PK filter ({len(pk_values)} rows)")
+                else:
+                    logger.info(f"Loading table: {self.schema}.{self.table} ({len(select_cols)} columns)")
+            else:
+                logger.info(f"Loading table: {self.schema}.{self.table} ({len(select_cols)} columns)")
             
             # Execute query
             df = pd.read_sql(sql, conn)
@@ -201,6 +215,64 @@ class TableAdapter(BaseAdapter):
         
         finally:
             conn.close()
+    
+    def _build_pk_where_clause(self, pk_columns: List[str], pk_values: List[tuple]) -> Optional[str]:
+        """
+        Build a WHERE clause for PK filtering.
+        
+        Args:
+            pk_columns: List of primary key column names
+            pk_values: List of tuples of PK values
+        
+        Returns:
+            WHERE clause string or None if no values
+        """
+        if not pk_values:
+            return None
+        
+        # Normalize column names to lowercase
+        pk_cols_lower = [col.lower() for col in pk_columns]
+        
+        # For single PK: WHERE pk_col IN (val1, val2, ...)
+        if len(pk_columns) == 1:
+            col = pk_columns[0]
+            # Build value list, escaping single quotes
+            val_strs = []
+            for val_tuple in pk_values:
+                val = val_tuple[0] if isinstance(val_tuple, tuple) else val_tuple
+                # Safe escaping: replace single quotes with two single quotes
+                val_str = str(val).replace("'", "''")
+                val_strs.append(f"'{val_str}'")
+            
+            if len(val_strs) <= 1000:  # Keep under typical SQL IN limit
+                vals_sql = ", ".join(val_strs)
+                return f'"{col}" IN ({vals_sql})'
+            else:
+                # For very large PK lists, use UNION of smaller IN clauses
+                logger.warning(f"Large PK filter ({len(val_strs)} values) - may impact performance")
+                chunks = [val_strs[i:i+1000] for i in range(0, len(val_strs), 1000)]
+                conditions = [f'"{col}" IN ({", ".join(chunk)})' for chunk in chunks]
+                return f'({" OR ".join(conditions)})'
+        
+        # For composite PK: WHERE (pk_col1, pk_col2) IN ((val1, val2), ...)
+        else:
+            cols_sql = ", ".join([f'"{col}"' for col in pk_columns])
+            # Build value tuples list
+            val_tuples = []
+            for val_tuple in pk_values:
+                val_strs = [str(v).replace("'", "''") for v in val_tuple]
+                quoted_vals = ", ".join([f"'{v}'" for v in val_strs])
+                val_tuples.append(f"({quoted_vals})")
+            
+            if len(val_tuples) <= 500:  # Keep under typical limit for composite keys
+                vals_sql = ", ".join(val_tuples)
+                return f'({cols_sql}) IN ({vals_sql})'
+            else:
+                logger.warning(f"Large composite PK filter ({len(val_tuples)} values) - may impact performance")
+                # Fall back to chunking
+                chunks = [val_tuples[i:i+500] for i in range(0, len(val_tuples), 500)]
+                conditions = [f'({cols_sql}) IN ({", ".join(chunk)})' for chunk in chunks]
+                return f'({" OR ".join(conditions)})'
     
     def get_metadata(self) -> Dict[str, Any]:
         """

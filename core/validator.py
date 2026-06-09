@@ -260,10 +260,33 @@ class Validator:
         # Load data
         logger.info("\nLoading data...")
         source_df = source_adapter.load()
-        target_df = target_adapter.load()
-        
-        # Get metadata
         source_metadata = source_adapter.get_metadata()
+        
+        logger.info(f"Source: {len(source_df)} rows, {len(source_df.columns)} columns")
+        
+        # Extract source PKs for potential target pushdown filtering
+        source_pk_values = None
+        if self.primary_keys:
+            source_pk_values = source_df[self.primary_keys].drop_duplicates().values.tolist()
+            logger.info(f"Extracted {len(source_pk_values)} unique source PKs for potential target filtering")
+        
+        # Load target with optional PK-based SQL pushdown filtering
+        if (
+            source_pk_values and 
+            self.primary_keys and 
+            isinstance(target_adapter, TableAdapter) and
+            len(source_df) < 10000000  # Avoid huge IN clauses (> 10M PKs)
+        ):
+            # Use SQL pushdown to filter target table to source PKs
+            logger.info("Applying SQL pushdown filtering on target table...")
+            target_df = target_adapter.load(
+                pk_columns=self.primary_keys,
+                pk_values=source_pk_values
+            )
+        else:
+            # Standard full load (will do Python-side filtering later if needed)
+            target_df = target_adapter.load()
+        
         target_metadata = target_adapter.get_metadata()
 
         # Align columns when source and target naming conventions differ.
