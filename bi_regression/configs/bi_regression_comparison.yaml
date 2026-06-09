@@ -1,0 +1,27 @@
+# BI regression config: compares two dashboards tab-by-tab using SSIM.
+test_type: "comparison"
+
+comparison:
+  dashboard_url_1: "https://prod-useast-b.online.tableau.com/#/site/infoblox/views/YourDashboard/YourView"
+  dashboard_url_2: "https://prod-useast-b.online.tableau.com/#/site/infoblox/views/YourDashboard_UAT/YourView"
+  label_1: "Prod"
+  label_2: "UAT"
+  ssim_threshold: 0.98
+  filter_scenarios:
+    - label: "Default"
+      filters:
+        - name: "Region"
+          value: "(All)"
+
+browser:
+  user_data_dir: "/Users/kkrishna/Library/Application Support/Microsoft Edge"
+  profile_dir: "Default"
+  headless: false
+  page_load_timeout: 90000
+  render_wait_seconds: 6
+  max_retries: 3
+  viewport_width: 1920
+  viewport_height: 1080
+
+output:
+  base_dir: "test_results/bi_regression"
