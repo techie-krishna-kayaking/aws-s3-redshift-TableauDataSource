@@ -7,6 +7,7 @@ import yaml
 from pathlib import Path
 from typing import Dict, Any, List
 import logging
+from collections import defaultdict
 
 from adapters import FileAdapter, TableAdapter, DataSourceAdapter, BaseAdapter
 from core.comparator import Comparator
@@ -42,6 +43,17 @@ class Validator:
         self.primary_keys = [pk.lower() for pk in parse_primary_keys(config.get('primary_keys', ''))]
         self.output_dir = Path(config.get('output_dir', './results'))
         self.regression = config.get('regression', False)  # Enable comprehensive validations
+        self.column_mapping = {
+            str(src).lower(): str(tgt).lower()
+            for src, tgt in (config.get('column_mapping', {}) or {}).items()
+        }
+        self.auto_match_by_suffix = bool(config.get('auto_match_by_suffix', False))
+        self.source_prefixes_to_strip = [
+            str(p).lower() for p in (config.get('source_prefixes_to_strip', []) or []) if str(p).strip()
+        ]
+        self.target_prefixes_to_strip = [
+            str(p).lower() for p in (config.get('target_prefixes_to_strip', []) or []) if str(p).strip()
+        ]
         
         # Propagate common file settings from root config to source and target
         common_settings = ['sep', 'encoding', 'format', 'sheet_name', 'json_orient']
@@ -53,6 +65,157 @@ class Validator:
                     self.target_config[setting] = config[setting]
         
         logger.info(f"Initialized validator: {self.name}")
+
+    @staticmethod
+    def _strip_known_prefixes(column_name: str, prefixes: List[str]) -> str:
+        """Strip configured prefixes from a column name if present."""
+        for prefix in prefixes:
+            if column_name.startswith(prefix):
+                return column_name[len(prefix):]
+        return column_name
+
+    def _candidate_column_names(self, column_name: str, prefixes: List[str]) -> List[str]:
+        """Generate candidate normalized names for fuzzy matching."""
+        stripped = self._strip_known_prefixes(column_name, prefixes)
+        if stripped == column_name:
+            return [column_name]
+        return [column_name, stripped]
+
+    def _is_suffix_match(self, source_name: str, target_name: str) -> bool:
+        """Check if one name is a suffix-based variant of the other."""
+        return (
+            source_name.endswith(f"_{target_name}")
+            or target_name.endswith(f"_{source_name}")
+        )
+
+    def _resolve_column_alignment(
+        self,
+        source_columns: List[str],
+        target_columns: List[str]
+    ) -> Dict[str, str]:
+        """
+        Resolve source->target alignment map for column names.
+
+        Priority:
+        1) Explicit mapping from config.column_mapping
+        2) Exact name match
+        3) Optional fuzzy matching using configured prefixes and suffix matching
+        """
+        target_set = set(target_columns)
+        rename_map: Dict[str, str] = {}
+        used_targets = set()
+
+        # Explicit mapping first.
+        for src_col, tgt_col in self.column_mapping.items():
+            if src_col not in source_columns:
+                logger.warning(
+                    "Configured source column '%s' not found for mapping", src_col
+                )
+                continue
+            if tgt_col not in target_set:
+                logger.warning(
+                    "Configured target column '%s' not found for mapping from '%s'", tgt_col, src_col
+                )
+                continue
+            rename_map[src_col] = tgt_col
+            used_targets.add(tgt_col)
+
+        if not self.auto_match_by_suffix and not self.source_prefixes_to_strip and not self.target_prefixes_to_strip:
+            return rename_map
+
+        candidates_by_source = defaultdict(list)
+        for src_col in source_columns:
+            if src_col in rename_map:
+                continue
+            if src_col in target_set and src_col not in used_targets:
+                rename_map[src_col] = src_col
+                used_targets.add(src_col)
+                continue
+
+            src_candidates = self._candidate_column_names(src_col, self.source_prefixes_to_strip)
+            for tgt_col in target_columns:
+                if tgt_col in used_targets:
+                    continue
+
+                tgt_candidates = self._candidate_column_names(tgt_col, self.target_prefixes_to_strip)
+                matched = False
+
+                if set(src_candidates).intersection(tgt_candidates):
+                    matched = True
+                elif self.auto_match_by_suffix:
+                    for sc in src_candidates:
+                        for tc in tgt_candidates:
+                            if self._is_suffix_match(sc, tc):
+                                matched = True
+                                break
+                        if matched:
+                            break
+
+                if matched:
+                    candidates_by_source[src_col].append(tgt_col)
+
+        for src_col, target_candidates in candidates_by_source.items():
+            if len(target_candidates) == 1:
+                tgt_col = target_candidates[0]
+                rename_map[src_col] = tgt_col
+                used_targets.add(tgt_col)
+            elif len(target_candidates) > 1:
+                logger.warning(
+                    "Ambiguous auto column mapping for source '%s': %s. Add explicit column_mapping to resolve.",
+                    src_col,
+                    sorted(target_candidates)
+                )
+
+        return rename_map
+
+    def _apply_column_alignment(
+        self,
+        source_df,
+        target_df,
+        source_metadata: Dict[str, Any],
+        target_metadata: Dict[str, Any]
+    ):
+        """Apply column renames on source so source/target names can be compared consistently."""
+        source_columns = list(source_df.columns)
+        target_columns = list(target_df.columns)
+
+        rename_map = self._resolve_column_alignment(source_columns, target_columns)
+
+        # Keep only real renames where target column exists.
+        source_rename_map = {
+            src: tgt
+            for src, tgt in rename_map.items()
+            if src in source_df.columns and tgt in target_df.columns and src != tgt
+        }
+
+        if source_rename_map:
+            logger.info(
+                "Applying source column alignment for %d columns", len(source_rename_map)
+            )
+            source_df = source_df.rename(columns=source_rename_map)
+            for col_meta in source_metadata.get('columns', []):
+                col_name = col_meta.get('name')
+                if col_name in source_rename_map:
+                    col_meta['name'] = source_rename_map[col_name]
+
+        # Normalize PKs to aligned target-style names when source-prefixed PKs are provided.
+        aligned_primary_keys = []
+        for pk in self.primary_keys:
+            aligned_pk = rename_map.get(pk, pk)
+            aligned_primary_keys.append(aligned_pk)
+
+        self.primary_keys = aligned_primary_keys
+
+        if self.column_mapping or self.auto_match_by_suffix or self.source_prefixes_to_strip or self.target_prefixes_to_strip:
+            common_after_alignment = set(source_df.columns).intersection(set(target_df.columns))
+            logger.info(
+                "Column alignment complete: %d source columns, %d target columns, %d common columns",
+                len(source_df.columns),
+                len(target_df.columns),
+                len(common_after_alignment)
+            )
+
+        return source_df, target_df, source_metadata, target_metadata
     
     def _create_adapter(self, adapter_config: Dict[str, Any]) -> BaseAdapter:
         """
@@ -102,6 +265,14 @@ class Validator:
         # Get metadata
         source_metadata = source_adapter.get_metadata()
         target_metadata = target_adapter.get_metadata()
+
+        # Align columns when source and target naming conventions differ.
+        source_df, target_df, source_metadata, target_metadata = self._apply_column_alignment(
+            source_df=source_df,
+            target_df=target_df,
+            source_metadata=source_metadata,
+            target_metadata=target_metadata
+        )
         
         logger.info(f"Source: {len(source_df)} rows, {len(source_df.columns)} columns")
         logger.info(f"Target: {len(target_df)} rows, {len(target_df.columns)} columns")

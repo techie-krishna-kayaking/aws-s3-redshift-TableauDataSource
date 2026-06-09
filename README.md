@@ -259,6 +259,46 @@ primary_keys: id,user_id,timestamp  # Composite keys
 - Identifies top culprit columns across all failures
 - Displays first 3–5 examples per failure type
 
+### 🔤 Column Name Alignment (Prefix Handling)
+
+If source and target have different naming conventions (for example `fulfill_line_id` vs `id`), you can align names before comparison.
+
+```yaml
+validations:
+  - name: "Fulfill Lines Validation"
+    source:
+      type: table
+      environment: PREPROD
+      schema: edw_stage
+      table: stg_fulfill_lines
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: fulfill_lines
+
+    primary_keys: fulfill_line_id
+
+    # 1) Explicit source->target map (recommended for critical columns)
+    column_mapping:
+      fulfill_line_id: id
+      fulfill_line_accounting_rule_id: accounting_rule_id
+      fulfill_line_accounting_rule_id_derived: accounting_rule_id_derived
+
+    # 2) Optional automatic matching for prefixed names
+    auto_match_by_suffix: true
+    source_prefixes_to_strip:
+      - fulfill_line_
+
+    output_dir: ./results/fulfill_lines
+```
+
+Notes:
+- `column_mapping` is applied first and has highest priority.
+- `auto_match_by_suffix: true` can auto-match names like `abc_order_id` -> `order_id`.
+- `source_prefixes_to_strip` and `target_prefixes_to_strip` help when prefixes are systematic.
+- Primary keys are automatically aligned using the same mapping logic.
+
 ### 📝 Timestamped Output — Never Lose History
 
 Every run creates new timestamped files:
