@@ -1,11 +1,10 @@
-# Computron Data Metadata Validation - Complete Dataset
+# Computron Data Metadata Validation - Complete Dataset (35 validations)
 # Purpose: Compare file sources (raw_data/computron) vs ASIS tables
 # Validation: Column count & Record count only (no data value comparison)
-# Output: Single CSV + Single HTML report
-# Tables: 36 total
+# Tables: 35 total
 
 validations:
-  - name: "Computron DOO Headers"
+  - name: oracle_fusion_dootop_header
     regression: false
     source:
       type: file
@@ -16,9 +15,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oracle_fusion_dootop_header
+    primary_keys: header_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron DOO Headers EFF"
+  - name: oracle_fusion_dootop_header_eff
     regression: false
     source:
       type: file
@@ -29,9 +30,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oracle_fusion_dootop_header_eff
+    primary_keys: header_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron DOO Lines"
+  - name: oracle_fusion_dootop_line
     regression: false
     source:
       type: file
@@ -42,22 +45,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oracle_fusion_dootop_line
+    primary_keys: line_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron DOO Lines EFF"
-    regression: false
-    source:
-      type: file
-      path: ./raw_data/computron/DOO_LINES_EFF_B.csv
-      format: csv
-    target:
-      type: table
-      environment: PREPROD
-      schema: edw_asis
-      table: oracle_fusion_dootop_line_eff
-    output_dir: ./results/computron_metadata
-
-  - name: "Computron DOO Fulfill Lines"
+  - name: oracle_fusion_dootop_fulfill_line
     regression: false
     source:
       type: file
@@ -67,10 +59,12 @@ validations:
       type: table
       environment: PREPROD
       schema: edw_asis
-      table: oracle_fusion_dootop_fulfillment_line
+      table: oracle_fusion_dootop_fulfill_line
+    primary_keys: fulfill_line_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron DOO Fulfill Lines EFF"
+  - name: oracle_fusion_dootop_fulfill_line_bieff_effbiflattened
     regression: false
     source:
       type: file
@@ -80,10 +74,12 @@ validations:
       type: table
       environment: PREPROD
       schema: edw_asis
-      table: oracle_fusion_dootop_fulfillment_line_eff
+      table: oracle_fusion_dootop_fulfill_line_bieff_effbiflattened
+    primary_keys: fulfill_line_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron EGP Categories B"
+  - name: oracle_fusion_egpcategoriesspublicmodel_category
     regression: false
     source:
       type: file
@@ -94,9 +90,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oracle_fusion_egpcategoriesspublicmodel_category
+    primary_keys: category_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron EGP Categories TL"
+  - name: oracle_fusion_egpcategories_category_tl
     regression: false
     source:
       type: file
@@ -107,9 +105,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oracle_fusion_egpcategories_category_tl
+    primary_keys: category_id, language
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron EGP Item Categories"
+  - name: oracle_fusion_egpitemspublicmodel_item_category
     regression: false
     source:
       type: file
@@ -120,9 +120,26 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oracle_fusion_egpitemspublicmodel_item_category
+    primary_keys: category_id, inventory_item_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron EGP Item Classes B V"
+  - name: oracle_fusion_egpitemspublicmodel_item_category_hierarchy
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_ITEM_CATEGORIES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_egpitemspublicmodel_item_category_hierarchy
+    primary_keys: category_id, inventory_item_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_egpitemclassespublicmodel_item_class
     regression: false
     source:
       type: file
@@ -133,9 +150,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oracle_fusion_egpitemclassespublicmodel_item_class
+    primary_keys: item_class_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron EGP Item Classes TL"
+  - name: oracle_fusion_egpitemclasses_item_class_tl
     regression: false
     source:
       type: file
@@ -146,9 +165,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oracle_fusion_egpitemclasses_item_class_tl
+    primary_keys: item_class_id, language
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron EGP System Items"
+  - name: oracle_fusion_egpitemspublicmodel_item
     regression: false
     source:
       type: file
@@ -159,9 +180,41 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oracle_fusion_egpitemspublicmodel_item
+    primary_keys: inventory_item_id, organization_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron FND DF Contexts B"
+  - name: oracle_fusion_egpitemspublicmodel_item_ref
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_SYSTEM_ITEMS_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_egpitemspublicmodel_item_ref
+    primary_keys: inventory_item_id, organization_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_egpitemspublicmodel_item_relationship
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_SYSTEM_ITEMS_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_egpitemspublicmodel_item_relationship
+    primary_keys: item_relationship_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: fnd_df_contexts_b
     regression: false
     source:
       type: file
@@ -172,9 +225,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: fnd_df_contexts_b
+    primary_keys: application_id, context_code
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron FND DF Contexts TL"
+  - name: fnd_df_contexts_tl
     regression: false
     source:
       type: file
@@ -185,9 +240,41 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: fnd_df_contexts_tl
+    primary_keys: application_id, context_code, language
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron HZ Contact Points"
+  - name: oracle_fusion_finextract_analyticsextractservice_desc_flex_contexts_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/FND_DF_CONTEXTS_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_analyticsextractservice_desc_flex_contexts_pvo
+    primary_keys: application_id, context_code
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_finextract_analyticsextractservice_descr_flex_contexts_tlpvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/FND_DF_CONTEXTS_TL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_analyticsextractservice_descr_flex_contexts_tlpvo
+    primary_keys: application_id, context_code, language
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: hz_contact_points
     regression: false
     source:
       type: file
@@ -198,9 +285,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: hz_contact_points
+    primary_keys: contact_point_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron HZ Customer Profiles F"
+  - name: hz_customer_profiles_f
     regression: false
     source:
       type: file
@@ -211,9 +300,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: hz_customer_profiles_f
+    primary_keys: cust_account_profile_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron HZ Cust Accounts"
+  - name: hz_cust_accounts
     regression: false
     source:
       type: file
@@ -224,9 +315,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: hz_cust_accounts
+    primary_keys: cust_account_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron HZ Cust Acct Sites"
+  - name: hz_cust_acct_sites_all
     regression: false
     source:
       type: file
@@ -237,9 +330,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: hz_cust_acct_sites_all
+    primary_keys: cust_acct_site_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron HZ Locations"
+  - name: hz_locations
     regression: false
     source:
       type: file
@@ -250,9 +345,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: hz_locations
+    primary_keys: location_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron HZ Org Contacts"
+  - name: hz_org_contacts
     regression: false
     source:
       type: file
@@ -263,9 +360,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: hz_org_contacts
+    primary_keys: org_contact_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron HZ Orig Sys References"
+  - name: hz_orig_sys_references
     regression: false
     source:
       type: file
@@ -276,9 +375,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: hz_orig_sys_references
+    primary_keys: orig_sys_reference_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron HZ Parties"
+  - name: hz_parties
     regression: false
     source:
       type: file
@@ -289,9 +390,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: hz_parties
+    primary_keys: party_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron HZ Party Sites"
+  - name: hz_party_sites
     regression: false
     source:
       type: file
@@ -302,9 +405,131 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: hz_party_sites
+    primary_keys: party_site_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron OSS Bill Lines"
+  - name: oracle_fusion_finextract_hzbiccextract_party_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_PARTIES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_hzbiccextract_party_extract_pvo
+    primary_keys: party_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_finextract_hzbiccextract_party_site_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_PARTY_SITES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_hzbiccextract_party_site_extract_pvo
+    primary_keys: party_site_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_finextract_hzbiccextract_original_system_reference_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_ORIG_SYS_REFERENCES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_hzbiccextract_original_system_reference_extract_pvo
+    primary_keys: orig_sys_reference_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_finextract_hzbiccextract_party_contact_point_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_CONTACT_POINTS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_hzbiccextract_party_contact_point_extract_pvo
+    primary_keys: contact_point_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_finextract_hzbiccextract_customer_account_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_CUST_ACCOUNTS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_hzbiccextract_customer_account_extract_pvo
+    primary_keys: cust_account_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_finextract_hzbiccextract_customer_account_site_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_CUST_ACCT_SITES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_hzbiccextract_customer_account_site_extract_pvo
+    primary_keys: cust_acct_site_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_finextract_hzbiccextract_location_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_LOCATIONS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_hzbiccextract_location_extract_pvo
+    primary_keys: location_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_finextract_hzbiccextract_organization_contact_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_ORG_CONTACTS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_hzbiccextract_organization_contact_extract_pvo
+    primary_keys: org_contact_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oss_bill_lines
     regression: false
     source:
       type: file
@@ -315,9 +540,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oss_bill_lines
+    primary_keys: bill_line_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron OSS Products"
+  - name: oss_products
     regression: false
     source:
       type: file
@@ -328,9 +555,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oss_products
+    primary_keys: product_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron OSS Subscriptions"
+  - name: oss_subscriptions
     regression: false
     source:
       type: file
@@ -341,9 +570,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: oss_subscriptions
+    primary_keys: subscription_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron RA Batch Sources"
+  - name: ra_batch_sources_all
     regression: false
     source:
       type: file
@@ -354,9 +585,26 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: ra_batch_sources_all
+    primary_keys: batch_source_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron RA Customer Trx"
+  - name: oracle_fusion_finextract_arbiccextract_transaction_batch_source_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_BATCH_SOURCES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_arbiccextract_transaction_batch_source_extract_pvo
+    primary_keys: batch_source_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: ra_customer_trx_all
     regression: false
     source:
       type: file
@@ -367,9 +615,41 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: ra_customer_trx_all
+    primary_keys: customer_trx_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron RA Customer Trx Lines"
+  - name: oracle_fusion_finextract_arbiccextract_transaction_header_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_CUSTOMER_TRX_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_arbiccextract_transaction_header_extract_pvo
+    primary_keys: customer_trx_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_finextract_arbiccextract_cust_profile_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_CUSTOMER_PROFILES_F.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_arbiccextract_cust_profile_extract_pvo
+    primary_keys: cust_account_profile_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: ra_customer_trx_lines_all
     regression: false
     source:
       type: file
@@ -380,9 +660,26 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: ra_customer_trx_lines_all
+    primary_keys: customer_trx_line_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron RA Cust Trx Line GL Dist"
+  - name: oracle_fusion_finextract_arbiccextract_transaction_line_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_CUSTOMER_TRX_LINES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_arbiccextract_transaction_line_extract_pvo
+    primary_keys: customer_trx_line_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: ra_cust_trx_line_gl_dist_all
     regression: false
     source:
       type: file
@@ -393,9 +690,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: ra_cust_trx_line_gl_dist_all
+    primary_keys: cust_trx_line_gl_dist_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron RA Cust Trx Types"
+  - name: ra_cust_trx_types_all
     regression: false
     source:
       type: file
@@ -406,9 +705,26 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: ra_cust_trx_types_all
+    primary_keys: cust_trx_type_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron RA Terms TL"
+  - name: oracle_fusion_finextract_arbiccextract_transaction_type_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_CUST_TRX_TYPES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_arbiccextract_transaction_type_extract_pvo
+    primary_keys: cust_trx_type_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: ra_terms_tl
     regression: false
     source:
       type: file
@@ -419,9 +735,26 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: ra_terms_tl
+    primary_keys: term_id, language
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron VRM Billing Line Details"
+  - name: oracle_fusion_finextract_arbiccextract_payment_term_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_TERMS_TL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_finextract_arbiccextract_payment_term_extract_pvo
+    primary_keys: term_id, language
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: vrm_billing_line_details
     regression: false
     source:
       type: file
@@ -432,9 +765,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: vrm_billing_line_details
+    primary_keys: billing_line_detail_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron VRM Source Documents"
+  - name: vrm_source_documents
     regression: false
     source:
       type: file
@@ -445,9 +780,11 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: vrm_source_documents
+    primary_keys: source_document_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron VRM Source Doc Lines"
+  - name: vrm_source_doc_lines
     regression: false
     source:
       type: file
@@ -458,9 +795,26 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: vrm_source_doc_lines
+    primary_keys: source_doc_line_id
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
 
-  - name: "Computron VRM Source Doc Sub Lines"
+  - name: oracle_fusion_prcponpublicview_negotiation_response_requirement_and_attribute_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/VRM_SOURCE_DOC_LINES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_prcponpublicview_negotiation_response_requirement_and_attribute_pvo
+    primary_keys: source_doc_line_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: vrm_source_doc_sub_lines
     regression: false
     source:
       type: file
@@ -471,4 +825,126 @@ validations:
       environment: PREPROD
       schema: edw_asis
       table: vrm_source_doc_sub_lines
+    primary_keys: source_doc_sub_line_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_scmextract_doobiccextract_header_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/DOO_HEADERS_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_scmextract_doobiccextract_header_extract_pvo
+    primary_keys: header_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_scmextract_doobiccextract_line_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/DOO_LINES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_scmextract_doobiccextract_line_extract_pvo
+    primary_keys: line_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_scmextract_doobiccextract_fulfill_line_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/DOO_FULFILL_LINES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_scmextract_doobiccextract_fulfill_line_extract_pvo
+    primary_keys: fulfill_line_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_scmextract_egpbiccextract_category_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_CATEGORIES_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_scmextract_egpbiccextract_category_extract_pvo
+    primary_keys: category_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_scmextract_egpbiccextract_item_class_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_ITEM_CLASSES_B_V.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_scmextract_egpbiccextract_item_class_extract_pvo
+    primary_keys: item_class_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_scmextract_egpbiccextract_item_class_translation_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_ITEM_CLASSES_TL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_scmextract_egpbiccextract_item_class_translation_extract_pvo
+    primary_keys: item_class_id, language
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_scmextract_egpbiccextract_item_extract_pvo
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_SYSTEM_ITEMS_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_scmextract_egpbiccextract_item_extract_pvo
+    primary_keys: inventory_item_id, organization_id
+    auto_match_by_suffix: true
+    output_dir: ./results/computron_metadata
+
+  - name: oracle_fusion_itemclasses_item_class_p_1
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_ITEM_CLASSES_TL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_itemclasses_item_class_p_1
+    primary_keys: item_class_id, language
+    auto_match_by_suffix: true
     output_dir: ./results/computron_metadata
