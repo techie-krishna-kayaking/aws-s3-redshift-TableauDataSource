@@ -1,0 +1,13 @@
+validations:
+  - name: "Token Intent Record Validation"
+    source:
+      type: file
+      path: ./raw_data/Token_Intent_Record__c.csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: salesforce_token_intent_record__c
+    primary_keys: id
+    output_dir: ./results/token_intent
+  

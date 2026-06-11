@@ -54,6 +54,16 @@ class Validator:
         self.target_prefixes_to_strip = [
             str(p).lower() for p in (config.get('target_prefixes_to_strip', []) or []) if str(p).strip()
         ]
+        self.quick_sample_pks = config.get('quick_sample_pks', None)
+        self.quick_sample_seed = int(config.get('quick_sample_seed', 42))
+
+        if self.quick_sample_pks is not None:
+            try:
+                self.quick_sample_pks = int(self.quick_sample_pks)
+            except (TypeError, ValueError):
+                raise ValueError("'quick_sample_pks' must be a positive integer")
+            if self.quick_sample_pks <= 0:
+                raise ValueError("'quick_sample_pks' must be a positive integer")
         
         # Propagate common file settings from root config to source and target
         common_settings = ['sep', 'encoding', 'format', 'sheet_name', 'json_orient']
@@ -216,6 +226,34 @@ class Validator:
             )
 
         return source_df, target_df, source_metadata, target_metadata
+
+    def _build_target_pk_candidates(self, source_pk_columns: List[str]) -> List[List[str]]:
+        """Build candidate target PK column lists for pushdown filtering."""
+        candidates: List[List[str]] = []
+
+        mapped = [self.column_mapping.get(pk, pk) for pk in source_pk_columns]
+        candidates.append(mapped)
+
+        candidates.append(source_pk_columns)
+
+        stripped = [
+            self._strip_known_prefixes(pk, self.source_prefixes_to_strip)
+            for pk in source_pk_columns
+        ]
+        candidates.append(stripped)
+
+        deduped: List[List[str]] = []
+        seen = set()
+        for candidate in candidates:
+            key = tuple(candidate)
+            if key in seen:
+                continue
+            if not all(str(col).strip() for col in candidate):
+                continue
+            deduped.append(candidate)
+            seen.add(key)
+
+        return deduped
     
     def _create_adapter(self, adapter_config: Dict[str, Any]) -> BaseAdapter:
         """
@@ -261,13 +299,81 @@ class Validator:
         logger.info("\nLoading data...")
         source_df = source_adapter.load()
         source_metadata = source_adapter.get_metadata()
+        subset_applied = False
         
         logger.info(f"Source: {len(source_df)} rows, {len(source_df.columns)} columns")
         
-        # Load target without pushdown filtering initially
-        # (will use pushdown after column alignment if source is smaller)
-        target_df = target_adapter.load()
-        target_metadata = target_adapter.get_metadata()
+        # Smart quick mode: sample source PKs and push down target fetch by PK.
+        if self.quick_sample_pks and isinstance(target_adapter, TableAdapter):
+            source_pk_cols = [pk for pk in self.primary_keys if pk in source_df.columns]
+
+            if not self.primary_keys:
+                logger.warning("quick_sample_pks requested but no primary_keys configured; using regular target load")
+                target_df = target_adapter.load()
+                target_metadata = target_adapter.get_metadata()
+            elif len(source_pk_cols) != len(self.primary_keys):
+                logger.warning(
+                    "quick_sample_pks requested but some PKs are missing in source. Found %s of %s PKs; using regular target load",
+                    len(source_pk_cols),
+                    len(self.primary_keys)
+                )
+                target_df = target_adapter.load()
+                target_metadata = target_adapter.get_metadata()
+            else:
+                source_unique_pks = source_df[source_pk_cols].drop_duplicates()
+                sample_size = min(self.quick_sample_pks, len(source_unique_pks))
+
+                if sample_size <= 0:
+                    logger.warning("Source has no PK rows for quick sampling; using regular target load")
+                    target_df = target_adapter.load()
+                    target_metadata = target_adapter.get_metadata()
+                else:
+                    if sample_size < len(source_unique_pks):
+                        sampled_pks = source_unique_pks.sample(n=sample_size, random_state=self.quick_sample_seed)
+                    else:
+                        sampled_pks = source_unique_pks
+
+                    source_df = source_df.merge(sampled_pks, on=source_pk_cols, how='inner')
+                    logger.info(
+                        "Quick mode enabled: sampled %s PK rows from source (%s total unique PKs)",
+                        sample_size,
+                        len(source_unique_pks)
+                    )
+
+                    pk_values = list(sampled_pks.itertuples(index=False, name=None))
+                    pushdown_loaded = False
+                    last_error = None
+
+                    for target_pk_cols in self._build_target_pk_candidates(source_pk_cols):
+                        try:
+                            target_df = target_adapter.load(pk_columns=target_pk_cols, pk_values=pk_values)
+                            target_metadata = target_adapter.get_metadata()
+                            logger.info(
+                                "Quick mode target pushdown succeeded using PK columns: %s",
+                                target_pk_cols
+                            )
+                            pushdown_loaded = True
+                            subset_applied = True
+                            break
+                        except Exception as e:
+                            last_error = e
+                            logger.warning(
+                                "Quick mode target pushdown failed for PK columns %s: %s",
+                                target_pk_cols,
+                                e
+                            )
+
+                    if not pushdown_loaded:
+                        logger.warning(
+                            "Quick mode pushdown failed (%s). Falling back to regular target load.",
+                            last_error
+                        )
+                        target_df = target_adapter.load()
+                        target_metadata = target_adapter.get_metadata()
+        else:
+            # Default target load path
+            target_df = target_adapter.load()
+            target_metadata = target_adapter.get_metadata()
 
         # Align columns when source and target naming conventions differ.
         source_df, target_df, source_metadata, target_metadata = self._apply_column_alignment(
@@ -281,7 +387,6 @@ class Validator:
         logger.info(f"Target: {len(target_df)} rows, {len(target_df.columns)} columns")
         
         # Smart Sub-setting Logic
-        subset_applied = False
         # Filter primary keys to only those that exist in both source and target
         valid_pks = [pk for pk in self.primary_keys if pk in source_df.columns and pk in target_df.columns]
         
@@ -410,13 +515,20 @@ def load_config(config_path: Path) -> Dict[str, Any]:
     return config
 
 
-def run_validations(config_path: Path, validation_name: str = None) -> List[Dict[str, Any]]:
+def run_validations(
+    config_path: Path,
+    validation_name: str = None,
+    target_limit: int = None,
+    quick_sample_pks: int = None
+) -> List[Dict[str, Any]]:
     """
     Run validations from configuration file.
     
     Args:
         config_path: Path to YAML configuration file
         validation_name: Optional name of specific validation to run (runs all if None)
+        target_limit: Optional row limit applied to target table adapters for quick runs
+        quick_sample_pks: Optional source PK sample size for target pushdown quick mode
     
     Returns:
         List of validation results
@@ -438,6 +550,15 @@ def run_validations(config_path: Path, validation_name: str = None) -> List[Dict
     # Run each validation
     results = []
     for val_config in validations:
+        if target_limit is not None:
+            target_cfg = val_config.get('target', {})
+            if str(target_cfg.get('type', '')).lower() == 'table':
+                target_cfg['limit'] = target_limit
+                val_config['target'] = target_cfg
+
+        if quick_sample_pks is not None:
+            val_config['quick_sample_pks'] = quick_sample_pks
+
         validator = Validator(val_config)
         result = validator.run()
         results.append(result)
@@ -465,6 +586,7 @@ def run_validations(config_path: Path, validation_name: str = None) -> List[Dict
         output_dir = Path(validations[0].get('output_dir', './results'))
         consolidated = ConsolidatedReporter(results)
         consolidated_paths = consolidated.generate_reports(output_dir)
+        logger.info(f"Consolidated CSV:  {consolidated_paths['csv']}")
         logger.info(f"Consolidated Excel: {consolidated_paths['excel']}")
         logger.info(f"Consolidated HTML:  {consolidated_paths['html']}")
 

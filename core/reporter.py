@@ -537,14 +537,50 @@ class ConsolidatedReporter:
         logger.info(f"Consolidated HTML saved: {output_path}")
         return output_path
 
+    def generate_csv(self, output_path: Path) -> Path:
+        """
+        Generate a single consolidated CSV file combining all validation results.
+        
+        Args:
+            output_path: Path to save the consolidated CSV file
+        
+        Returns:
+            Path to generated CSV file
+        """
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Combine all results with validation_name column
+        all_rows = []
+        for result in self.all_results:
+            df = pd.DataFrame(result['results'])
+            df.insert(0, 'validation_name', result['name'])
+            all_rows.append(df)
+        
+        consolidated_df = pd.concat(all_rows, ignore_index=True)
+        consolidated_df.to_csv(output_path, index=False, quoting=csv.QUOTE_MINIMAL)
+        
+        logger.info(f"Consolidated CSV saved: {output_path} ({len(consolidated_df)} rows)")
+        return output_path
+
     def generate_reports(self, output_dir: Path, base_name: str = 'consolidated') -> Dict[str, Path]:
-        """Generate consolidated Excel + tabbed HTML."""
+        """
+        Generate consolidated CSV, Excel, and tabbed HTML reports.
+        
+        Args:
+            output_dir: Output directory for reports
+            base_name: Base filename for reports
+        
+        Returns:
+            Dictionary with paths to all generated files (csv, excel, html)
+        """
         output_dir.mkdir(parents=True, exist_ok=True)
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        csv_path = output_dir / f"{base_name}_{timestamp}.csv"
         excel_path = output_dir / f"{base_name}_{timestamp}.xlsx"
         html_path = output_dir / f"{base_name}_{timestamp}.html"
 
         return {
+            'csv': self.generate_csv(csv_path),
             'excel': self.generate_excel(excel_path),
             'html': self.generate_html(html_path),
         }

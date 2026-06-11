@@ -96,6 +96,15 @@ class TableAdapter(BaseAdapter):
         # Table parameters
         self.table = config['table']
         self.columns = config.get('columns', None)
+        self.limit = config.get('limit', config.get('row_limit', None))
+
+        if self.limit is not None:
+            try:
+                self.limit = int(self.limit)
+            except (TypeError, ValueError):
+                raise ValueError("TableAdapter 'limit' must be a positive integer")
+            if self.limit <= 0:
+                raise ValueError("TableAdapter 'limit' must be a positive integer")
         
         # Validate required parameters
         if not all([self.host, self.database, self.user]):
@@ -198,6 +207,11 @@ class TableAdapter(BaseAdapter):
                     logger.info(f"Loading table: {self.schema}.{self.table} ({len(select_cols)} columns)")
             else:
                 logger.info(f"Loading table: {self.schema}.{self.table} ({len(select_cols)} columns)")
+
+            # Optional row cap for quick/smoke validation runs
+            if self.limit is not None:
+                sql += f' LIMIT {self.limit}'
+                logger.info(f"Applying row limit: {self.limit}")
             
             # Execute query
             df = pd.read_sql(sql, conn)

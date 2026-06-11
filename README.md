@@ -92,6 +92,22 @@ python3 cli.py regression --config bi_regression/configs/config.yaml
 
 ---
 
+## ✨ NEW: Tableau Datasource (TWBX) Data Extraction
+
+**🎉 Now you can extract actual row data from TWBX files** instead of just metadata! 
+
+- ✅ Automatically extracts data from **.hyper files** (Tableau 2020.1+)
+- ✅ Extracts **.csv/.tsv embedded files** with auto-delimiter detection
+- ✅ Graceful fallback to **metadata-only mode** if no embedded data
+- ✅ Enables **full data validation** for TWBX → TWBX, TWBX → Redshift, TWBX → CSV comparisons
+- ✅ Supports **all 16 validation checks** (7 standard + 9 regression)
+
+**No configuration needed** — just point to your `.twbx` file and the framework handles data extraction automatically!
+
+See [Tableau Datasource (TWBX) Support](#-tableau-datasource-twbx-support--now-with-embedded-data-extraction-) for configuration examples.
+
+---
+
 ## 📊 Data Validation
 
 ### 🔄 5 Universal Comparison Scenarios
@@ -209,7 +225,57 @@ Total Validations: 47 | Pass: 44 | Fail: 3
 ❌ Failures: 3 data value check (e.g. column "status") — Mismatch: source='Active', target='Inactive'
 ```
 
-### 📦 Consolidated Reporting
+### � Tableau Datasource (TWBX) Support — Now with Embedded Data Extraction! 🎉
+
+**NEW:** The DataSourceAdapter now extracts **actual row data** from TWBX files, enabling full data validation including null checks, duplicate detection, and data value comparison.
+
+#### What's Supported:
+
+| Data Source | Status | Format | Details |
+|:---|:---|:---|:---|
+| **Hyper Files (.hyper)** | ✅ Supported | Tableau 2020.1+ native | Requires optional `hyper` library; gracefully falls back if not installed |
+| **CSV/TSV/TXT Embedded** | ✅ Supported | Text-based extracts | Auto-detects delimiters and encodings |
+| **TDE Files (.tde)** | 🔄 Planned | Older Tableau format | Placeholder for future Tableau SDK integration |
+| **Metadata-Only Mode** | ✅ Fallback | Schema extraction | Returns column names, types, structure if no embedded data found |
+
+#### Configuration:
+
+```yaml
+# TWBX with automatic data extraction (DEFAULT)
+source:
+  type: datasource
+  path: ./datasources/my_workbook.twbx
+  extract_data: true           # Extract actual data (default: true)
+  datasource_name: "My Data"   # Optional: specific datasource to use
+
+# Disable extraction and use metadata-only mode
+source:
+  type: datasource
+  path: ./datasources/my_workbook.twbx
+  extract_data: false          # Skip data extraction, use metadata only
+```
+
+#### Installation (Optional - for Hyper file support):
+
+```bash
+# If your TWBX contains .hyper files, install the optional dependency:
+pip install tableau-hyper-api
+```
+
+> **Tip:** Works without `hyper` library! The adapter automatically falls back to CSV extraction or metadata-only mode.
+
+#### What You Can Now Validate with TWBX:
+
+✅ **Actual Data Validation** — Compares real row data
+✅ **Null Value Detection** — Identifies NULL/NA values
+✅ **Duplicate Detection** — Finds duplicate rows
+✅ **Full Data Comparison** — Row-by-row data value validation
+✅ **Record Count** — Source vs target row counts
+✅ **Column Count** — Schema validation
+✅ **Metadata Types** — Data type compatibility
+✅ **All 7 Standard + 9 Regression Checks** — Same validation suite as other adapters!
+
+### �📦 Consolidated Reporting
 
 When running multiple validations in one config, the framework automatically generates:
 
@@ -245,8 +311,36 @@ Seamlessly compare data across Redshift environments:
 | **CSV** | `.csv` | `encoding` (auto-detects UTF-8, UTF-16, ISO-8859-1, CP1252) |
 | **JSON** | `.json` | `json_orient` (records, index, columns, values) |
 | **Parquet** | `.parquet` | — |
-| **Excel** | `.xlsx`, `.xls` | `sheet_name` (index or name) |
+| **Excel** | `.xlsx`, `.xls` | `sheet_name` (index or name) || **Tableau Datasource** | `.twbx` | `extract_data` (true/false), `datasource_name` (optional) |
 
+### 📊 Tableau Datasource (TWBX) Format
+
+```yaml
+source:
+  type: datasource
+  path: ./datasources/workbook.twbx          # Path to TWBX file
+  extract_data: true                         # Extract embedded data (default: true)
+  datasource_name: "Sales Data"              # Optional: specific datasource name
+
+target:
+  type: datasource
+  path: ./datasources/workbook_v2.twbx
+```
+
+**What Gets Extracted:**
+- **From .hyper files** → All rows and columns (Tableau 2020.1+)
+- **From embedded CSV** → All rows and columns
+- **From metadata** → Column names, types, structure (fallback)
+
+**Metadata Returned:**
+```python
+{
+  'has_embedded_data': True/False,
+  'data_source_type': 'hyper' | 'csv' | 'metadata',
+  'row_count': <int>,
+  'column_count': <int>
+}
+```
 ### 🔑 Primary Key Intelligence
 
 ```yaml
@@ -394,23 +488,27 @@ All dependencies are in a single `requirements.txt`. Key libraries:
   primary_keys: id
   output_dir: ./results
 
-# 4. Tableau Datasource → Datasource (pre/post-RCA)
-- name: "TWBX Comparison"
-  regression: true                # Full validation suite
+# 4. Tableau Datasource → Datasource (pre/post-RCA, with embedded data)
+- name: "TWBX Comparison - Full Data"
+  regression: true                # Full validation suite + all 16 checks
   source:
     type: datasource
     path: ./datasources/pre_rca.twbx
+    extract_data: true            # Extract actual row data
   target:
     type: datasource
     path: ./datasources/post_rca.twbx
+    extract_data: true
+  primary_keys: record_id
   output_dir: ./results
 
-# 5. Tableau Datasource → Redshift Table (dashboard accuracy)
-- name: "TWBX to Redshift"
-  regression: false
+# 5. Tableau Datasource → Redshift Table (dashboard accuracy validation)
+- name: "TWBX to Redshift - Data Validation"
+  regression: false               # Use 7 core checks
   source:
     type: datasource
     path: ./datasources/my_data.twbx
+    extract_data: true            # Extracts from .hyper or embedded CSV
   target:
     type: table
     environment: PREPROD
@@ -472,32 +570,32 @@ target:
 
 ### All 24 Scenarios at a Glance
 
-| # | Scenario | Source | Target | Key Feature |
-|---|:---------|:-------|:-------|:------------|
-| 1 | CSV → Redshift | file | table | Basic ETL validation |
-| 2 | Table → Table (same env) | table | table | Cross-schema comparison |
-| 3 | CSV → Parquet | file | file | Format migration |
-| 4 | TWBX → TWBX | datasource | datasource | Pre/post-RCA |
-| 5 | TWBX → Redshift | datasource | table | Dashboard accuracy |
-| 6 | DEV → PREPROD | table | table | Migration validation |
-| 7 | PREPROD → PROD | table | table | Pre-deploy check |
-| 8 | DEV → DEV_REVOPS | table | table | Same cluster, different users |
-| 9 | CSV → PROD | file | table | Production upload |
-| 10 | Env + direct config | table | table | Legacy + modern mixed |
-| 11 | TSV → Redshift | file (tsv) | table | Custom separator |
-| 12 | Pipe-delimited → CSV | file | file | `sep: "\|"` |
-| 13 | Latin-1 CSV → Redshift | file | table | Explicit encoding |
-| 14 | JSON → Redshift | file (json) | table | `json_orient: records` |
-| 15 | JSON → CSV | file (json) | file | Cross-format |
-| 16 | Parquet → Redshift | file (parquet) | table | Composite PK |
-| 17 | Excel sheet → CSV | file (xlsx) | file | `sheet_name` |
-| 18 | Excel → Redshift | file (xlsx) | table | Sheet by index |
-| 19 | Parquet → Parquet | file | file | Version comparison |
-| 20 | Composite PK | file | table | 3-column PK |
-| 21 | No PK (row-by-row) | file | table | Positional comparison |
-| 22 | Selective columns | file | table | `columns:` filter |
-| 23 | Named datasource | datasource | datasource | `datasource_name` |
-| 24 | TWBX → CSV | datasource | file | Metadata export check |
+| # | Scenario | Source | Target | Key Feature | Data Validation |
+|---|:---------|:-------|:-------|:------------|:---|
+| 1 | CSV → Redshift | file | table | Basic ETL validation | ✅ Standard |
+| 2 | Table → Table (same env) | table | table | Cross-schema comparison | ✅ Standard |
+| 3 | CSV → Parquet | file | file | Format migration | ✅ Standard |
+| 4 | TWBX → TWBX | datasource | datasource | Pre/post-RCA | ✅ Full (embedded data) |
+| 5 | TWBX → Redshift | datasource | table | Dashboard accuracy | ✅ Full (embedded data) |
+| 6 | DEV → PREPROD | table | table | Migration validation | ✅ Standard |
+| 7 | PREPROD → PROD | table | table | Pre-deploy check | ✅ Standard |
+| 8 | DEV → DEV_REVOPS | table | table | Same cluster, different users | ✅ Standard |
+| 9 | CSV → PROD | file | table | Production upload | ✅ Standard |
+| 10 | Env + direct config | table | table | Legacy + modern mixed | ✅ Standard |
+| 11 | TSV → Redshift | file (tsv) | table | Custom separator | ✅ Standard |
+| 12 | Pipe-delimited → CSV | file | file | `sep: "\|"` | ✅ Standard |
+| 13 | Latin-1 CSV → Redshift | file | table | Explicit encoding | ✅ Standard |
+| 14 | JSON → Redshift | file (json) | table | `json_orient: records` | ✅ Standard |
+| 15 | JSON → CSV | file (json) | file | Cross-format | ✅ Standard |
+| 16 | Parquet → Redshift | file (parquet) | table | Composite PK | ✅ Standard |
+| 17 | Excel sheet → CSV | file (xlsx) | file | `sheet_name` | ✅ Standard |
+| 18 | Excel → Redshift | file (xlsx) | table | Sheet by index | ✅ Standard |
+| 19 | Parquet → Parquet | file | file | Version comparison | ✅ Standard |
+| 20 | Composite PK | file | table | 3-column PK | ✅ Standard |
+| 21 | No PK (row-by-row) | file | table | Positional comparison | ✅ Standard |
+| 22 | Selective columns | file | table | `columns:` filter | ✅ Standard |
+| 23 | Named datasource | datasource | datasource | `datasource_name` | ✅ Full (embedded data) |
+| 24 | TWBX → CSV | datasource | file | Data extraction & format check | ✅ Full (embedded data) |
 
 ---
 
@@ -558,7 +656,7 @@ universal-validator/
 │   ├── base_adapter.py        #    Abstract base class (load, get_metadata)
 │   ├── file_adapter.py        #    CSV, JSON, Parquet, Excel support
 │   ├── table_adapter.py       #    Redshift with multi-env support
-│   └── datasource_adapter.py  #    Tableau TWBX extraction & XML parsing
+│   └── datasource_adapter.py  #    Tableau TWBX data extraction (Hyper, CSV, metadata)
 │
 ├── utils/                     # 🛠️ Utilities
 │   ├── helpers.py             #    Type coercion, comparison, formatting

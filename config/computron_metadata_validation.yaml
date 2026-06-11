@@ -1,0 +1,474 @@
+# Computron Data Metadata Validation - Complete Dataset
+# Purpose: Compare file sources (raw_data/computron) vs ASIS tables
+# Validation: Column count & Record count only (no data value comparison)
+# Output: Single CSV + Single HTML report
+# Tables: 36 total
+
+validations:
+  - name: "Computron DOO Headers"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/DOO_HEADERS_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_dootop_header
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron DOO Headers EFF"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/DOO_HEADERS_EFF_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_dootop_header_eff
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron DOO Lines"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/DOO_LINES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_dootop_line
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron DOO Lines EFF"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/DOO_LINES_EFF_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_dootop_line_eff
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron DOO Fulfill Lines"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/DOO_FULFILL_LINES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_dootop_fulfillment_line
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron DOO Fulfill Lines EFF"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/DOO_FULFILL_LINES_EFF_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_dootop_fulfillment_line_eff
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron EGP Categories B"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_CATEGORIES_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_egpcategoriesspublicmodel_category
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron EGP Categories TL"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_CATEGORIES_TL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_egpcategories_category_tl
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron EGP Item Categories"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_ITEM_CATEGORIES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_egpitemspublicmodel_item_category
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron EGP Item Classes B V"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_ITEM_CLASSES_B_V.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_egpitemclassespublicmodel_item_class
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron EGP Item Classes TL"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_ITEM_CLASSES_TL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_egpitemclasses_item_class_tl
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron EGP System Items"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/EGP_SYSTEM_ITEMS_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oracle_fusion_egpitemspublicmodel_item
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron FND DF Contexts B"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/FND_DF_CONTEXTS_B.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: fnd_df_contexts_b
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron FND DF Contexts TL"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/FND_DF_CONTEXTS_TL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: fnd_df_contexts_tl
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron HZ Contact Points"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_CONTACT_POINTS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: hz_contact_points
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron HZ Customer Profiles F"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_CUSTOMER_PROFILES_F.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: hz_customer_profiles_f
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron HZ Cust Accounts"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_CUST_ACCOUNTS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: hz_cust_accounts
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron HZ Cust Acct Sites"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_CUST_ACCT_SITES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: hz_cust_acct_sites_all
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron HZ Locations"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_LOCATIONS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: hz_locations
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron HZ Org Contacts"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_ORG_CONTACTS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: hz_org_contacts
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron HZ Orig Sys References"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_ORIG_SYS_REFERENCES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: hz_orig_sys_references
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron HZ Parties"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_PARTIES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: hz_parties
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron HZ Party Sites"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/HZ_PARTY_SITES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: hz_party_sites
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron OSS Bill Lines"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/OSS_BILL_LINES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oss_bill_lines
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron OSS Products"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/OSS_PRODUCTS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oss_products
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron OSS Subscriptions"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/OSS_SUBSCRIPTIONS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: oss_subscriptions
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron RA Batch Sources"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_BATCH_SOURCES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: ra_batch_sources_all
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron RA Customer Trx"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_CUSTOMER_TRX_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: ra_customer_trx_all
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron RA Customer Trx Lines"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_CUSTOMER_TRX_LINES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: ra_customer_trx_lines_all
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron RA Cust Trx Line GL Dist"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_CUST_TRX_LINE_GL_DIST_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: ra_cust_trx_line_gl_dist_all
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron RA Cust Trx Types"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_CUST_TRX_TYPES_ALL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: ra_cust_trx_types_all
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron RA Terms TL"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/RA_TERMS_TL.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: ra_terms_tl
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron VRM Billing Line Details"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/VRM_BILLING_LINE_DETAILS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: vrm_billing_line_details
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron VRM Source Documents"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/VRM_SOURCE_DOCUMENTS.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: vrm_source_documents
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron VRM Source Doc Lines"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/VRM_SOURCE_DOC_LINES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: vrm_source_doc_lines
+    output_dir: ./results/computron_metadata
+
+  - name: "Computron VRM Source Doc Sub Lines"
+    regression: false
+    source:
+      type: file
+      path: ./raw_data/computron/VRM_SOURCE_DOC_SUB_LINES.csv
+      format: csv
+    target:
+      type: table
+      environment: PREPROD
+      schema: edw_asis
+      table: vrm_source_doc_sub_lines
+    output_dir: ./results/computron_metadata

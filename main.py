@@ -79,6 +79,18 @@ Configuration file format (YAML):
         action='store_true',
         help='Enable debug logging'
     )
+
+    parser.add_argument(
+        '--target-limit',
+        type=int,
+        help='Limit rows loaded from target table adapters (smoke/perf runs)'
+    )
+
+    parser.add_argument(
+        '--quick-sample-pks',
+        type=int,
+        help='Sample N source PKs and fetch only matching target table rows'
+    )
     
     args = parser.parse_args()
     
@@ -91,10 +103,23 @@ Configuration file format (YAML):
     if not config_path.exists():
         logger.error(f"Configuration file not found: {config_path}")
         sys.exit(1)
+
+    if args.target_limit is not None and args.target_limit <= 0:
+        logger.error("--target-limit must be a positive integer")
+        sys.exit(1)
+
+    if args.quick_sample_pks is not None and args.quick_sample_pks <= 0:
+        logger.error("--quick-sample-pks must be a positive integer")
+        sys.exit(1)
     
     try:
         # Run validations
-        results = run_validations(config_path, args.name)
+        results = run_validations(
+            config_path,
+            args.name,
+            target_limit=args.target_limit,
+            quick_sample_pks=args.quick_sample_pks
+        )
         
         # Exit with error code if any validation failed
         failed_count = len([r for r in results if r['status'] == 'FAIL'])
